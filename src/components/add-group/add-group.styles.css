@@ -1,0 +1,247 @@
+#add-group-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.back-to-group{
+	width: 100%;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 2vh;
+	line-height: 18px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	color: #FFFFFF;
+	padding-top:3vh;
+	padding-right:3vw;
+	margin-bottom: 4vh;
+
+}
+
+#main-add-group-content{
+	width: 90%;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	
+}
+
+.main-add-group-content-background{
+	position: absolute;
+	background: #FFFFFF;
+	opacity: 0.9;
+	border-radius: 20px;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+}
+
+.main-add-group-content-header{
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 3vh;
+	line-height: 39px;
+	display: flex;
+	width: 100%;
+	height: 5vh;
+	padding: 1em;
+	color: #000000;
+}
+
+
+.input-adding-group-name{
+	width: 30vw;
+	height: 4vh;
+	outline: none;
+	border: none;
+	direction: rtl;
+	background: #FFFFFF;
+	opacity: 0.9;
+	border-radius: 1.8vh;
+	font-family: Assistant;
+	color: black;
+	font-weight: 400;
+	font-size: 1.4em;
+	position: relative;
+	padding-right: 2%;
+	background-color: inherit;
+	border: 1px solid #a5a5a5;
+	box-sizing: border-box;
+}
+
+.span-explnation-for-input {
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 2.7vh;
+	line-height: 33px;
+	padding-right: 2vw;
+	color: #000000;
+}
+
+.upload-contact-from-header{
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 2.5vh;
+	line-height: 33px;
+	margin-top: 4vh;
+	display: flex;
+	justify-content: flex-start;
+	padding-right: 2vw;
+
+	color: #000000;
+}
+
+.upload-container{
+	display: flex;
+	padding-right: 2vw;
+	padding-top: 4vh;
+	gap:2em;
+}
+
+.xlsx-icon-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 10vw;	
+	height: 10vw;
+	border-radius: 2.5vh;
+	border: 1px solid #DBD6D6;
+	box-sizing: border-box;
+}
+
+.phone-icon-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 10vw;	
+	height: 10vw;
+	border-radius: 2.5vh;
+	border: 1px solid #DBD6D6;
+	box-sizing: border-box;
+}
+
+
+#xlsx-upload-format{
+	height: 30vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+.xlsx-upload-format-header{
+	width: 100%;
+	display: flex;
+	margin-top:4vh;
+	margin-right: 3vw;
+	justify-content: flex-start;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 33px;
+
+	color: #000000;
+}
+
+.process-explantion{
+	font-family: Assistant;
+	width: 100%;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 24px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 2.5vh;
+	margin-right: 3vw;
+	text-align: right;
+
+	color: #000000;
+}
+
+.selects-container{
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+
+}
+
+select {
+	box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.418);
+	font-size: 1rem;
+	padding: 1em 4.5em 1em 1.5em;
+	background-color: #5a5a5a;
+	mix-blend-mode:luminosity;
+	color: white;
+	appearance: none;
+	border: none;
+	border-radius: 0.5vh;
+	outline: none;
+	cursor:pointer;
+}
+
+.custom-select {
+	position: relative;
+	display: flex;
+	width: fit-content;
+	align-items: center;
+	margin-top: 5vh;
+	margin-right: 1vw ;
+	justify-content: flex-start;
+}
+
+.custom-arrow{
+	display: block;
+	background-color: #FFFFFF;
+	height: 100%;
+	width: 3em;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 0 0.5vh 0.5vh 0;
+
+	pointer-events: none;
+	
+}
+
+
+.custom-arrow::before, .custom-arrow::after {
+	--size: 0.4em;
+	content: " ";
+	position: absolute;
+	width: 0;
+	height:0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+
+
+.custom-arrow::before {
+	border-left: var(--size) solid transparent ;
+	border-right: var(--size) solid transparent ;
+	border-top: var(--size) solid  ;
+}
+.custom-arrow::before {
+	border-left: var(--size) solid transparent ;
+	border-right: var(--size) solid transparent ;
+	border-top: var(--size) solid #5756af ;
+	top: 60%;
+}
+.custom-arrow::after {
+	border-left: var(--size) solid transparent ;
+	border-right: var(--size) solid transparent ;
+	border-bottom: var(--size) solid #5756af ;
+	top: 40%;
+}

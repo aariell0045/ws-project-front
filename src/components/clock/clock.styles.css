@@ -1,0 +1,17 @@
+#clock {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 16vw;
+	height: 11vh;
+	background: #FFFFFF;
+	opacity: 0.9;
+	border-radius: 2vh;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 6vh;
+	line-height: 78px;
+	user-select: none;
+	
+}

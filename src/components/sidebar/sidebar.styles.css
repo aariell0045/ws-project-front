@@ -1,0 +1,48 @@
+.aside-bar{
+    flex-direction: column;
+    display: inline-flex;
+	justify-content: center;
+	width: fit-content;
+	height: fit-content;
+	z-index: 0;
+	margin-left: 4vw;
+	
+}
+
+.logo {
+	list-style: none;
+	color: #FFFFFF;
+	font-family: Assistant;
+	font-style: normal;
+	font-size: 3.5vw;
+	font-weight: 800;
+	margin-right: 9%;
+	margin-top: 2.5%;
+	margin-bottom: 5vh;
+	line-height: 65px;
+	user-select: none;
+}
+
+.list {
+	list-style: none;
+	color: #FFFFFF;
+	font-style: normal;
+	font-weight: 500;
+	font-family: Assistant;
+	font-size: 1.6vw;
+	margin-bottom: 3vh;
+	margin-right: 3vw;
+	cursor: pointer;
+	
+	
+}
+
+.list:hover {
+	text-decoration: underline;
+
+}
+
+.list-7{
+	margin-top: 30vh;
+}
+ 

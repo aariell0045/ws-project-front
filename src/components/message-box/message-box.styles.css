@@ -1,0 +1,35 @@
+.message-box{
+	background: #FFFFFF;
+	border-radius: 1vh;
+	width: 80%;
+	padding: 2vw;
+	padding-top: 0px;
+	padding-bottom: 1vw;
+
+	
+}
+
+.message-box-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.message-box-header h3 {
+	font-family: Assistant;
+font-style: normal;
+font-weight: 600;
+font-size: 25px;
+line-height: 33px;
+margin: 0px;
+/* identical to box height */
+
+text-align: right;
+
+color: #000000;
+}
+
+.media-footer{
+	width: 100%;
+	text-align: end;
+}

@@ -1,0 +1,91 @@
+.create-message-header{
+	background-color: inherit;
+	color: black;
+	outline: none;
+	border: none;
+	margin-bottom: 2em;
+	height: fit-content;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 39px;
+	text-align: right;
+	color: #FFFFFF;
+}
+
+.create-message-header::placeholder{
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 39px;
+	text-align: right;
+	color: #FFFFFF;
+	
+}
+
+.message-name-warpper{
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 2vw;
+	margin-right: 2vw;
+
+
+}
+
+.add-message-footer{
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: 20px;
+	width: 85%;
+	height: 13vh;
+	position: absolute;
+	bottom: 4vh;
+	margin-right: 8%;
+	box-shadow: 2px 1px 4px 0px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	
+}
+
+.add-contact-name{
+	background: #FFFFFF;
+	opacity: 0.9;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	padding: 1em;
+	width: fit-content;
+	height: fit-content;
+	border: 1px solid #444;
+	cursor: pointer;
+}
+
+.add-message-tool{
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	border-radius: 50%;
+	font-weight: bold;
+	border: 1px solid #444;
+	cursor: pointer;
+}
+
+.add-sub-message {
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	/* identical to box height */
+	
+	text-align: right;
+	text-decoration-line: underline;
+	cursor: pointer;
+	color: #FFFFFF;
+	margin-right: 1vw;
+	
+}
