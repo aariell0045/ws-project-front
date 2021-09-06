@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import Group from './components/group/Group.component';
 import AddGroup from './components/add-group/AddGroup.component';
 import MessagesStock from './components/messages-stock/messages-stock.component';
+import SendMessagePart1 from './components/send-message-part-1/send-message-part-1.component';
 function App() {
   return (
     <div className="App">
@@ -38,6 +39,12 @@ function App() {
           <MessagesStock />
         )
       }} />
+      <Route exact path='/SendMessagePart1' render={() => {
+        return (
+          <SendMessagePart1 />
+        )
+      }} />
+
       </div>
       
   );
