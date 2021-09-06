@@ -1,11 +1,11 @@
 .message-box{
 	background: #FFFFFF;
-	border-radius: 1vh;
-	width: 80%;
-	padding: 2vw;
-	padding-top: 0px;
-	padding-bottom: 1vw;
-
+    border-radius: 1vh;
+    width: 80%;
+    padding: 2vw;
+    padding-top: 0px;
+    padding-bottom: 1vw;
+    height: 10em;
 	
 }
 
