@@ -1,6 +1,8 @@
 import "./send-message-part-1.styles.css";
 import React from "react";
 import MessageBox from "../message-box/message-box.component";
+import {Link} from 'react-router-dom'
+
 
 function SendMessagePart1() {
 	return (
@@ -26,11 +28,13 @@ function SendMessagePart1() {
 				</div>
 				<div className='send-message-part-1-left-side'>
 					<div className='send-message-part-1-left-side-background'></div>
-					<div className='send-message-part-1-left-side-button-warpper' >
-						<div className='send-message-part-1-left-side-button'>
-							<div className='send-message-part-1-left-side-button-background'></div>
-							יאללה, המשכנו
-						</div>
+					<div className='send-message-part-1-left-side-button-warpper'>
+						<Link to='/SendMessagePart2'>
+							<div className='send-message-part-1-left-side-button'>
+								<div className='send-message-part-1-left-side-button-background'></div>
+								יאללה, המשכנו
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
