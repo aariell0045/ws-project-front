@@ -1,5 +1,6 @@
 import React from 'react';
 import "./group.styles.css";
+import ContactBox from '../contact-box/contact-box.components';
 
 function Group() {
 
@@ -26,19 +27,8 @@ function Group() {
 					</div>
 				</div>
 				<div className='contacts-list' >
-					<div className='contact-container'>
-						<div className='contact-firstname-box' >
-							<span>אריאל</span>
-						</div>
-						<div className='contact-lastname-box' >
-							<span>כהן</span>
-						</div>
-						<div className='contact-phone-box' >
-							<span>05441234567</span>
-						</div>
-
-					</div>
-			
+					<ContactBox/>
+	
 				</div>
 			</main>
 		</section>

@@ -75,7 +75,7 @@
 	box-sizing: border-box;
 	border-radius: 10px;
 	height: 5vh;
-	width: 15vw;
+	width: 10vw;
 	font-family: Assistant;
 	font-style: normal;
 	font-weight: normal;
@@ -103,6 +103,6 @@
 	width: 100%;
 	height: fit-content;
 	position:absolute;
-	bottom: 3%;
-	right: 55%;
+	bottom: 3vw;
+	right: 28vw;
 }
