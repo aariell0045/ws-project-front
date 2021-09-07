@@ -9,6 +9,7 @@ import MessagesStock from './components/messages-stock/messages-stock.component'
 import SendMessagePart2 from './components/send-message-part-2/send-message-part-2.component';
 
 import SendMessagePart1 from './components/send-message-part-1/send-message-part-1.component';
+import SendMessagePart3 from './components/send-message-part-3/send-message-part-3.component';
 
 function App() {
   return (
@@ -52,6 +53,11 @@ function App() {
       <Route exact path='/SendMessagePart1' render={() => {
         return (
           <SendMessagePart1 />
+        )
+      }} />
+      <Route exact path='/SendMessagePart3' render={() => {
+        return (
+          <SendMessagePart3 />
         )
       }} />
 
