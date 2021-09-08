@@ -47,6 +47,9 @@ function GroupsList() {
         </div>
       <div className="groups-page-groups-list">
         <ListItems />
+        <ListItems />
+        <ListItems />
+       
       </div>
     </section>
   );

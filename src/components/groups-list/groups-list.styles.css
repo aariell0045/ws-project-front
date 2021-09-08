@@ -1,6 +1,7 @@
 #groups-page {
   width: 100%;
   height: 100vh;
+  padding-right: 3vw;
 }
 
 .groups-page-main-header {
@@ -90,7 +91,7 @@
   font-family: Assistant;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
+  font-size: 1vw;
   line-height: 20px;
   /* identical to box height */
 
@@ -114,69 +115,74 @@
   width: 3vw;
 }
 
-
-.groups-page-groups-container-header{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-
+.groups-page-groups-container-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-bottom: 1.5vh;
 }
 
-.groups-page-groups-container-header-first-column{
-width: 100%;
-display: flex;
-margin: 0px;
-margin-right: 4vw;
+.groups-page-groups-container-header-first-column {
+  width: 100%;
+  display: flex;
+  margin: 0px;
+  margin-right: 6vw;
 
-font-family: Assistant;
-font-style: normal;
-font-weight: normal;
-font-size: 1.3vw;
-/* identical to box height */
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.3vw;
+  /* identical to box height */
 
-text-align: right;
+  text-align: right;
 
-color: #FFFFFF;
+  color: #ffffff;
 }
 
-.groups-page-groups-container-header-second-column{
-    width: 100%;
-display: flex;
-margin: 0px;
-margin-right: 4vw;
+.groups-page-groups-container-header-second-column {
+  width: 100%;
+  display: flex;
+  margin: 0px;
+  margin-right: 3vw;
 
-font-family: Assistant;
-font-style: normal;
-font-weight: normal;
-font-size: 1.3vw;
-/* identical to box height */
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.3vw;
+  /* identical to box height */
 
-text-align: right;
+  text-align: right;
 
-color: #FFFFFF;
+  color: #ffffff;
 }
 
-.groups-page-groups-container-header-third-column{
-    width: 100%;
-display: flex;
-margin: 0px;
-margin-right: 4vw;
+.groups-page-groups-container-header-third-column {
+  width: 100%;
+  display: flex;
+  margin: 0px;
+  margin-right: 1vw;
 
-font-family: Assistant;
-font-style: normal;
-font-weight: normal;
-font-size: 1.3vw;
-/* identical to box height */
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.3vw;
+  /* identical to box height */
 
-text-align: right;
+  text-align: right;
 
-color: #FFFFFF;
+  color: #ffffff;
 }
 
-.groups-page-groups-list{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 80vh;
-    align-items: center;
+.groups-page-groups-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80vh;
+  align-items: center;
+  overflow-y: scroll;
+  gap: 1vh;
+}
+
+.groups-page-groups-list::-webkit-scrollbar{
+  width: 0px;
 }
