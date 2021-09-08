@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import HomePurpleIcon from "../../icons/icons-components/home-page-icon/home-page-icon.component";
 import MessagesStockIcon from "../../icons/icons-components/messages-strock-icon/messages-stock-icon.component";
@@ -21,56 +21,56 @@ const links = [
 	{ linkName: "התנתקות", goTo: "", className: "list list-8" },
 ];
 
-const ICONS = [];
-
 function Sidebar() {
+	const [path, setPath] = useState("");
+	console.log(path);
 	return (
 		<aside className='aside-bar'>
-			<Link to={links[0].goTo}>
+			<Link onClick={() => setPath(links[0].goTo)} to={links[0].goTo}>
 				<li className={links[0].className}>
-					<HomePurpleIcon />
+					<HomePurpleIcon path={path} />
 					{links[0].linkName}
 				</li>
 			</Link>
-			<Link to={links[1].goTo}>
+			<Link onClick={() => setPath(links[1].goTo)} to={links[1].goTo}>
 				<li className={links[1].className}>
-					<MessagesStockIcon />
+					<MessagesStockIcon path={path} />
 					{links[1].linkName}
 				</li>
 			</Link>
-			<Link to={links[2].goTo}>
+			<Link onClick={() => setPath(links[2].goTo)} to={links[2].goTo}>
 				<li className={links[2].className}>
-					<GroupsIcon />
+					<GroupsIcon path={path} />
 					{links[2].linkName}
 				</li>
 			</Link>
-			<Link to={links[3].goTo}>
+			<Link onClick={() => setPath(links[3].goTo)} to={links[3].goTo}>
 				<li className={links[3].className}>
-					<SendIcon />
+					<SendIcon path={path} />
 					{links[3].linkName}
 				</li>
 			</Link>
-			<Link to={links[4].goTo}>
+			<Link onClick={() => setPath(links[4].goTo)} to={links[4].goTo}>
 				<li className={links[4].className}>
-					<HistoryIcon />
+					<HistoryIcon path={path} />
 					{links[4].linkName}
 				</li>
 			</Link>
-			<Link to={links[5].goTo}>
+			<Link onClick={() => setPath(links[5].goTo)} to={links[5].goTo}>
 				<li className={links[5].className}>
-					<ProfileIcone />
+					<ProfileIcone path={path} />
 					{links[5].linkName}
 				</li>
 			</Link>
-			<Link to={links[6].goTo}>
+			<Link onClick={() => setPath(links[6].goTo)} to={links[6].goTo}>
 				<li className={links[6].className}>
-					<SettingsIcon />
+					<SettingsIcon path={path} />
 					{links[6].linkName}
 				</li>
 			</Link>
-			<Link to={links[7].goTo}>
+			<Link onClick={() => setPath(links[7].goTo)} to={links[7].goTo}>
 				<li className={links[7].className}>
-					<SignOutIcon />
+					<SignOutIcon path={path} />
 					{links[7].linkName}
 				</li>
 			</Link>
