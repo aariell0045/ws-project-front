@@ -10,6 +10,7 @@ import SendMessagePart2 from "./components/send-message-part-2/send-message-part
 
 import SendMessagePart1 from "./components/send-message-part-1/send-message-part-1.component";
 import SendMessagePart3 from "./components/send-message-part-3/send-message-part-3.component";
+import HistoryList from "./components/history-list/history-list.component";
 
 function App() {
 	return (
@@ -75,6 +76,13 @@ function App() {
 				path='/SendMessagePart3'
 				render={() => {
 					return <SendMessagePart3 />;
+				}}
+			/>
+			<Route
+				exact
+				path='/HistoryList'
+				render={() => {
+					return <HistoryList />;
 				}}
 			/>
 		</div>
