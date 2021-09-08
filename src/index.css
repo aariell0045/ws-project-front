@@ -1,38 +1,35 @@
 body {
-  margin: 0;
-  font-family: 'Assistant', sans-serif;  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  direction: rtl;
-  overflow: hidden;
+	margin: 0;
+	font-family: "Assistant", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	direction: rtl;
+	overflow: hidden;
 }
 
-a{
-  text-decoration: none;
+a {
+	text-decoration: none;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-
 textarea {
-  border: 1px solid #888; 
-  resize: none;
-  border-radius: 1em;
-  outline: none;
-  font-family: Assistant;
+	border: 1px solid #888;
+	resize: none;
+	border-radius: 1em;
+	outline: none;
+	font-family: Assistant;
 	font-style: normal;
 	font-size: 20px;
 	line-height: 39px;
-
 }
 
 textarea:focus {
-  border: 2px solid #444;
+	border: 2px solid #444;
 }
 
-p{
-  margin: 0px;
+p {
+	margin: 0px;
 }
-

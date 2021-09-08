@@ -2,7 +2,7 @@
     flex-direction: column;
     display: inline-flex;
 	justify-content: center;
-	width: fit-content;
+	width: 10vw;
 	height: fit-content;
 	z-index: 0;
 	margin-left: 4vw;
@@ -19,22 +19,30 @@
 	margin-right: 9%;
 	margin-top: 2.5%;
 	margin-bottom: 5vh;
-	line-height: 65px;
 	user-select: none;
 }
 
 .list {
-	list-style: none;
-	color: #FFFFFF;
-	font-style: normal;
-	font-weight: 500;
 	font-family: Assistant;
-	font-size: 1.6vw;
-	margin-bottom: 3vh;
-	margin-right: 3vw;
-	cursor: pointer;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.2vw;
+	text-align: right;
+	list-style: none;
+	color: #000000;
+	margin-top: 4vh;
+	width: 100%;
+	text-align: start;
+	padding-right: 0.7vw;
+	display: flex;
+	width: 10vw;
+	gap: 1vw;
 	
 	
+}
+
+.list-1 {
+	margin-top: 6vh;
 }
 
 .list:hover {
@@ -42,7 +50,7 @@
 
 }
 
-.list-7{
+.list-6{
 	margin-top: 30vh;
 }
  
