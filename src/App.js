@@ -1,7 +1,7 @@
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar.component';
 import Home from './components/home/Home.component';
-import GroupsList from './components/groups-list/groups-list.component';
+import GroupsList from "./components/groups-list/groups-list.component"
 import { Route } from 'react-router-dom';
 import AddGroup from './components/add-group/AddGroup.component';
 import MessagesStock from './components/messages-stock/messages-stock.component';
