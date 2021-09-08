@@ -11,6 +11,7 @@ import SendMessagePart2 from "./components/send-message-part-2/send-message-part
 import SendMessagePart1 from "./components/send-message-part-1/send-message-part-1.component";
 import SendMessagePart3 from "./components/send-message-part-3/send-message-part-3.component";
 import HistoryList from "./components/history-list/history-list.component";
+import LoginPage from "./components/login-page/login-page.component";
 
 function App() {
 	return (
@@ -18,6 +19,15 @@ function App() {
 			<div id='background'></div>
 			<div className='sidebar'></div>
 			<Sidebar />
+
+			<Route
+				exact
+				path='/Login'
+				render={() => {
+					return <LoginPage />;
+				}}
+			/>
+
 			<Route
 				exact
 				path='/Home'
