@@ -8,7 +8,7 @@ function SendMessagePart2() {
       <div className="send-message-part-2-warpper">
         <div className="send-message-part-2-right-side">
           <header className="send-message-part-2-right-side-main-header">
-            <h2>יש לבחור את הקבוצה הרלוונטית:</h2>
+            <p>יש לבחור את הקבוצה הרלוונטית:</p>
           </header>
           <input
             className="send-message-part-2-right-side-search-input"
@@ -39,7 +39,7 @@ function SendMessagePart2() {
           <div className="send-message-part-2-left-side-background"></div>
           <div className="send-message-part-2-left-side-container">
             <header className="send-message-part-2-left-side-main-header">
-              <h2>שם הקבוצה - 100 משתתפים</h2>
+              <p>שם הקבוצה - 100 משתתפים</p>
             </header>
 
             <div className="contacts-table-headers">

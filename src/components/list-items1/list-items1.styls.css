@@ -1,0 +1,21 @@
+.list-items-box {
+  
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1vh;
+  width: 95%;
+  height: 6vh;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.list-items-icons{
+    position: absolute;
+    left: 2vw;
+    width: 5%;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+

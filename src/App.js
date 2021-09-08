@@ -1,9 +1,8 @@
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar.component';
 import Home from './components/home/Home.component';
-import GroupsList from './components/groups-list/Groups-list.component';
+import GroupsList from './components/groups-list/groups-list.component';
 import { Route } from 'react-router-dom';
-import Group from './components/group/Group.component';
 import AddGroup from './components/add-group/AddGroup.component';
 import MessagesStock from './components/messages-stock/messages-stock.component';
 import SendMessagePart2 from './components/send-message-part-2/send-message-part-2.component';
@@ -28,11 +27,6 @@ function App() {
         )
       }} />
 
-      <Route exact path='/Group' render={() => {
-        return (
-          <Group />
-        )
-      }} />
       <Route exact path='/AddGroup' render={() => {
         return (
           <AddGroup />
