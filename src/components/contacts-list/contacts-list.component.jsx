@@ -7,9 +7,10 @@ function ContactsList() {
     <section id="contacts-page">
       <header className="contacts-page-main-header">
         <div className="contacts-page-main-header-right-side">
+          <span className='contacts-page-main-header-back-button'>icon</span>
           <div className="contacts-page-main-header-title-container">
             <p className="contacts-page-main-header-title">
-              שם הקבוצה-1000משתתפים
+              <span>שם הקבוצה </span>- 1000 משתתפים
             </p>
           </div>
         </div>
@@ -18,7 +19,7 @@ function ContactsList() {
             <input
               className="contacts-page-main-header-search"
               type="text"
-              placeholder="חיפוש משתתפים או קבוצות"
+              placeholder="חיפוש משתתפים בקבוצה"
             />
           </div>
           <div className="contacts-page-main-header-add-new-contact-button-container">
@@ -28,6 +29,23 @@ function ContactsList() {
           </div>
         </div>
       </header>
+
+      <div className="contacts-page-contacts-container-header">
+        <div className="contacts-page-contacts-container-header-first-column">
+          <p>שם פרטי</p>
+        </div>
+        <div className="contacts-page-contacts-container-header-second-column">
+          <p>שם משפחה</p>
+        </div>
+        <div className="contacts-page-contacts-container-header-third-column">
+          <p>טלפון</p>
+        </div>
+      </div>
+      <div className="contacts-page-contacts-list">
+        <ListItems />
+        <ListItems />
+        <ListItems />
+      </div>
     </section>
   );
 }

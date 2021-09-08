@@ -6,6 +6,7 @@
     padding-top: 0px;
     padding-bottom: 1vw;
     height: 10em;
+	position: relative;
 	
 }
 
@@ -32,4 +33,7 @@ color: #000000;
 .media-footer{
 	width: 100%;
 	text-align: end;
+	position: absolute;
+	bottom: 1.5vh;
+	left: 1.5vw;
 }
