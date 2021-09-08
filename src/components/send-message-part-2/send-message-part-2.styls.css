@@ -1,7 +1,7 @@
 .send-message-part-2-right-side-main-header {
   font-family: Assistant;
   font-style: normal;
-  font-weight: 200;
+  font-weight: 600;
   font-size: 1.5vw;
   text-align: right;
   color: #ffffff;
@@ -10,15 +10,14 @@
 }
 
 .send-message-part-2-right-side-search-input {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 20px;
-  width: 90%;
-  height: 7vh;
-
-  padding-right: 1em;
-  outline: none;
+    background: rgba(255, 255, 255, 0.2);
+	border: 1px solid #000000;
+	border-radius: 20px;
+	width: 88%;
+	height: 6.5vh;
+	outline: none;
+	padding-right: 1em;
+  font-size: 1vw;
 }
 
 .send-message-part-2-right-side-search-input::placeholder {
