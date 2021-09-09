@@ -112,6 +112,7 @@
   border-radius: 50%;
   height: 3vw;
   width: 3vw;
+  cursor: pointer;
 }
 
 .groups-page-groups-container-header {
