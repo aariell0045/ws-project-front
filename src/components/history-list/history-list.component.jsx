@@ -17,47 +17,42 @@ function HistoryList() {
 				</div>
 			</header>
 
-			<div className='history-list-header-container-warpper'>
-				<div className='history-list-header-container'>
-					<div className='history-list-header-warpper'>
-						<p
-							style={{ paddingRight: "2vw" }}
-							className='history-list-header-content'
-						>
-							שם ההודעה
-						</p>
+			<div className='history-page-list-container-header'>
+				<div className='history-page-list-item-header'>
+					<div className='history-page-list-first-item history-page-list-content-item-warpper-header'>
+						<p className='history-page-content-header'>שם ההודעה</p>
+						<span className='history-page-icon-header'>icon</span>
 					</div>
-					<div className='history-list-header-warpper'>
-						<p className='history-list-header-content'>שם הקבוצה</p>
+					<div className='history-page-list-second-item history-page-list-content-item-warpper-header'>
+						<p className='history-page-content-header'>שם הקבוצה</p>
+						<span className='history-page-icon-header'>icon</span>
 					</div>
-					<div className='history-list-header-warpper'>
-						<p className='history-list-header-content'>תאריך שליחה</p>
+					<div className='history-page-list-threed-item history-page-list-content-item-warpper-header'>
+						<p className='history-page-content-header'>תאריך שליחה</p>
+						<span className='history-page-icon-header'>icon</span>
 					</div>
-					<div className='history-list-header-warpper'>
-						<p className='history-list-header-content'>קבצים מצורפים</p>
+					<div className='history-page-list-four-item history-page-list-content-item-warpper-header'>
+						<p className='history-page-content-header'>קבצים מצורפים</p>
 					</div>
 				</div>
 			</div>
-			<div className='history-list-container'>
-				<div className='history-list-item'>
-					<div className='history-list-item-warpper history-list-item-warpper-1'>
-						<p className='history-list-item-content history-list-item-content-first-item'>
-							שם ארוך של הודעה
-						</p>
+
+			<div className='history-page-list-container'>
+				<div className='history-page-list-item'>
+					<div className='history-page-list-first-item history-page-list-content-item-warpper'>
+						<p className='history-page-content'>שם ההודעה</p>
+						<span className='history-page-icon'>icon</span>
 					</div>
-					<div className='history-list-item-warpper history-list-item-warpper-2 '>
-						<p className='history-list-item-content history-list-item-content-second'>מועדון ליצמן - בנות</p>
+					<div className='history-page-list-second-item history-page-list-content-item-warpper '>
+						<p className='history-page-content'>שם הקבוצה</p>
+						<span className='history-page-icon'>icon</span>
 					</div>
-					<div className='history-list-item-warpper history-list-item-warpper-3 '>
-						<p className='history-list-item-content history-list-item-content-threed'> 18:13 1/3/2020</p>
+					<div className='history-page-list-threed-item history-page-list-content-item-warpper '>
+						<p className='history-page-content'>תאריך שליחה</p>
+						<span className='history-page-icon'>icon</span>
 					</div>
-					<div className='history-list-item-warpper history-list-item-warpper-4 '>
-						<p
-					
-							className='history-list-item-content history-list-item-content-last-item'
-						>
-							icon
-						</p>
+					<div className='history-page-list-four-item history-page-list-content-item-warpper '>
+						<p className='history-page-content'>קבצים מצורפים</p>
 					</div>
 				</div>
 			</div>
