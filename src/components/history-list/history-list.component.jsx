@@ -27,7 +27,7 @@ function HistoryList() {
 						<p className='history-page-content-header'>שם הקבוצה</p>
 						<span className='history-page-icon-header'>icon</span>
 					</div>
-					<div className='history-page-list-threed-item history-page-list-content-item-warpper-header'>
+					<div className='history-page-list-third-item history-page-list-content-item-warpper-header'>
 						<p className='history-page-content-header'>תאריך שליחה</p>
 						<span className='history-page-icon-header'>icon</span>
 					</div>
@@ -47,7 +47,7 @@ function HistoryList() {
 						<p className='history-page-content'>שם הקבוצה</p>
 						<span className='history-page-icon'>icon</span>
 					</div>
-					<div className='history-page-list-threed-item history-page-list-content-item-warpper '>
+					<div className='history-page-list-third-item history-page-list-content-item-warpper '>
 						<p className='history-page-content'>תאריך שליחה</p>
 						<span className='history-page-icon'>icon</span>
 					</div>

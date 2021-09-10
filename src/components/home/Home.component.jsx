@@ -3,6 +3,9 @@ import AddEvents from "../add-events/add-events.component";
 import "./home.styles.css";
 import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-down-icon.component";
 import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
+import ArrowLeftIcon from "../../icons/icons-components/arrow-left-icon/arrow-left-icon.component";
+import ListItem2 from "../list-item-2/list-item2.component";
+import image2 from "../../images/qr-code.png";
 
 function Home() {
 	const [state, setState] = useState({
@@ -12,13 +15,20 @@ function Home() {
 	});
 
 	const [tasks, setTasks] = useState([]);
+	const [events, setEvents] = useState([]);
 
 	function openWindow(windowKey) {
-		console.log(state[windowKey]);
 		let currentState = { ...state };
 		currentState.pointerEvents = "none";
 		currentState[windowKey] = true;
 		setState(currentState);
+	}
+
+	function openItem(itemContainer, index, setContainer) {
+		debugger;
+		let currentTaksState = [...itemContainer];
+		currentTaksState[index].isOpen = !currentTaksState[index].isOpen;
+		setContainer(currentTaksState);
 	}
 
 	return (
@@ -45,28 +55,19 @@ function Home() {
 							<p className='my-tasks-header-content'>המשימות שלי</p>
 						</div>
 						<div className='my-tasks-list'>
-							{tasks.map((task) => {
+							{tasks.map((task, index) => {
 								return (
-									<div className='task-box-warpper'>
-										<input type='radio' />
-										<div className='task-box'>
-											<div className='task-box-icons' >
-												<div className='task-box-icons-warpper'>
-												<ArrowDownIcon />
-												</div>
-												<div className='task-box-icons-warpper'>
-													{/* <TrashIcon disabled={true}/> */}
-												</div>
-											</div>
-											<p
-												style={{
-													backgroundColor: task.taskColor,
-												}}
-												className='importance-level'
-											></p>
-											{task.taskName}
-										</div>
-									</div>
+									<ListItem2
+										key={index}
+										itemColor={task.taskColor}
+										itemName={task.taskName}
+										itemDescription={task.taskDescription}
+										itemIsOpen={task.isOpen}
+										index={index}
+										openItem={openItem}
+										itemContainer={tasks}
+										setContainer={setTasks}
+									/>
 								);
 							})}
 						</div>
@@ -107,21 +108,33 @@ function Home() {
 							<p className='home-page-date-content'>פברואר 2021</p>
 							<p classNames='home-page-left-arrow'>right</p>
 						</div>
-						<div className='my-tasks-list'>
-							<div className='task-box-warpper'>
-								<div className='task-box'>
-									<p className='importance-level'></p> שם האירוע
-								</div>
+						<div className='my-tasks-list-warpper'>
+							<div className='my-events-list'>
+								{events.map((event, index) => {
+									console.log(event);
+									return (
+										<ListItem2
+											key={index}
+											itemColor={event.taskColor}
+											itemName={event.taskName}
+											itemDescription={event.taskDescription}
+											itemIsOpen={event.isOpen}
+											index={index}
+											openItem={openItem}
+											itemContainer={events}
+											setContainer={setEvents}
+										/>
+									);
+								})}
 							</div>
-							<div className='task-box-warpper'>
-								<div className='task-box'>
-									<p className='importance-level'></p> שם האירוע
-								</div>
-							</div>
-							<div className='task-box-warpper'>
-								<div className='task-box'>
-									<p className='importance-level'></p> שם האירוע
-								</div>
+							<div className='my-task-button-warpper-2 my-task-button-warpper'>
+								<button
+									disabled={state.openAddTaskWindow}
+									onClick={() => openWindow("openAddEventWindow")}
+									className='add-new-task-button'
+								>
+									אירוע חדש
+								</button>
 							</div>
 						</div>
 					</div>
@@ -131,7 +144,16 @@ function Home() {
 				<AddEvents
 					useState={[state, setState]}
 					useTasks={[tasks, setTasks]}
-					tasksDetails={["משימה חדשה", "שם המשימה"]}
+					tasksDetails={["משימה חדשה", "שם משימה"]}
+					windowKey='openAddTaskWindow'
+				/>
+			)}
+			{state.openAddEventWindow && (
+				<AddEvents
+					useState={[state, setState]}
+					useTasks={[events, setEvents]}
+					tasksDetails={["אירוע חדש", "שם אירוע"]}
+					windowKey='openAddEventWindow'
 				/>
 			)}
 		</section>

@@ -52,6 +52,7 @@
 	width: 15vw;
 	background-color: inherit;
 	outline: none;
+	font-size: 2vw;
 }
 
 .add-events-description textarea {

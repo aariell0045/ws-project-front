@@ -43,6 +43,7 @@ function AddEvents(props) {
 	]);
 
 	function close(windowKey) {
+		debugger
 		const [state, setState] = props.useState;
 		let currentState = { ...state };
 		currentState[windowKey] = false;
@@ -51,11 +52,10 @@ function AddEvents(props) {
 	}
 
 	function addTask(taskDetails) {
-		const { taskName, taskDescription, taskColor } = taskDetails;
 		console.log(taskDetails);
-		const [tasks, setTasks] = props.useTasks;
+		const [tasks, setTasks] = [...props.useTasks];
 		let currentTasksState = [...tasks];
-		currentTasksState.push({ taskName, taskDescription, taskColor });
+		currentTasksState.push({ ...taskDetails });
 		setTasks(currentTasksState);
 	}
 
@@ -77,7 +77,7 @@ function AddEvents(props) {
 	return (
 		<div className='add-events-container'>
 			<div className='add-events-header'>
-				<span onClick={() => close("openAddTaskWindow")}>X</span>
+				<span onClick={() => close(props.windowKey)}>X</span>
 				<p>{tasksDetails[0]}</p>
 			</div>
 
@@ -147,8 +147,9 @@ function AddEvents(props) {
 							taskName: state.taskName,
 							taskDescription: state.taskDescription,
 							taskColor: state.taskColor,
+							isOpen: false,
 						});
-						close("openAddTaskWindow");
+						close(props.windowKey);
 					}}
 					className='add-events-footer-button'
 				>

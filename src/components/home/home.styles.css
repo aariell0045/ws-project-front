@@ -18,13 +18,15 @@
 
 .home-page-left-side-main-header {
 	width: 100%;
+	height: -moz-fit-content;
 	height: fit-content;
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
 	flex-direction: column;
 	margin-bottom: 3.5vh;
-	margin-top: 9.3vh;
+	margin-top: 7.9vh;
+	gap: 2vh;
 }
 
 .home-page-left-side-header-content {
@@ -70,7 +72,7 @@
 	height: 70vh;
 	position: relative;
 	width: 80%;
-	padding-right: 3vw;
+	padding-right: 1vw;
 }
 
 .my-tasks-main-header {
@@ -94,47 +96,12 @@
 	flex-direction: column;
 	gap: 1vh;
 	width: 100%;
+	overflow-y: scroll;
+	height: 60vh;
 }
 
-.task-box-warpper {
-	display: flex;
-	gap: 0.02vw;
-	width: 100%;
-	align-items: center;
-}
-
-.task-box {
-	background: rgba(255, 255, 255, 0.9);
-	mix-blend-mode: normal;
-	opacity: 0.9;
-	border: 1px solid #000000;
-	box-sizing: border-box;
-	border-radius: 10px;
-	width: 90%;
-	height: 4.5vh;
-	display: flex;
-	align-items: center;
-	padding-right: 1vw;
-}
-
-.importance-level {
-	width: 0.5vw;
-	height: 0.5vw;
-	background: #fd4c4c;
-	display: flex;
-	margin-left: 0.4vw;
-	border-radius: 50%;
-}
-
-.my-task-button-warpper {
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	height: 8vh;
-	left: 0px;
-	align-items: center;
+.my-tasks-list::-webkit-scrollbar {
+	width: 0px;
 }
 
 .add-new-task-button {
@@ -290,4 +257,28 @@
 	width: 1vw;
 	height: 1vw;
 	border-radius: 50%;
+}
+
+.my-tasks-list-warpper {
+	width: 100%;
+	height: 39vh;
+	position: relative;
+}
+
+.my-task-button-warpper-2 {
+	position: absolute;
+	margin-left: 1vw;
+}
+
+.my-events-list {
+	display: inline-flex;
+	flex-direction: column;
+	gap: 1vh;
+	width: 100%;
+	overflow-y: scroll;
+	height: 30vh;
+}
+
+.my-events-list::-webkit-scrollbar {
+	width: 0px;
 }

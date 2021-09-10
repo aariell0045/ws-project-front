@@ -11,8 +11,7 @@ function TrashIcon(props) {
 				fill='none'
 				xmlns='http://www.w3.org/2000/svg'
 			>
-				<g style={{ mixBlendMode: "multiply" }}>
-					<rect width='21' height='21' fill='white' />
+				<g>
 					<path
 						d='M8.75 13.125L8.75 10.5'
 						stroke='black'
@@ -50,7 +49,6 @@ function TrashIcon(props) {
 				xmlns='http://www.w3.org/2000/svg'
 			>
 				<g style={{ mixBlendMode: "multiply" }}>
-					<rect width='21' height='21' fill='white' />
 					<path d='M8.75 13.125L8.75 10.5' stroke='black' stroke-linecap='round' />
 					<path d='M12.25 13.125L12.25 10.5' stroke='black' stroke-linecap='round' />
 					<path
