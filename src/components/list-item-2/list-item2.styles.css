@@ -1,0 +1,119 @@
+.task-box-icons {
+	position: absolute;
+	left: 1vw;
+	display: flex;
+	gap: 1vw;
+	height: 100%;
+	align-items: center;
+}
+
+.task-box-icons svg {
+	position: absolute;
+	top: 1.3vh;
+	left: 2vw;
+}
+
+.task-header {
+	display: flex;
+	height: 3vh;
+	align-items: center;
+}
+
+.task-box-open .task-header {
+	margin-top: 2vh;
+}
+
+.task-description {
+	margin-right: 1vw;
+	padding-bottom: 2vh;
+	max-width: 80%;
+	word-wrap: break-word;
+	font-size: 1.2vw;
+	display: flex;
+	text-align: start;
+	align-items: flex-start;
+	height: 100%;
+	word-break: break-word;
+}
+
+.task-name {
+	font-size: 1.3vw;
+}
+
+.task-box-open .task-description {
+	padding-top: 2.3vh;
+}
+
+.trash-icon svg {
+	background: #ffffff;
+	mix-blend-mode: multiply;
+	position: absolute;
+	left: 0.2vw;
+	background-color: inherit;
+}
+
+.task-box-input-open {
+	margin-bottom: 10vh;
+}
+.task-box-input-close {
+	margin-bottom: 1vh;
+}
+.task-box-close {
+	background: rgba(255, 255, 255, 0.9);
+	mix-blend-mode: normal;
+	opacity: 0.9;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: 10px;
+	width: 90%;
+	height: 4.5vh;
+	display: flex;
+	align-items: center;
+	padding-right: 1vw;
+	position: relative;
+}
+
+.task-box-open {
+	background: rgba(255, 255, 255, 0.9);
+	mix-blend-mode: normal;
+	opacity: 0.9;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: 10px;
+	width: 90%;
+	height: fit-content;
+	display: flex;
+	align-items: flex-start;
+	padding-right: 1vw;
+	position: relative;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.importance-level {
+	width: 0.5vw;
+	height: 0.5vw;
+	background: #fd4c4c;
+	display: flex;
+	margin-left: 0.4vw;
+	border-radius: 50%;
+}
+
+.my-task-button-warpper {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	height: 8vh;
+	left: 0px;
+	align-items: center;
+}
+
+.task-box-warpper {
+	display: flex;
+	gap: 0.02vw;
+	width: 100%;
+	align-items: center;
+	position: relative;
+}
