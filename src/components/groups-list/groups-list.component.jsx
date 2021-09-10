@@ -21,6 +21,10 @@ function GroupsList() {
     currentState[name] = value;
     setState(currentState);
   }
+
+  function deleteItem(itemsContainer,index){
+    let currentState = { ...state };
+  }
   return (
     <section id="groups-page">
       <header className="groups-page-main-header">
@@ -70,14 +74,14 @@ function GroupsList() {
         {state.searchGroups &&
           groupsList.map((group, index) => {
             if (group.groupName.includes(state.searchGroups)) {
-              return <ListItems key={index} group={group} />;
+              return <ListItems key={index} item={[group.groupName,group.groupLength,group.productionDate]} />;
             } else {
               return null;
             }
           })}
         {!state.searchGroups &&
           groupsList.map((group, index) => {
-            return <ListItems key={index} group={group} />;
+            return <ListItems key={index} item={[group.groupName,group.groupLength,group.productionDate]} />;
           })}
       </div>
     </section>

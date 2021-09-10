@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "./clock.styles.css"
 
 function Clock() {
-		
 		const [date, setDate] = useState(new Date());
 	  
 	   //Replaces componentDidMount and componentWillUnmount
