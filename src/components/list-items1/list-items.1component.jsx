@@ -3,14 +3,14 @@ import React from "react";
 import ContactsList from "../contacts-list/contacts-list.component";
 
 function ListItems(props) {
-  let { groupName, groupLength, productionDate } = props.group;
+  let [firstCoulmn,secondCoulmn,thirdCoulmn] = props.item;
 
   return (
     <div className="list-items-box">
       <div className="list-items-details-container">
-        <div className="list-items-first-row">{groupName}</div>
-        <div className="list-items-second-row">{groupLength}</div>
-        <div className="list-items-third-row">{productionDate}</div>
+        <div className="list-items-first-row">{firstCoulmn}</div>
+        <div className="list-items-second-row">{secondCoulmn}</div>
+        <div className="list-items-third-row">{thirdCoulmn}</div>
       </div>
       <div className="list-items-icons">
         <span className="list-items-display-icon">icon</span>
