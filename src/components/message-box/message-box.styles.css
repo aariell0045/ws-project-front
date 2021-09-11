@@ -1,16 +1,21 @@
-.message-box{
-	background: #FFFFFF;
-    border-radius: 1vh;
-    width: 80%;
-    padding: 2vw;
-    padding-top: 0px;
-    padding-bottom: 1vw;
-    height: 10em;
+.message-box {
+	border-radius: 1vh;
+	width: 80%;
+	padding: 2vw;
+	padding-top: 0px;
+	padding-bottom: 1vw;
+	height: 10em;
+	min-height: 10em;
 	position: relative;
-	
+	background: rgba(255, 255, 255, 0.8);
 }
 
-.message-box-header{
+.message-box p {
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+}
+
+.message-box-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -18,19 +23,19 @@
 
 .message-box-header h3 {
 	font-family: Assistant;
-font-style: normal;
-font-weight: 600;
-font-size: 25px;
-line-height: 33px;
-margin: 0px;
-/* identical to box height */
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 33px;
+	margin: 0px;
+	/* identical to box height */
 
-text-align: right;
+	text-align: right;
 
-color: #000000;
+	color: #000000;
 }
 
-.media-footer{
+.media-footer {
 	width: 100%;
 	text-align: end;
 	position: absolute;
