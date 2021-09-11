@@ -7,16 +7,17 @@
   color: #ffffff;
   padding-right: 0.4vw;
   padding-top: 3vw;
+  padding-bottom: 4vh;
 }
 
 .send-message-part-2-right-side-search-input {
-    background: rgba(255, 255, 255, 0.2);
-	border: 1px solid #000000;
-	border-radius: 20px;
-	width: 88%;
-	height: 6.5vh;
-	outline: none;
-	padding-right: 1em;
+  background: rgba(255, 255, 255, 0.2);
+  border: 0.11vw solid #000000;
+  border-radius: 20px;
+  width: 88%;
+  height: 6vh;
+  outline: none;
+  padding-right: 1em;
   font-size: 1vw;
 }
 
@@ -25,8 +26,6 @@
   font-style: normal;
   font-weight: normal;
   font-size: 1vw;
-  line-height: 20px;
-  /* identical to box height */
   text-align: right;
   color: #000000;
 }
@@ -67,7 +66,7 @@
 }
 
 .group-box {
-    background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 1vh;
   width: 85%;
   height: 4vw;
@@ -95,8 +94,8 @@
   margin-top: 3vh;
 }
 
-.send-message-part-2-right-side-groupsList::-webkit-scrollbar{
-    width: 0px;
+.send-message-part-2-right-side-groupsList::-webkit-scrollbar {
+  width: 0px;
 }
 .send-message-part-2-left-side-main-header {
   font-family: Assistant;
@@ -107,6 +106,7 @@
   color: #ffffff;
   padding-top: 3vw;
   margin-right: -1.7vw;
+  padding-bottom: 4vh;
 }
 
 .send-message-part-2-left-side-button {
@@ -191,7 +191,6 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
-
 }
 
 .contacts-list-container {
@@ -206,8 +205,8 @@
   overflow-y: scroll;
   margin-top: 2vh;
 }
-.contacts-list-container::-webkit-scrollbar{
-    width: 0px;
+.contacts-list-container::-webkit-scrollbar {
+  width: 0px;
 }
 
 .send-message-part-2-left-side-container {

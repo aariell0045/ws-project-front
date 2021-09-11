@@ -1,6 +1,7 @@
 import "./send-message-part-2.styls.css";
 import React from "react";
 import ContactBox from "../contact-box/contact-box.components";
+import { Link } from "react-router-dom";
 
 function SendMessagePart2() {
   return (
@@ -31,7 +32,6 @@ function SendMessagePart2() {
                 <strong>שם הקבוצה</strong>-100 משתתפים
               </p>
             </div>
-        
           </div>
         </div>
 
@@ -60,17 +60,16 @@ function SendMessagePart2() {
               <ContactBox />
               <ContactBox />
               <ContactBox />
-              
-              
-        
             </div>
           </div>
-          <div className="send-message-part-2-left-side-button-warpper">
-            <div className="send-message-part-2-left-side-button">
-              <div className="send-message-part-2-left-side-button-background"></div>
-              יאללה, המשכנו
+          <Link to="/SendMessagePart3">
+            <div className="send-message-part-2-left-side-button-warpper">
+              <div className="send-message-part-2-left-side-button">
+                <div className="send-message-part-2-left-side-button-background"></div>
+                יאללה, המשכנו
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </section>
