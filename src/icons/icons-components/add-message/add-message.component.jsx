@@ -1,22 +1,10 @@
 function AddMessageIcon() {
 	return (
-		<svg
-			style={{
-				width: "100%",
-				position: "absolute",
-				top: "50%",
-				marginTop: "-0.4vw",
-				left: "50%",
-				marginLeft: "-1.4vw",
-			}}
-			viewBox='0 0 28 20'
-			fill='none'
-			xmlns='http://www.w3.org/2000/svg'
-		>
+		<svg width='100%' viewBox='0 0 28 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
 			<svg
-				width='24'
+				width='100%'
 				height='24'
-				viewBox='8 5 8 25'
+				viewBox='8 5 12 25'
 				fill='none'
 				xmlns='http://www.w3.org/2000/svg'
 			>
