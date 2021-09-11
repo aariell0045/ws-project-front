@@ -65,6 +65,7 @@
 .add-events-title {
 	display: flex;
 	width: 100%;
+	align-items: flex-end;
 }
 .add-events-title p {
 	padding-left: 1vw;

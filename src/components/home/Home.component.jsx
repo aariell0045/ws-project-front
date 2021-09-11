@@ -25,7 +25,6 @@ function Home() {
 	}
 
 	function openItem(itemContainer, index, setContainer) {
-		debugger;
 		let currentTaksState = [...itemContainer];
 		currentTaksState[index].isOpen = !currentTaksState[index].isOpen;
 		setContainer(currentTaksState);
@@ -34,7 +33,7 @@ function Home() {
 	return (
 		<section id='home-page'>
 			<div style={{ pointerEvents: state.pointerEvents }} className='home-page-warpper'>
-				<div className='home-page-left-side'>
+				<div className='home-page-right-side'>
 					<header className='home-page-left-side-main-header'>
 						<p className='home-page-left-side-header-content'>
 							ערב טוב,
@@ -82,59 +81,62 @@ function Home() {
 						</div>
 					</div>
 				</div>
-				<div className='home-page-right-side'>
-					<div className='calander'>
-						<div className='calander-date'>
-							<p className='home-page-left-arrow'>left</p>
-							<p className='home-page-date-content'>פברואר 2021</p>
-							<p classNames='home-page-left-arrow'>right</p>
-						</div>
-						<div className='week-days-warpper'>
-							<div className='week-days'>
-								<p className='day'>א'</p>
-								<p className='day'>ב'</p>
-								<p className='day'>ג'</p>
-								<p className='day'>ד'</p>
-								<p className='day'>ה'</p>
-								<p className='day'>ו'</p>
-								<p className='day'>ש'</p>
+			
+				<div className='home-page-left-side'>
+					<div className='home-page-right-warpper' >
+						<div className='calander'>
+							<div className='calander-date'>
+								<p className='home-page-left-arrow'>left</p>
+								<p className='home-page-date-content'>פברואר 2021</p>
+								<p classNames='home-page-left-arrow'>right</p>
 							</div>
-						</div>
-						<div className='dates-list'></div>
-					</div>
-					<div className='home-page-events'>
-						<div className='calander-date'>
-							<p className='home-page-left-arrow'>left</p>
-							<p className='home-page-date-content'>פברואר 2021</p>
-							<p classNames='home-page-left-arrow'>right</p>
-						</div>
-						<div className='my-tasks-list-warpper'>
-							<div className='my-events-list'>
-								{events.map((event, index) => {
-									console.log(event);
-									return (
-										<ListItem2
-											key={index}
-											itemColor={event.taskColor}
-											itemName={event.taskName}
-											itemDescription={event.taskDescription}
-											itemIsOpen={event.isOpen}
-											index={index}
-											openItem={openItem}
-											itemContainer={events}
-											setContainer={setEvents}
-										/>
-									);
-								})}
+							<div className='week-days-warpper'>
+								<div className='week-days'>
+									<p className='day'>א'</p>
+									<p className='day'>ב'</p>
+									<p className='day'>ג'</p>
+									<p className='day'>ד'</p>
+									<p className='day'>ה'</p>
+									<p className='day'>ו'</p>
+									<p className='day'>ש'</p>
+								</div>
 							</div>
-							<div className='my-task-button-warpper-2 my-task-button-warpper'>
-								<button
-									disabled={state.openAddTaskWindow}
-									onClick={() => openWindow("openAddEventWindow")}
-									className='add-new-task-button'
-								>
-									אירוע חדש
-								</button>
+							<div className='dates-list'></div>
+						</div>
+						<div className='home-page-events'>
+							<div className='calander-date'>
+								<p className='home-page-left-arrow'>left</p>
+								<p className='home-page-date-content'>פברואר 2021</p>
+								<p classNames='home-page-left-arrow'>right</p>
+							</div>
+							<div className='my-tasks-list-warpper'>
+								<div className='my-events-list'>
+									{events.map((event, index) => {
+										console.log(event);
+										return (
+											<ListItem2
+												key={index}
+												itemColor={event.taskColor}
+												itemName={event.taskName}
+												itemDescription={event.taskDescription}
+												itemIsOpen={event.isOpen}
+												index={index}
+												openItem={openItem}
+												itemContainer={events}
+												setContainer={setEvents}
+											/>
+										);
+									})}
+								</div>
+								<div className='my-task-button-warpper-2 my-task-button-warpper'>
+									<button
+										disabled={state.openAddEventWindow}
+										onClick={() => openWindow("openAddEventWindow")}
+										className='add-new-task-button'
+									>
+										אירוע חדש
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
