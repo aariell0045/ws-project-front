@@ -4,10 +4,85 @@ import ListItems from "../list-items1/list-items.1component";
 import "./groups-list.styles.css";
 
 const groups = [
-  { groupName: "ariel", groupLength: 50, productionDate: "25.09.2000" },
-  { groupName: "ariel", groupLength: 50, productionDate: "25.09.2000" },
-  { groupName: "toam", groupLength: 50, productionDate: "25.09.2000" },
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0512203450",
+      },
+    ],
+  },
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0532203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+    ],
+  },
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0582203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+    ],
+  },
 ];
+
+function mergeGroups(groupName, groups) {
+  let newGroup = {groupName, contactsList: []};
+  for (let group of groups) {
+    newGroup.contactsList.push(...group.contactsList);
+  }
+  newGroup.contactsList = checkDuplicate(newGroup.contactsList);
+  newGroup.groupLength = newGroup.contactsList.length;
+  return newGroup;
+}
+
+function checkDuplicate(contactsList) {
+  let newObjectContactsList = {};
+  let newArrayContactsList = [];
+
+  for (let contact of contactsList) {
+    let phone = contact.contactPhone;
+    newObjectContactsList[phone] = contact;
+  }
+  for (let key in newObjectContactsList) {
+    newArrayContactsList.push(newObjectContactsList[key]);
+  }
+  return newArrayContactsList;
+}
+
+console.log(mergeGroups("king",groups));
+
 
 function GroupsList() {
   const [groupsList, setGroupList] = useState(groups);
@@ -22,7 +97,7 @@ function GroupsList() {
     setState(currentState);
   }
 
-  function deleteItem(itemsContainer,index){
+  function deleteItem(itemsContainer, index) {
     let currentState = { ...state };
   }
   return (
@@ -74,14 +149,32 @@ function GroupsList() {
         {state.searchGroups &&
           groupsList.map((group, index) => {
             if (group.groupName.includes(state.searchGroups)) {
-              return <ListItems key={index} item={[group.groupName,group.groupLength,group.productionDate]} />;
+              return (
+                <ListItems
+                  key={index}
+                  item={[
+                    group.groupName,
+                    group.groupLength,
+                    group.productionDate,
+                  ]}
+                />
+              );
             } else {
               return null;
             }
           })}
         {!state.searchGroups &&
           groupsList.map((group, index) => {
-            return <ListItems key={index} item={[group.groupName,group.groupLength,group.productionDate]} />;
+            return (
+              <ListItems
+                key={index}
+                item={[
+                  group.groupName,
+                  group.groupLength,
+                  group.productionDate,
+                ]}
+              />
+            );
           })}
       </div>
     </section>
