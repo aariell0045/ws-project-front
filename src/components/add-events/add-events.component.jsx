@@ -43,7 +43,6 @@ function AddEvents(props) {
 	]);
 
 	function close(windowKey) {
-		debugger
 		const [state, setState] = props.useState;
 		let currentState = { ...state };
 		currentState[windowKey] = false;

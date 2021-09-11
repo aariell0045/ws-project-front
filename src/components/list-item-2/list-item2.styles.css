@@ -16,11 +16,8 @@
 .task-header {
 	display: flex;
 	height: 3vh;
-	align-items: center;
-}
-
-.task-box-open .task-header {
-	margin-top: 2vh;
+	align-items: flex-start;
+	padding-top: 2vh;
 }
 
 .task-description {
@@ -28,7 +25,7 @@
 	padding-bottom: 2vh;
 	max-width: 80%;
 	word-wrap: break-word;
-	font-size: 1.2vw;
+	font-size: 130%;
 	display: flex;
 	text-align: start;
 	align-items: flex-start;
@@ -37,24 +34,20 @@
 }
 
 .task-name {
-	font-size: 1.3vw;
-}
-
-.task-box-open .task-description {
-	padding-top: 2.3vh;
+	font-size: 150%;
+	margin-top:-1vh ;
 }
 
 .trash-icon svg {
 	background: #ffffff;
-	mix-blend-mode: multiply;
-	position: absolute;
-	left: 0.2vw;
-	background-color: inherit;
+    mix-blend-mode: multiply;
+    position: absolute;
+    left: -0.4vw;
+    background-color: inherit;
+    top: 1.2vh;
 }
 
-.task-box-input-open {
-	margin-bottom: 10vh;
-}
+
 .task-box-input-close {
 	margin-bottom: 1vh;
 }
@@ -74,25 +67,24 @@
 }
 
 .task-box-open {
-	background: rgba(255, 255, 255, 0.9);
-	mix-blend-mode: normal;
-	opacity: 0.9;
-	border: 1px solid #000000;
-	box-sizing: border-box;
-	border-radius: 10px;
-	width: 90%;
-	height: fit-content;
 	display: flex;
-	align-items: flex-start;
-	padding-right: 1vw;
-	position: relative;
 	flex-direction: column;
 	align-items: flex-start;
+	opacity: 0.9;
+	width: 90%;
+	border: 0.01vw solid #000000;
+	box-sizing: border-box;
+	border-radius: 0.7vh;
+	height: fit-content;
+	padding-right: 1vw;
+	position: relative;
+	background: rgba(255, 255, 255, 0.9);
+	mix-blend-mode: normal;
 }
 
 .importance-level {
-	width: 0.5vw;
-	height: 0.5vw;
+	width: 0.91em;
+	height: 0.91em;
 	background: #fd4c4c;
 	display: flex;
 	margin-left: 0.4vw;
@@ -101,12 +93,13 @@
 
 .my-task-button-warpper {
 	position: absolute;
-	bottom: 0px;
+	bottom: 2vw;
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
-	height: 8vh;
-	left: 0px;
+	height: -moz-fit-content;
+	height: fit-content;
+	left: 3vw;
 	align-items: center;
 }
 
@@ -114,6 +107,10 @@
 	display: flex;
 	gap: 0.02vw;
 	width: 100%;
-	align-items: center;
+	align-items: flex-start;
 	position: relative;
+}
+
+.task-box-warpper input {
+	margin-top: 1vh;
 }
