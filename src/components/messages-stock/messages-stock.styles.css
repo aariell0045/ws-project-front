@@ -1,116 +1,124 @@
 #messages-stock {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 .messages-stock-warpper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-  height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 100%;
+	height: 100vh;
 }
 
 .messages-stock-right-side {
-  width: 100%;
-  height: 100%;
-  position: relative;
+	width: 100%;
+	height: 100%;
+	position: relative;
 }
 
 .message-stock-right-side-background {
-  background: rgba(255, 255, 255, 0.4);
-  mix-blend-mode: soft-light;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
+	background: rgba(255, 255, 255, 0.4);
+	mix-blend-mode: soft-light;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1;
 }
 
 .messsages-stock-tools {
-  position: absolute;
-  left: 0;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-top: 35.826px;
-  display: inline-flex;
-  justify-content: flex-end;
+	position: absolute;
+	left: 0;
+	height: -moz-fit-content;
+	height: fit-content;
+	margin-top: 35.826px;
+	display: inline-flex;
+	justify-content: flex-end;
 }
 
 .new-message-tool {
-  border: 1px solid black;
-  border-radius: 1vh;
-  box-sizing: border-box;
-  text-align: start;
-  cursor: pointer;
-  margin-left: 1.2em;
-  padding: 0 0.5em;
-  user-select: none;
-  display: flex;
-  width: fit-content;
+	border: 1px solid black;
+	border-radius: 1vh;
+	box-sizing: border-box;
+	text-align: start;
+	cursor: pointer;
+	margin-left: 1.2em;
+	padding: 0 0.5em;
+	user-select: none;
+	display: flex;
+	width: fit-content;
 }
 
 .new-message-tool-active {
-  width: 6vw;
-  justify-content: flex-start;
+	width: 6vw;
+	justify-content: flex-start;
 }
 
 .messages-stock-left-side-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.8vw;
-  line-height: 39px;
-  text-align: right;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 7vh;
-  padding-bottom: 3vh;
-
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.8vw;
+	line-height: 39px;
+	text-align: right;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 7vh;
+	padding-bottom: 3vh;
 }
 
 .messages-stock-right-side-button-add-new-message {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 50%;
-  height: 3vw;
-  width: 3vw;
-  cursor: pointer;
-  margin-left: 4vw;
+	background: rgba(255, 255, 255, 0.8);
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	height: 3vw;
+	width: 3vw;
+	cursor: pointer;
+	margin-left: 4vw;
+	position: relative;
 }
 .messages-stock-left-side {
-  padding-right: 3vw;
+	padding-right: 3vw;
 }
 
 .messages-stcok-left-side-input {
-  background: rgba(255, 255, 255, 0.2);
-  border: 0.11vw solid #000000;
-  box-sizing: border-box;
-  border-radius: 20px;
-  width: 90%;
-  height: 6vh;
-  outline: none;
-  padding-right: 1em;
+	background: rgba(255, 255, 255, 0.2);
+	border: 0.11vw solid #000000;
+	box-sizing: border-box;
+	border-radius: 20px;
+	width: 90%;
+	height: 6vh;
+	outline: none;
+	padding-right: 1em;
 }
 
 .messages-stcok-left-side-input::placeholder {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1vw;
-  text-align: right;
-  color: #000000;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1vw;
+	text-align: right;
+	color: #000000;
 }
 
 .messages-stcok-list {
-  margin-top: 2vh;
-  display: grid;
-  gap: 1em;
-  overflow-y: scroll;
-  height: 75vh;
+	margin-top: 2vh;
+	display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+	gap: 1em;
+	overflow-y: scroll;
+	height: 75vh;
+
 }
 
 .messages-stcok-list::-webkit-scrollbar {
-  width: 0px;
+	width: 0px;
+}
+
+.messages-stock-right-side-button-add-new-message svg {
+	width: 2em;
+	height: 2em;
 }
