@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import MessageBox from "../message-box/message-box.component";
 import AddMessage from "../add-message/add-message.component";
 import AddMessageIcon from "../../icons/icons-components/add-message/add-message.component";
+import AddEvents from "../add-events/add-events.component";
+import AddSingleField from "../add-single-field/add-single-field.component";
 
 const messages = [
 	{ messageName: "ariel", contentMessage: "שלום מה קורה אחשלי היקר מכל!!!!!" },
@@ -16,6 +18,9 @@ function MessagesStock() {
 	const [messagesList, setMessageList] = useState(messages);
 	const [state, setState] = useState({
 		searchMessages: "",
+		messageName: "שם ההודעה",
+		openAddMessageNameWindows: false,
+		fieldsErea: [" ", "", ""],
 	});
 
 	function handleInputs({ target }) {
@@ -26,16 +31,24 @@ function MessagesStock() {
 	}
 
 	return (
-		<section id='messages-stock'>
+		<section
+			style={{
+				backdropFilter: state.openAddMessageNameWindows && "blur(4px)",
+			}}
+			id='messages-stock'
+		>
+			{state.openAddMessageNameWindows && (
+				<div className='messages-stock-background'></div>
+			)}
 			<div className='messages-stock-warpper'>
 				<div className='messages-stock-left-side'>
 					<header className='messages-stock-left-side-header'>
 						<p>מאגר הודעות</p>
 						<button
-							onClick={(event) => setCreateMessage(!createMessage)}
+							onClick={(event) => setCreateMessage(true)}
 							className='messages-stock-right-side-button-add-new-message'
 						>
-              <AddMessageIcon />
+							<AddMessageIcon />
 						</button>
 					</header>
 					<input
@@ -79,20 +92,25 @@ function MessagesStock() {
 				</div>
 				<div className='messages-stock-right-side'>
 					<div className='message-stock-right-side-background'></div>
-					<div className='messsages-stock-tools'>
-						<span
-							className={
-								createMessage
-									? "new-message-tool new-message-tool-active"
-									: "new-message-tool"
-							}
-						>
-							{"icon"}
-						</span>
+					<div className='messsages-stock-tools'></div>
+					<div>
+						{createMessage && (
+							<AddMessage
+								useState={[state, setState]}
+								useTasks={[messagesList, setMessageList]}
+							/>
+						)}
 					</div>
-					<div>{createMessage && <AddMessage />}</div>
 				</div>
 			</div>
+			{state.openAddMessageNameWindows && (
+				<AddSingleField
+					useState={[state, setState]}
+					useTasks={[messagesList, setMessageList]}
+					tasksDetails={["שם ההודעה", "הבא "]}
+					windowKey='openAddMessageNameWindows'
+				/>
+			)}
 		</section>
 	);
 }

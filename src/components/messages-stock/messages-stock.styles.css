@@ -1,6 +1,7 @@
 #messages-stock {
 	width: 100%;
 	height: 100%;
+	position: relative;
 }
 .messages-stock-warpper {
 	display: grid;
@@ -106,26 +107,29 @@
 .messages-stcok-list {
 	margin-top: 2vh;
 	display: flex;
-  flex-direction: column;
-  /* align-items: center; */
+	flex-direction: column;
+	/* align-items: center; */
 	gap: 1em;
 	overflow-y: scroll;
 	height: 75vh;
-
 }
 
 .messages-stcok-list::-webkit-scrollbar {
 	width: 0px;
 }
 
-.messages-stock-right-side-button-add-new-message{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top:0.5vh
+.messages-stock-right-side-button-add-new-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0.5vh;
 }
 
-.messages-stock-right-side-button-add-new-message svg {
-
-
+.messages-stock-background {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(4vw);
+	position: absolute;
+	z-index: 1;
 }

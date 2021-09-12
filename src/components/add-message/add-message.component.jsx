@@ -1,74 +1,97 @@
 import "./add-messages.styles.css";
 import React, { useState } from "react";
+import AddEvents from "../add-events/add-events.component";
 
-function AddMessage() {
-	const [textareaLength2, setTextareaLength2] = useState(20);
-	const [textareaClumnes2, setTextareaClumnes2] = useState(2);
-	const SIZE = 60;
-	const [inputs, setInputs] = useState([	<textarea
-		style={{  padding: "2vh"}}
-		onChange={(event) => {
-			let value = event.target.value;
-			let length = value.length;
-			if (length > 5) {
-				const newNumber = length + 1;
-				setTextareaLength2(newNumber);
-			} else {
-				setTextareaClumnes2(2)
-				setTextareaLength2(20);
-			}
+function AddMessage(props) {
+	const [state, setState] = props.useState;
 
-			if (textareaLength2 % SIZE === 0) {
-				const newNumber = textareaClumnes2 + 1;
-				setTextareaClumnes2(newNumber);
-			}
-		}}
-		name=''
-		id=''
-		cols={textareaLength2 < SIZE ? textareaLength2 : SIZE}
-		rows={textareaClumnes2}
-	></textarea>])
-
+	function handleFieldsErea(event, index) {
+		let { value } = event.target;
+		state.fieldsErea[index] = value;
+		setState({
+			...state,
+		});
+	}
+	console.log(state.fieldsErea[0].length + 30);
 	return (
 		<section className='add-message'>
 			<div className='message-name-warpper'>
 				<header className='message-name'>
-					<input className='create-message-header' type="text" placeholder="שם ההודעה" />
+					<div
+						onClick={() => {
+							let currentState = { ...state };
+							currentState.openAddMessageNameWindows = true;
+							setState(currentState);
+						}}
+						className='create-message-header'
+					>
+						{state.messageName}
+					</div>
 				</header>
-				{inputs.map((textarea,index) => {
-					if (index == inputs.length - 1) {
-						return (
-							<div>
-								{textarea}
-								<br />
-							<span className='add-sub-message' >הוספת תת הודעה</span>
-							</div>
-							
-						)
-					}
-					return (
-					textarea
-				)
-			})}
-			
-
+				<div className='message-content-warpper'>
+					{state.fieldsErea[0] && (
+						<textarea
+							value={state.fieldsErea[0].trimStart()}
+							onChange={(event) => handleFieldsErea(event, 0)}
+							style={{ padding: "2vh" }}
+							name=''
+							id=''
+							cols={
+								state.fieldsErea[0].length < 30
+									? state.fieldsErea[0].length + 30
+									: 75
+							}
+							rows={state.fieldsErea[0].length / 50}
+						></textarea>
+					)}
+					{state.fieldsErea[1] && (
+						<textarea
+							value={state.fieldsErea[1]}
+							onChange={(event) => handleFieldsErea(event, 1)}
+							style={{ padding: "2vh" }}
+							name=''
+							id=''
+							cols={30}
+							rows={3}
+						></textarea>
+					)}
+					{state.fieldsErea[2] && (
+						<textarea
+							value={state.fieldsErea[2]}
+							onChange={(event) => handleFieldsErea(event, 2)}
+							style={{ padding: "2vh" }}
+							name=''
+							id=''
+							cols={30}
+							rows={3}
+						></textarea>
+					)}
+					<br />
+					<span
+						onClick={() => {
+							for (let i = 0; i < state.fieldsErea.length; i++) {
+								if (!state.fieldsErea[i]) {
+									return (state.fieldsErea[i] = " ");
+								}
+								setState({
+									...state,
+								});
+							}
+						}}
+						className='add-sub-message'
+					>
+						הוספת תת הודעה
+					</span>
+				</div>
 			</div>
-			<div className='add-message-footer' >
-				<button className='add-contact-name'>
-				@ הוספת תבנית שם 
-				</button>
+			<div className='add-message-footer'>
+				<button className='add-contact-name'>@ הוספת תבנית שם</button>
+				<button className='add-message-tool'>B</button>
 				<button className='add-message-tool'>
-				B 
+					<em>I</em>
 				</button>
-				<button className='add-message-tool'>
-				<em>I</em> 
-				</button>
-				<button className='add-message-tool'>
-				icon 
-				</button>
-				<button className='add-message-tool'>
-				icon 
-				</button>
+				<button className='add-message-tool'>icon</button>
+				<button className='add-message-tool'>icon</button>
 			</div>
 		</section>
 	);
