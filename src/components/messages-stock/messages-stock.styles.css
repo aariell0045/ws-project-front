@@ -118,7 +118,14 @@
 	width: 0px;
 }
 
+.messages-stock-right-side-button-add-new-message{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:0.5vh
+}
+
 .messages-stock-right-side-button-add-new-message svg {
-	width: 2em;
-	height: 2em;
+
+
 }

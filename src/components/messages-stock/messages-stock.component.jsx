@@ -35,7 +35,7 @@ function MessagesStock() {
 							onClick={(event) => setCreateMessage(!createMessage)}
 							className='messages-stock-right-side-button-add-new-message'
 						>
-							<AddMessageIcon />
+              <AddMessageIcon />
 						</button>
 					</header>
 					<input
