@@ -180,8 +180,11 @@ function SendMessagePart2() {
               })}
             </div>
           </div>
-          <Link to="/SendMessagePart3">
-            <div className="send-message-part-2-left-side-button-warpper">
+          <Link to={state.currentGroup.isActive && "/SendMessagePart3"}>
+            <div
+              style={{ cursor: !state.currentGroup.isActive && "pointer" }}
+              className="send-message-part-2-left-side-button-warpper"
+            >
               <div className="send-message-part-2-left-side-button">
                 <div
                   className={
