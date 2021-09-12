@@ -1,16 +1,18 @@
 import "./contact-box.styls.css";
 
-function ContactBox() {
+function ContactBox(props) {
+
+   let [firstColumn,secondColumn,thirdColumn]=props.item;
   return (
     <div className="contact-container">
       <div className="contact-firstname-box">
-        <span>אריאל</span>
+        <span>{firstColumn}</span>
       </div>
       <div className="contact-lastname-box">
-        <span>כהן</span>
+        <span>{secondColumn}</span>
       </div>
       <div className="contact-phone-box">
-        <span>05441234567</span>
+        <span>{thirdColumn}</span>
       </div>
     </div>
   );

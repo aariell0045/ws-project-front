@@ -1,9 +1,87 @@
 import "./send-message-part-2.styls.css";
-import React from "react";
+import React, { useEffect } from "react";
 import ContactBox from "../contact-box/contact-box.components";
 import { Link } from "react-router-dom";
+import GroupBox from "../list-item-3/list-item-3.component";
+import { useState } from "react";
+
+const groups = [
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0512203450",
+      },
+    ],
+  },
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0532203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+    ],
+  },
+  {
+    groupName: "ariel",
+    groupLength: 50,
+    productionDate: "25.09.2000",
+    contactsList: [
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0582203450",
+      },
+      {
+        contactName: "ariel",
+        contactLastName: "cohen",
+        contactPhone: "0502203450",
+      },
+    ],
+  },
+];
 
 function SendMessagePart2() {
+  const [groupsList, setGroupList] = useState(groups);
+  const [state, setState] = useState({
+    searchGroups: "",
+    currentGroup: {},
+  });
+  console.log(groupsList);
+
+  useEffect(() => {
+    let currentState = groupsList.map((group) => {
+      return { ...group, isActive: false };
+    });
+    setGroupList(currentState);
+  }, []);
+
+  console.log(state.currentGroup);
+  function handleInputs({ target }) {
+    const { name, value } = target;
+    let currentState = { ...state };
+    currentState[name] = value;
+    setState(currentState);
+  }
+
   return (
     <section id="send-message-part-2">
       <div className="send-message-part-2-warpper">
@@ -12,26 +90,61 @@ function SendMessagePart2() {
             <p>יש לבחור את הקבוצה הרלוונטית:</p>
           </header>
           <input
+            name="searchGroups"
             className="send-message-part-2-right-side-search-input"
             type="text"
             placeholder="חיפוש בקבוצות שלי"
+            onChange={(event) => handleInputs(event)}
           />
           <div className="send-message-part-2-right-side-groupsList">
-            <div className="group-box">
-              <p>
-                <strong>שם הקבוצה</strong>-100 משתתפים
-              </p>
-            </div>
-            <div className="group-box">
-              <p>
-                <strong>שם הקבוצה</strong>-100 משתתפים
-              </p>
-            </div>
-            <div className="group-box">
-              <p>
-                <strong>שם הקבוצה</strong>-100 משתתפים
-              </p>
-            </div>
+            {state.searchGroups &&
+              groupsList.map((group, index) => {
+                if (group.groupName.includes(state.searchGroups)) {
+                  return (
+                    <GroupBox
+                      key={index}
+                      item={[group.groupName, group.groupLength]}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            {!state.searchGroups &&
+              groupsList.map((group, index) => {
+                console.log(group);
+                return (
+                  <div
+                    className={
+                      groupsList[index]?.isActive
+                        ? "group-box-clicked"
+                        : "group-box"
+                    }
+                    onClick={() => {
+                      let currentGroupsList = groupsList.map((group, i) => {
+                        if (i === index) {
+                          group.isActive = true;
+                        } else {
+                          group.isActive = false;
+                        }
+                        return group;
+                      });
+
+                      setGroupList(currentGroupsList);
+
+                      setState({
+                        ...state,
+                        currentGroup: group,
+                      });
+                    }}
+                  >
+                    <GroupBox
+                      key={index}
+                      item={[group.groupName, group.groupLength]}
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
 
@@ -54,18 +167,29 @@ function SendMessagePart2() {
               </div>
             </div>
             <div className="contacts-list-container">
-              <ContactBox />
-              <ContactBox />
-              <ContactBox />
-              <ContactBox />
-              <ContactBox />
-              <ContactBox />
+              {state.currentGroup?.contactsList?.map((contact, index) => {
+                return (
+                  <ContactBox
+                    item={[
+                      contact.contactName,
+                      contact.contactLastName,
+                      contact.contactPhone,
+                    ]}
+                  />
+                );
+              })}
             </div>
           </div>
           <Link to="/SendMessagePart3">
             <div className="send-message-part-2-left-side-button-warpper">
               <div className="send-message-part-2-left-side-button">
-                <div className="send-message-part-2-left-side-button-background"></div>
+                <div
+                  className={
+                    state.currentGroup.isActive
+                      ? "send-message-part-2-left-side-button-background-ready"
+                      : "send-message-part-2-left-side-button-background"
+                  }
+                ></div>
                 יאללה, המשכנו
               </div>
             </div>
