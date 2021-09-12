@@ -27,12 +27,12 @@
 .send-message-part-1-search-input {
   background: rgba(255, 255, 255, 0.2);
   border: 0.11vw solid #000000;
-  box-sizing: border-box;
   border-radius: 20px;
-  width: 90%;
+  width: 88%;
   height: 6vh;
   outline: none;
   padding-right: 1em;
+  font-size: 1vw;
 }
 
 .send-message-part-1-search-input::placeholder {
