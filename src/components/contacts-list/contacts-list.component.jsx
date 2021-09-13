@@ -2,6 +2,8 @@ import "./contacts-list.styls.css";
 import React,{useState} from "react";
 import ListItems from "../list-items1/list-items.1component";
 import { Link } from "react-router-dom";
+import AddContactIcon from "../../icons/icons-components/add-contact-icon/add-contact.component"
+import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 
 const contacts = [
   { firstName: "ariel", lastName: "cohen", phoneNumber: "1502203450" },
@@ -25,7 +27,7 @@ function ContactsList() {
     <section id="contacts-page">
       <header className="contacts-page-main-header">
         <div className="contacts-page-main-header-right-side">
-          <Link to="/Groups"><span className="contacts-page-main-header-back-button">icon</span></Link>
+          <Link to="/Groups"><span className="contacts-page-main-header-back-button"><GoBack/></span></Link>
           <div className="contacts-page-main-header-title-container">
             <p className="contacts-page-main-header-title">
               <span>שם הקבוצה </span>- 1000 משתתפים
@@ -44,7 +46,7 @@ function ContactsList() {
           </div>
           <div className="contacts-page-main-header-add-new-contact-button-container">
             <button className="contacts-page-main-header-add-new-contact-button">
-              icon
+            <AddContactIcon/>
             </button>
           </div>
         </div>

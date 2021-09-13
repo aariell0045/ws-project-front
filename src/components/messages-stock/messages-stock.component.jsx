@@ -55,13 +55,13 @@ function MessagesStock() {
 					</header>
 					<input
 						name='searchMessages'
-						className='messages-stcok-left-side-input'
+						className='messages-stock-left-side-input'
 						type='text'
 						placeholder='חיפוש במאגר ההודעות'
 						onChange={(event) => handleInputs(event)}
 					/>
 
-					<div className='messages-stcok-list'>
+					<div className='messages-stock-list'>
 						{state.searchMessages &&
 							messagesList.map((message, index) => {
 								if (message.messageName.includes(state.searchMessages)) {

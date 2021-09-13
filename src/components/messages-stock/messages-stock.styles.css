@@ -84,7 +84,7 @@
 	padding-right: 3vw;
 }
 
-.messages-stcok-left-side-input {
+.messages-stock-left-side-input {
 	background: rgba(255, 255, 255, 0.2);
 	border: 0.11vw solid #000000;
 	box-sizing: border-box;
@@ -95,7 +95,7 @@
 	padding-right: 1em;
 }
 
-.messages-stcok-left-side-input::placeholder {
+.messages-stock-left-side-input::placeholder {
 	font-family: Assistant;
 	font-style: normal;
 	font-weight: normal;
@@ -104,7 +104,7 @@
 	color: #000000;
 }
 
-.messages-stcok-list {
+.messages-stock-list {
 	margin-top: 2vh;
 	display: flex;
 	flex-direction: column;
@@ -114,7 +114,8 @@
 	height: 75vh;
 }
 
-.messages-stcok-list::-webkit-scrollbar {
+
+.messages-stock-list::-webkit-scrollbar {
 	width: 0px;
 }
 

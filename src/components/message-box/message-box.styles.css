@@ -8,6 +8,11 @@
 	min-height: 10em;
 	position: relative;
 	background: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+}
+
+.message-box:hover{
+	background: #ffffff;
 }
 
 .message-box p {

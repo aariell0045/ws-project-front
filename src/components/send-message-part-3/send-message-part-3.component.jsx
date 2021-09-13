@@ -2,13 +2,14 @@ import "./send-message-part-3.styles.css";
 import React from "react";
 import PhoneSvg from "../../phone.svg";
 import { Link } from "react-router-dom";
+import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 
 function SendMessagePart3() {
 	return (
 		<section id='send-message-part3'>
 			<div className='send-message-part3-warpper last-warpper-1'>
 			<header className='send-message-part3-main-header'>
-				<Link to="/SendMessagePart2"><span>icon</span></Link>
+				<Link to="/SendMessagePart2"><span><GoBack/></span></Link>
 				<p>כל הפרטים לפני ששולחים:</p>
 			</header>
 				<img className='phoen-svg' src={PhoneSvg} alt='React Logo' />
