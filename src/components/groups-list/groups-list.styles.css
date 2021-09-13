@@ -86,17 +86,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-family: Assistant;
   font-style: normal;
   font-weight: normal;
   font-size: 1vw;
   line-height: 20px;
   /* identical to box height */
-
   text-align: right;
-
   color: #000000;
+  cursor: pointer;
+}
+
+.groups-page-main-header-merge-groups-button:hover{
+  background: #ffffff;
 }
 
 .groups-page-main-header-add-new-group-button-container {
@@ -114,6 +116,10 @@
   height: 3vw;
   width: 3vw;
   cursor: pointer;
+}
+
+.groups-page-main-header-add-new-group-button:hover{
+  background: #ffffff;
 }
 
 .groups-page-groups-container-header {
@@ -182,7 +188,9 @@
   align-items: center;
   overflow-y: scroll;
   gap: 1vh;
+  
 }
+
 
 .groups-page-groups-list::-webkit-scrollbar{
   width: 0px;

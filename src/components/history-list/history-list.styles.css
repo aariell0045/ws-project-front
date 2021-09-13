@@ -84,6 +84,11 @@
   gap: 6vw;
   min-height: 6.5vh;
   position: relative;
+  cursor: pointer;
+}
+
+.history-page-list-item:hover{
+  background: #ffffff;
 }
 
 .history-page-list-content-item-warpper {

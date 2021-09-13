@@ -7,7 +7,23 @@
   display: flex;
   justify-content: space-around;
   position: relative;
-  
+  cursor: pointer;
+}
+.list-items-trash-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55%;
+}
+
+.list-items-display-icon{
+  display: flex;
+  align-items: center;
+  height: 60%;
+  padding-top: 1vh;
+}
+.list-items-box:hover {
+  background: #ffffff;
 }
 
 .list-items-icons {
@@ -20,14 +36,12 @@
   align-items: center;
 }
 
-
-.list-items-details-container{
+.list-items-details-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .list-items-first-row {
   font-family: Assistant;

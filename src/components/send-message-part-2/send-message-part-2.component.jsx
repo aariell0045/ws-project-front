@@ -4,6 +4,7 @@ import ContactBox from "../contact-box/contact-box.components";
 import { Link } from "react-router-dom";
 import GroupBox from "../list-item-3/list-item-3.component";
 import { useState } from "react";
+import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component"
 
 const groups = [
   {
@@ -87,7 +88,7 @@ function SendMessagePart2() {
       <div className="send-message-part-2-warpper">
         <div className="send-message-part-2-right-side">
           <header className="send-message-part-2-right-side-main-header">
-            <Link to="/SendMessagePart1"><span >icon</span></Link>
+            <Link to="/SendMessagePart1"><span ><GoBack/></span></Link>
             <p>יש לבחור את הקבוצה הרלוונטית:</p>
           </header>
           <input
