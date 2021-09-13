@@ -1,11 +1,16 @@
 import "./send-message-part-3.styles.css";
 import React from "react";
 import PhoneSvg from "../../phone.svg";
+import { Link } from "react-router-dom";
 
 function SendMessagePart3() {
 	return (
 		<section id='send-message-part3'>
 			<div className='send-message-part3-warpper last-warpper-1'>
+			<header className='send-message-part3-main-header'>
+				<Link to="/SendMessagePart2"><span>icon</span></Link>
+				<p>כל הפרטים לפני ששולחים:</p>
+			</header>
 				<img className='phoen-svg' src={PhoneSvg} alt='React Logo' />
 				<div className='content-phone-box'>red</div>
 			</div>
@@ -37,7 +42,14 @@ function SendMessagePart3() {
 
 				
 			</div>
-			<div className='send-message-part3-warpper'></div>
+			<div className='send-message-part3-warpper'>
+			<div className="send-message-part-3-button-warpper">
+              <div className="send-message-part-3-button">
+                <div className="send-message-part-3-button-background"></div>
+                  לשליחה דרך
+              </div>
+          </div>
+			</div>
 		</section>
 	);
 }
