@@ -37,7 +37,7 @@ function AddSingleField(props) {
 					onClick={() => {
 						if (state) {
 							setState(state);
-							close()
+							close();
 						}
 					}}
 					className=''

@@ -21,6 +21,8 @@ function MessagesStock() {
 		messageName: "שם ההודעה",
 		openAddMessageNameWindows: false,
 		fieldsErea: [" ", "", ""],
+		currrentField: null,
+		selectedField: "",
 	});
 
 	function handleInputs({ target }) {
