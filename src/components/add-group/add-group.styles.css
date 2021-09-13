@@ -5,13 +5,21 @@
 	width: 100%;
 }
 
+.back-to-group a{
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 2vh;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
 .back-to-group{
 	width: 100%;
 	font-family: Assistant;
 	font-style: normal;
 	font-weight: 300;
 	font-size: 2vh;
-	line-height: 18px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -19,7 +27,6 @@
 	padding-top:3vh;
 	padding-right:3vw;
 	margin-bottom: 4vh;
-
 }
 
 #main-add-group-content{

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MaterialUiSelect from '../../Material-Ui-Components/Select.component';
-import "./add-group.styles.css"
+import "./add-group.styles.css";
+import { Link } from 'react-router-dom';
 
 
 const OPTIONS = ["A", "B", "C", "D", "E", "F","G", "H", "I", "J", "K", "L","M", "N", "O", "P", "Q", "R","Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -118,7 +119,7 @@ function AddGroup() {
 	return (
 		<section id="add-group-page">
 			<div className='back-to-group' >
-				<span>חזרה לכל הקבוצות</span>
+				<Link to="/Groups"><span>חזרה לכל הקבוצות</span></Link>
 			</div>
 			<main id='main-add-group-content'>
 				<div className='main-add-group-content-background' ></div>

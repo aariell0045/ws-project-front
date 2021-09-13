@@ -87,6 +87,7 @@ function SendMessagePart2() {
       <div className="send-message-part-2-warpper">
         <div className="send-message-part-2-right-side">
           <header className="send-message-part-2-right-side-main-header">
+            <Link to="/SendMessagePart1"><span >icon</span></Link>
             <p>יש לבחור את הקבוצה הרלוונטית:</p>
           </header>
           <input

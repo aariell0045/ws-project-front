@@ -87,15 +87,15 @@
   font-family: Assistant;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 1.1vw;
   text-align: right;
   color: #000000;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: large;
+  
+
 }
 
 .send-message-part-1-left-side-button-background {
@@ -112,6 +112,6 @@
   height: fit-content;
   position: absolute;
   bottom: 2vw;
-  right: 28vw;
+  right: 29vw;
   
 }
