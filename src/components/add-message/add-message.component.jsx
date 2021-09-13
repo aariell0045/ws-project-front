@@ -2,31 +2,31 @@ import "./add-messages.styles.css";
 import React, { useState } from "react";
 import AddEvents from "../add-events/add-events.component";
 import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
+import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
+import AddMessageField from "../add-message-field/add-message-field.component.jsx";
 
 function AddMessage(props) {
 	const [state, setState] = props.useState;
-	console.log(state);
-	function handleFieldsErea(event, index) {
-		let { value } = event.target;
-		if (index === 0 && value === "") {
-			value = " ";
-		}
-		state.fieldsErea[index] = value;
-		setState({
-			...state,
-		});
+
+	function uploadFile(e) {
+		let file = e.target.files[0];
+		console.log(file);
+		previewFile(file);
 	}
 
-	function clearFeild(index) {
-		debugger;
-		if (index === 0) {
-			state.fieldsErea[index] = " ";
-		} else {
-			state.fieldsErea[index] = "";
-		}
-		setState({
-			...state,
-		});
+	function previewFile(file) {
+		let reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			if (state.currentMessage == null) {
+				return alert("בבקשה תתמקד על אחת מתיבות הטקסט");
+			}
+			state.currentMessage.imageSrc = reader.result;
+			console.log(state.currentMessage);
+			setState({
+				...state,
+			});
+		};
 	}
 
 	return (
@@ -44,137 +44,23 @@ function AddMessage(props) {
 						{state.messageName}
 					</div>
 				</header>
-				<div className='message-content-warpper'>
-					{state.fieldsErea[0] && (
-						<div className='message-content-texterea-warpper'>
-							<div
-								onClick={() => clearFeild(0)}
-								style={{
-									top: `${
-										Math.floor(
-											(state.fieldsErea[0].length / 75 + 1) * 2
-										) + "vh"
-									}`,
-								}}
-								className='message-content-trash-icon'
-							>
-								<TrashIcon disabled />
-							</div>
-							<textarea
-								value={state.fieldsErea[0].trimStart()}
-								onFocus={() => {
-									state.currrentField = 0;
-									setState({
-										...state,
-									});
-								}}
-								onChange={(event) => handleFieldsErea(event, 0)}
-								style={{ padding: "2vh", paddingLeft: "4vw" }}
-								name=''
-								id=''
-								cols={
-									state.fieldsErea[0].length < 74
-										? state.fieldsErea[0].length + 1
-										: 75
-								}
-								rows={state.fieldsErea[0].length / 70 + 1}
-							></textarea>
-						</div>
-					)}
-
-					{state.fieldsErea[1] && (
-						<div className='message-content-texterea-warpper'>
-							<div
-								onClick={() => clearFeild(1)}
-								style={{
-									top: `${
-										Math.floor(
-											(state.fieldsErea[1].length / 75 + 1) * 2
-										) + "vh"
-									}`,
-								}}
-								className='message-content-trash-icon'
-							>
-								<TrashIcon disabled />
-							</div>
-							<textarea
-								value={state.fieldsErea[1].trimStart()}
-								onFocus={() => {
-									state.currrentField = 1;
-									setState({
-										...state,
-									});
-								}}
-								onChange={(event) => handleFieldsErea(event, 1)}
-								style={{ padding: "2vh", paddingLeft: "4vw" }}
-								name=''
-								id=''
-								cols={
-									state.fieldsErea[1].length < 75
-										? state.fieldsErea[1].length
-										: 75
-								}
-								rows={state.fieldsErea[1].length / 70 + 1}
-							></textarea>
-						</div>
-					)}
-
-					{state.fieldsErea[2] && (
-						<div className='message-content-texterea-warpper'>
-							<div
-								onClick={() => clearFeild(2)}
-								style={{
-									top: `${
-										Math.floor(
-											(state.fieldsErea[2].length / 75 + 1) * 2
-										) + "vh"
-									}`,
-								}}
-								className='message-content-trash-icon'
-							>
-								<TrashIcon disabled />
-							</div>
-							<textarea
-								value={state.fieldsErea[2].trimStart()}
-								onFocus={() => {
-									state.currrentField = 2;
-									setState({
-										...state,
-									});
-								}}
-								onChange={(event) => handleFieldsErea(event, 2)}
-								style={{ padding: "2vh", paddingLeft: "4vw" }}
-								name=''
-								id=''
-								cols={
-									state.fieldsErea[2].length < 75
-										? state.fieldsErea[2].length
-										: 75
-								}
-								rows={state.fieldsErea[2].length / 70 + 1}
-							></textarea>
-						</div>
-					)}
-					<br />
-					{(!state.fieldsErea[2] || !state.fieldsErea[1]) && (
-						<span
-							onClick={() => {
-								for (let i = 0; i < state.fieldsErea.length; i++) {
-									if (!state.fieldsErea[i]) {
-										return (state.fieldsErea[i] = " ");
-									}
-									setState({
-										...state,
-									});
-								}
-							}}
-							className='add-sub-message'
-						>
-							הוספת תת הודעה
-						</span>
-					)}
-				</div>
 			</div>
+			<div className='add-message-messages-list'>
+				{state.messages.map((messageField, index) => {
+					if (index === 4) {
+						return null;
+					}
+					if (messageField.display) {
+						return messageField.afterDisplay();
+					} else {
+						return messageField.beforDisplay();
+					}
+				})}
+
+				<br />
+			</div>
+
+			{/* <img src={imageSrc} alt='' /> */}
 			<div className='add-message-footer'>
 				<button
 					onClick={() => {
@@ -192,7 +78,17 @@ function AddMessage(props) {
 				<button className='add-message-tool'>
 					<em>I</em>
 				</button>
-				<button className='add-message-tool'>icon</button>
+				<input
+					onChange={(event) => uploadFile(event)}
+					type='file'
+					name='upload-file'
+					id='upload-file'
+					style={{ display: "none" }}
+				/>
+				<label className='add-message-tool' htmlFor='upload-file'>
+					<MediaIcon />
+				</label>
+
 				<button className='add-message-tool'>icon</button>
 			</div>
 		</section>

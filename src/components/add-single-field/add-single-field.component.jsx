@@ -27,6 +27,14 @@ function AddSingleField(props) {
 			<div className='add-single-field-input-container'>
 				{firstField}:
 				<input
+					onKeyPress={(event) => {
+						if (event.key === "Enter" && state) {
+							setState({
+								...state,
+							});
+							close();
+						}
+					}}
 					name='messageName'
 					onChange={(event) => handleInputs(event)}
 					type='text'
@@ -36,7 +44,9 @@ function AddSingleField(props) {
 				<button
 					onClick={() => {
 						if (state) {
-							setState(state);
+							setState({
+								...state,
+							});
 							close();
 						}
 					}}
