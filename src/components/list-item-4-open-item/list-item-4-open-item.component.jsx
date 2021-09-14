@@ -1,5 +1,6 @@
 import "./list-item-4-open-item.styls.css";
 import React from "react";
+import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-down-icon.component";
 
 
 function ListItem4(props) {
@@ -21,7 +22,7 @@ function ListItem4(props) {
       <div className="history-page-list-four-item history-page-list-content-item-warpper ">
         <p className="history-page-content">{media}</p>
       </div>
-      <span className="history-page-list-open-item-icon">icon</span>
+      <span className="history-page-list-open-item-icon"><ArrowDownIcon/></span>
     </div>
   );
 }

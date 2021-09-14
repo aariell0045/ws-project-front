@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import ListItems from "../list-items1/list-items.1component";
 import "./groups-list.styles.css";
 
-
 const groups = [
   {
+    id: "1",
     groupName: "ariel",
     groupLength: 50,
     productionDate: "25.09.2000",
@@ -23,6 +23,7 @@ const groups = [
     ],
   },
   {
+    id: "2",
     groupName: "ariel",
     groupLength: 50,
     productionDate: "25.09.2000",
@@ -40,6 +41,7 @@ const groups = [
     ],
   },
   {
+    id: "3",
     groupName: "ariel",
     groupLength: 50,
     productionDate: "25.09.2000",
@@ -59,7 +61,7 @@ const groups = [
 ];
 
 function mergeGroups(groupName, groups) {
-  let newGroup = {groupName, contactsList: []};
+  let newGroup = { groupName, contactsList: [] };
   for (let group of groups) {
     newGroup.contactsList.push(...group.contactsList);
   }
@@ -82,11 +84,10 @@ function checkDuplicate(contactsList) {
   return newArrayContactsList;
 }
 
-console.log(mergeGroups("king",groups));
-
+console.log(mergeGroups("king", groups));
 
 function GroupsList() {
-  const [groupsList, setGroupList] = useState(groups);
+  const [groupsList, setGroupsList] = useState(groups);
   const [state, setState] = useState({
     searchGroups: "",
   });
@@ -98,9 +99,11 @@ function GroupsList() {
     setState(currentState);
   }
 
-  function deleteItem(itemsContainer, index) {
-    let currentState = { ...state };
+  function deleteItem(id, container, setContainer) {
+    debugger;
+    setContainer(container.filter((item) => item.id != id));
   }
+
   return (
     <section id="groups-page">
       <header className="groups-page-main-header">
@@ -152,6 +155,9 @@ function GroupsList() {
             if (group.groupName.includes(state.searchGroups)) {
               return (
                 <ListItems
+                  id={group.id}
+                  onClickEvent={deleteItem}
+                  onClickEventParams={[groupsList, setGroupsList]}
                   key={index}
                   item={[
                     group.groupName,
@@ -168,6 +174,9 @@ function GroupsList() {
           groupsList.map((group, index) => {
             return (
               <ListItems
+                id={group.id}
+                onClickEvent={deleteItem}
+                onClickEventParams={[groupsList, setGroupsList]}
                 key={index}
                 item={[
                   group.groupName,

@@ -63,13 +63,15 @@
 }
 
 .groups-page-main-header-search::placeholder {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1vw;
-  /* identical to box height */
-  text-align: right;
-  color: #000000;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1vw;
+	/* identical to box height */
+
+	text-align: right;
+
+	color: #000000;
 }
 
 .groups-page-main-header-merge-groups-button-container {
