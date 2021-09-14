@@ -17,7 +17,8 @@ function ListItem2(props) {
 					<span onClick={() => props.openItem(props.itemContainer, props.index, props.setContainer)}>
 						{itemIsOpen ? <ArrowLeftIcon /> : <ArrowDownIcon />}
 					</span>
-					<span className='trash-icon'>
+					<span className='trash-icon' style={{cursor:itemIsOpen?"pointer":"initial"}}
+					id={props.id} onClick={(event) => props.onClickEvent && itemIsOpen ? props.onClickEvent(props.id,...props.onClickEventParams) : null}>
 						{!itemIsOpen && <TrashIcon disabled={true} />}
 						{itemIsOpen && <TrashIcon disabled={false} />}
 					</span>

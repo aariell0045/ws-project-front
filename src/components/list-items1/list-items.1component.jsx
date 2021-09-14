@@ -7,6 +7,7 @@ import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-do
 function ListItems(props) {
   let [firstCoulmn, secondCoulmn, thirdCoulmn] = props.item;
   const [state, setState] = useState({ disabled: false });
+
   return (
     <div className="list-items-box">
       <div className="list-items-details-container">
@@ -16,7 +17,7 @@ function ListItems(props) {
       </div>
       <div className="list-items-icons">
         <span className="list-items-display-icon"><ArrowDownIcon/></span>
-        <span
+        <span id={props.id} onClick={(event) => props.onClickEvent ? props.onClickEvent(props.id,...props.onClickEventParams) : null}
           onMouseLeave={() => setState({ ...state, disabled: false })}
           onMouseEnter={() => setState({ ...state, disabled: true })}
           title="delete"

@@ -61,7 +61,7 @@ const groups = [
 ];
 
 function SendMessagePart2() {
-  const [groupsList, setGroupList] = useState(groups);
+  const [groupsList, setGroupsList] = useState(groups);
   const [state, setState] = useState({
     searchGroups: "",
     currentGroup: {},
@@ -72,7 +72,7 @@ function SendMessagePart2() {
     let currentState = groupsList.map((group) => {
       return { ...group, isActive: false };
     });
-    setGroupList(currentState);
+    setGroupsList(currentState);
   }, []);
 
   console.log(state.currentGroup);
@@ -132,7 +132,7 @@ function SendMessagePart2() {
                         return group;
                       });
 
-                      setGroupList(currentGroupsList);
+                      setGroupsList(currentGroupsList);
 
                       setState({
                         ...state,
