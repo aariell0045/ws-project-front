@@ -3,22 +3,27 @@ import Sidebar from "./components/sidebar/Sidebar.component";
 import Home from "./components/home/Home.component";
 import GroupsList from "./components/groups-list/groups-list.component";
 import ContactsList from "./components/contacts-list/contacts-list.component";
-import { Route } from "react-router-dom";
+import { Route,useHistory} from "react-router-dom";
 import AddGroup from "./components/add-group/AddGroup.component";
 import MessagesStock from "./components/messages-stock/messages-stock.component";
 import SendMessagePart2 from "./components/send-message-part-2/send-message-part-2.component";
-
+import React from "react";
 import SendMessagePart1 from "./components/send-message-part-1/send-message-part-1.component";
 import SendMessagePart3 from "./components/send-message-part-3/send-message-part-3.component";
 import HistoryList from "./components/history-list/history-list.component";
 import LoginPage from "./components/login-page/login-page.component";
 
 function App() {
+	
+	const history = useHistory();
+	const path = history.location.pathname;
+	console.log(path);
+	
 	return (
 		<div className='App'>
 			<div id='background'></div>
-			<div className='sidebar'></div>
-			<Sidebar />
+			{ path !== "/Login" && <div className='sidebar'></div>}
+			{path !== "/Login" && <Sidebar />}
 
 			<Route
 				exact
@@ -95,6 +100,7 @@ function App() {
 					return <HistoryList />;
 				}}
 			/>
+			
 		</div>
 	);
 }
