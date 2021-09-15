@@ -24,6 +24,7 @@ const links = [
 function Sidebar() {
 	const [path, setPath] = useState("");
 	console.log(path);
+	
 	return (
 		<aside className='aside-bar'>
 			<Link onClick={() => setPath(links[0].goTo)} to={links[0].goTo}>

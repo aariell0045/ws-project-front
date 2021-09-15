@@ -9,8 +9,12 @@ function LoginPage() {
       <div className="login-page-container">
         <div className="login-page-logo-container">
           <header className="login-page-logo">
-            <img className='login-page-wesend-logo' src={logo} alt="" />
-            <img className='login-page-orangeline-logo' src={OrangeLineLogo} alt="" />
+            <img className="login-page-wesend-logo" src={logo} alt="" />
+            <img
+              className="login-page-orangeline-logo"
+              src={OrangeLineLogo}
+              alt=""
+            />
           </header>
         </div>
         <div className="login-page-user-name-container">
@@ -19,7 +23,7 @@ function LoginPage() {
             <input
               className="login-page-user-name-box"
               type="text"
-              placeholder="ישראל ישראלי"
+              placeholder=""
             />
           </div>
         </div>
@@ -29,9 +33,12 @@ function LoginPage() {
             <input
               className="login-page-password-box"
               type="text"
-              placeholder="ישראל ישראלי"
+              placeholder=""
             />
           </div>
+        </div>
+        <div className="login-page-sign-in-button-container">
+          <button className="login-page-sign-in-button"> התחברות</button>
         </div>
         <div className="login-page-forgot-password-container">
           <div className="login-page-forgot-password">שכחתי סיסמא</div>
