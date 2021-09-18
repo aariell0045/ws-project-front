@@ -1,0 +1,70 @@
+.add-message-container-main-header {
+	width: 100%;
+	height: 10vh;
+	display: flex;
+	margin-right: -3vw;
+	margin-top: -2vh;
+	align-items: center;
+}
+
+.add-message-container-main-header p {
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 2.3vw;
+	color: #ffffff;
+	margin-right: 3vw;
+}
+
+.add-message-field {
+	word-wrap: break-word;
+	flex-wrap: wrap;
+	border: 1px solid black;
+	border-radius: 1vh;
+	padding-left: 2vw;
+	position: relative;
+	background: #ffffff;
+	box-sizing: border-box;
+	padding-top: 2vh;
+	padding-right: 1vw;
+}
+
+.add-message-field textarea {
+	width: 90%;
+	height: 100%;
+	max-width: 33vw;
+	padding-right: 1vw;
+	padding-top: 1.5vh;
+	background-color: inherit;
+	border: none;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 1vw;
+	line-height: 24px;
+	text-align: right;
+	padding: 0px;
+	border-radius: 0px;
+	color: #000000;
+}
+
+.add-message-field img {
+	max-width: 20vw;
+	width: 20vw;
+}
+
+.add-message-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	margin-top: 2vh;
+	margin-right: 3vw;
+	gap: 1vh;
+}
+
+.image-url-upload-media {
+	border-radius: 4vh;
+	width: 15vw;
+	border: 1px solid black;
+}

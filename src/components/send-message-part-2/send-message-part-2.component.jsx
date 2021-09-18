@@ -66,7 +66,6 @@ function SendMessagePart2() {
     searchGroups: "",
     currentGroup: {},
   });
-  console.log(groupsList);
 
   useEffect(() => {
     let currentState = groupsList.map((group) => {
@@ -75,7 +74,6 @@ function SendMessagePart2() {
     setGroupsList(currentState);
   }, []);
 
-  console.log(state.currentGroup);
   function handleInputs({ target }) {
     const { name, value } = target;
     let currentState = { ...state };
@@ -114,7 +112,6 @@ function SendMessagePart2() {
               })}
             {!state.searchGroups &&
               groupsList.map((group, index) => {
-                console.log(group);
                 return (
                   <div
                     className={
