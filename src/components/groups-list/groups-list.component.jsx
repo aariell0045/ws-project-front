@@ -99,7 +99,6 @@ function GroupsList() {
   }
 
   function deleteItem(id, container, setContainer) {
-    debugger;
     setContainer(container.filter((item) => item.id != id));
   }
 

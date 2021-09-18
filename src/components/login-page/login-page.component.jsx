@@ -32,7 +32,7 @@ function LoginPage() {
             סיסמא:
             <input
               className="login-page-password-box"
-              type="text"
+              type="password"
               placeholder=""
             />
           </div>
