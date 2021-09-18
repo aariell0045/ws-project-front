@@ -5,197 +5,237 @@ import AddMessage from "../add-message/add-message.component";
 import AddMessageIcon from "../../icons/icons-components/add-message/add-message.component";
 import AddEvents from "../add-events/add-events.component";
 import AddSingleField from "../add-single-field/add-single-field.component";
-import AddMessageField from "../add-message-field/add-message-field.component";
+import EditMessageField from "../add-message-field/add-message-field.component";
+import CreateMessage from "../create-message-filed/create-message-field.component";
+import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
 
 const messages = [
-	{ messageName: "ariel", contentMessage: "שלום מה קורה אחשלי היקר מכל!!!!!" },
-	{ messageName: "ariel", contentMessage: "שלום מה קורה אחשלי היקר מכל!!!!!" },
-	{ messageName: "toam", contentMessage: "שלום מה קורה אחשלי היקר מכל!!!!!" },
-	{ messageName: "toam", contentMessage: "שלום מה קורה אחשלי היקר מכל!!!!!" },
+	{
+		id: "1",
+		messageName: "ariel",
+		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
+		isActive: false,
+	},
+	{
+		id: "2",
+		messageName: "ariel",
+		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
+		isActive: false,
+	},
+	{
+		id: "3",
+		messageName: "toam",
+		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
+		isActive: false,
+	},
+	{
+		id: "4",
+		messageName: "toam",
+		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
+		isActive: false,
+	},
 ];
 
 function MessagesStock() {
-	const [createMessage, setCreateMessage] = useState(false);
-	const [messagesList, setMessageList] = useState([]);
-	const [state, setState] = useState({
-		searchMessages: "",
-		messageName: "שם ההודעה",
-		openAddMessageNameWindows: false,
-		currentMessage: null,
-		messages: [
-			{
-				id: "1",
-				imageSrc: "",
-				content: "",
-				display: false,
-				clear() {
-					this.imageSrc = "";
-					this.content = "";
-				},
-				afterDisplay() {
-					return (
-						<AddMessageField
-							imageSrc={this.imageSrc}
-							content={this.content}
-							display={this.display}
-							onFocus={this.onFocus}
-							onChange={this.onChange}
-							delete={this.delete}
-							currentObject={this}
-						/>
-					);
-				},
-				toggle() {
-					this.display = !this.display;
-				},
-				beforDisplay() {
-					return (
-						<div
-							className='befor-display-message-stock'
-							onClick={() => {
-								debugger;
-								this.toggle();
-								let newObj = { ...state.messages[0] };
-								state.messages.push({
-									...newObj,
-									id: +this.id + 1 + "",
-									display: false,
-									imageSrc: "",
-									content: "",
-								});
+	const [messagesList, setMessagesList] = useState(messages);
+	const [displayMessage, setDisplayMessage] = useState(null);
+	const [createMessage, setCreateMessage] = useState(null);
+	const [openMessageName, setOpenMessageName] = useState(false);
+	const [messagesInRow, setMessagesInRow] = useState([{ contentField: "", mediaSrc: "" }]);
+	const [currentMessage, setCurrentMessage] = useState(null);
+	console.log(currentMessage);
 
-								setState({
-									...state,
-								});
-							}}
-						>
-							<span>הוספת תת הודעה</span>
-						</div>
-					);
-				},
-				onFocus(currentObject) {
-					state.currentMessage = currentObject;
-					console.log(state);
-					setState({
-						...state,
-					});
-				},
-				onChange(event) {
-					state.currentMessage.content = event.target.innerText;
+	function claseLeftSide() {
+		setDisplayMessage(null);
+	}
 
-					setState({
-						...state,
-					});
-				},
-				delete(event, id) {
-					let index = state.messages.findIndex((message) => message.id == id);
-					if (index === 4) {
-						state.messages.splice(index);
-					} else {
-						state.messages.splice(index, 1);
-					}
-					setState({
-						...state,
-					});
-				},
-			},
-		],
-	});
-	console.log(messagesList);
+	function addName(currentMessage) {
+		if (currentMessage) {
+			currentMessage.contentField += " (שם פרטי) ";
+			setCurrentMessage({ ...currentMessage });
+			setCurrentMessage(null);
+		} else {
+			alert("please focus on the field");
+		}
+	}
 
-	function handleInputs({ target }) {
-		const { name, value } = target;
-		let currentState = { ...state };
-		currentState[name] = value;
-		setState(currentState);
+	function uploadImage(event) {
+		if (currentMessage) {
+			// const media = event.target.files[0];
+			// const reader = new FileReader();
+			// reader.readAsDataURL(media);
+			// reader.onloadend = (event) => {
+			// 	const newCurrentMessage = { ...currentMessage };
+			// 	const index = messagesList.findIndex(
+			// 		(message) => newCurrentMessage.id + 1 == message.id
+			// 	);
+			// 	newCurrentMessage.mediaSrc = event.target.result || "";
+			// 	const newMessagesList = [...messagesList];
+			// 	newMessagesList[index].contentMessage.push({
+			// 		contentField: newCurrentMessage.contentField,
+			// 		mediaSrc: newCurrentMessage.mediaSrc,
+			// 	});
+			// 	setMessagesList(newMessagesList);
+			// }
+			alert("didnt work yet");
+		} else {
+			alert("please focus on the field");
+		}
 	}
 
 	return (
-		<section
-			style={{
-				backdropFilter: state.openAddMessageNameWindows && "blur(4px)",
-			}}
-			id='messages-stock'
-		>
-			{state.openAddMessageNameWindows && (
-				<div className='messages-stock-background'></div>
-			)}
-			<div className='messages-stock-warpper'>
-				<div className='messages-stock-left-side'>
-					<header className='messages-stock-left-side-header'>
+		<section id='messages-stock'>
+			<div className='messages-stcok-warrper-container'>
+				<div className='messages-stock-right-side'>
+					<header className='messages-stock-main-header'>
 						<p>מאגר הודעות</p>
+						<input type='text' placeholder='חיפוש במאגר ההודעות' />
 						<button
-							onClick={(event) => {
-								setCreateMessage(true);
-								setState({
-									...state,
-									openAddMessageNameWindows: true,
-								});
+							onClick={() => {
+								setDisplayMessage(null);
+								setOpenMessageName(true);
+								setCreateMessage(null);
+								setMessagesInRow([{ contentField: "", mediaSrc: "" }]);
 							}}
-							className='messages-stock-right-side-button-add-new-message'
+							className='messages-stcok-add-message-icon'
 						>
 							<AddMessageIcon />
 						</button>
 					</header>
-					<input
-						name='searchMessages'
-						className='messages-stock-left-side-input'
-						type='text'
-						placeholder='חיפוש במאגר ההודעות'
-						onChange={(event) => handleInputs(event)}
-					/>
 
-					<div className='messages-stock-list'>
-						{state.searchMessages &&
-							messagesList.map((message, index) => {
-								if (message.messageName.includes(state.searchMessages)) {
-									return (
-										<MessageBox key={index} item={state.messages} />
-									);
-								} else {
-									return null;
-								}
-							})}
-						{!state.searchMessages &&
-							messagesList.map((message, index) => {
-								console.log(message);
-								return <MessageBox key={index} item={message} />;
-							})}
+					<div className='messages-list'>
+						{messagesList.map((message, index) => {
+							let item = [
+								message.messageName,
+								message.contentMessage.length,
+								message.contentMessage,
+							];
+							let useDisplayMessageState = [displayMessage, setDisplayMessage];
+							let useCreateMessageState = [createMessage, setCreateMessage];
+
+							return (
+								<MessageBox
+									key={index}
+									id={message.id}
+									item={item}
+									useDisplayMessageState={useDisplayMessageState}
+									useCreateMessageState={useCreateMessageState}
+									color={message.isActive}
+								/>
+							);
+						})}
 					</div>
 				</div>
-				<div className='messages-stock-right-side'>
-					<div className='message-stock-right-side-background'></div>
-					<div className='messsages-stock-tools'></div>
-					<nav className='messeges-stcok-left-side-nav-bar'>
-						<div>X</div>
-						<div>icon</div>
-						<div>icons</div>
+				<div className='messages-stock-left-side'>
+					<div className='messages-stock-left-side-background'></div>
+					<nav className='message-stcok-left-side-nav-bar'>
+						<button onClick={claseLeftSide}>X</button>
+						<button>icon</button>
+						<button>icon</button>
 						<button
+							disabled={
+								(displayMessage && !displayMessage.editMode) ||
+								(createMessage && false)
+							}
 							onClick={() => {
 								debugger;
-								messagesList.push([state.messageName, state.messages]);
-								setMessageList([...messagesList]);
+								if (displayMessage) {
+									const index = messagesList.findIndex(
+										(message) => message.id == displayMessage.id
+									);
+
+									const newMessagesList = [...messagesList];
+
+									newMessagesList[index] = {
+										id: newMessagesList[index].id,
+										messageName: displayMessage.messageName,
+										contentMessage: displayMessage.contentMessage,
+									};
+									console.log(newMessagesList);
+
+									setDisplayMessage(null);
+									setMessagesList(newMessagesList);
+								}
+								if (createMessage) {
+									let newMessage = {
+										id: messagesList.length,
+										messageName: createMessage.messageName,
+										contentMessage: messagesInRow,
+									};
+									const newMessagesList = [...messagesList];
+									newMessagesList.push(newMessage);
+
+									setMessagesList(newMessagesList);
+								}
+
+								// setMessagesInRow([{ contentField: "", mediaSrc: "" }]);
+								// setCreateMessage(null);
 							}}
+							className={
+								displayMessage?.editMode || createMessage
+									? "messages-stcok-left-side-nav-bar-save-button-clicked"
+									: "messages-stcok-left-side-nav-bar-save-button"
+							}
 						>
 							שמור
 						</button>
 					</nav>
-					<div>
+
+					<div className='left-side-display-list'>
+						{displayMessage && (
+							<EditMessageField
+								useDisplayMessageState={[displayMessage, setDisplayMessage]}
+								setOpenMessageName={setOpenMessageName}
+								setCurrentMessage={setCurrentMessage}
+							/>
+						)}
 						{createMessage && (
-							<AddMessage
-								useState={[state, setState]}
-								useTasks={[messagesList, setMessageList]}
+							<CreateMessage
+								currentMessage={createMessage}
+								container={messagesInRow}
+								setContainer={setMessagesInRow}
+								setOpenMessageName={setOpenMessageName}
+								setCurrentMessage={setCurrentMessage}
 							/>
 						)}
 					</div>
+					<div className='left-side-footer-container'>
+						<div className='left-side-tools-warpper'>
+							<button
+								onClick={() => addName(currentMessage)}
+								className='left-side-button-1'
+							>
+								@ הוספת תבנית שם
+							</button>
+							<div className='left-side-tools-warpper-left-side'>
+								<button className='left-side-button-3'>/</button>
+								<button className='left-side-button-2'>B</button>
+								<input
+									onChange={(event) => uploadImage(event)}
+									type='file'
+									id='upload-media'
+									name='upload-media'
+									style={{ display: "none" }}
+								/>
+
+								<div className='left-side-button-4'>
+									<label htmlFor='upload-media'>
+										<div className='media-icon-upload-media'>
+											<MediaIcon />
+										</div>
+									</label>
+								</div>
+								<button className='left-side-button-5'>icon</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			{state.openAddMessageNameWindows && (
+			{openMessageName && (
 				<AddSingleField
-					useState={[state, setState]}
-					useTasks={[messagesList, setMessageList]}
-					tasksDetails={["שם ההודעה", "הבא "]}
-					windowKey='openAddMessageNameWindows'
+					setOpenMessageName={setOpenMessageName}
+					setCreateMessage={setCreateMessage}
+					useDisplayMessage={[displayMessage, setDisplayMessage]}
 				/>
 			)}
 		</section>

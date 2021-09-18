@@ -123,7 +123,6 @@ function Home() {
               <div className="my-tasks-list-warpper">
                 <div className="my-events-list">
                   {events.map((event, index) => {
-                    console.log(event);
                     return (
                       <ListItem2
                         id={event.id}
