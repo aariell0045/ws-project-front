@@ -84,7 +84,6 @@ function checkDuplicate(contactsList) {
   return newArrayContactsList;
 }
 
-console.log(mergeGroups("king", groups));
 
 function GroupsList() {
   const [groupsList, setGroupsList] = useState(groups);

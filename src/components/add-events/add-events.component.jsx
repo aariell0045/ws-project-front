@@ -10,7 +10,6 @@ function AddEvents(props) {
 		colorBar: true,
 	});
 
-	console.log(state);
 	const COLORS = {
 		RED: {
 			color: "#FD4C4C",
@@ -51,7 +50,6 @@ function AddEvents(props) {
 	}
 
 	function addTask(taskDetails) {
-		console.log(taskDetails);
 		const [tasks, setTasks] = [...props.useTasks];
 		let currentTasksState = [...tasks];
 		currentTasksState.push({ ...taskDetails });
@@ -129,7 +127,6 @@ function AddEvents(props) {
 								let currentState = { ...state };
 								currentState.colorBar = true;
 								setState(currentState);
-								console.log(state);
 							}}
 							style={{
 								backgroundColor: colorBar[0].color,

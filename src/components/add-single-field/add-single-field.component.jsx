@@ -1,59 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./add-single-field.styles.css";
 
 function AddSingleField(props) {
-	const [state, setState] = props.useState;
-	const [container, containerList] = props.useTasks;
-	const [firstField, secondField] = props.tasksDetails;
-	function close() {
-		setState({
-			...state,
-			[props.windowKey]: false,
-		});
+	const [fieldInput, setFieldInput] = useState("");
+	const [displayMessage, setDisplayMessage] = props.useDisplayMessage;
+	function saveMessage(displayMessage) {
+		if (displayMessage) {
+			displayMessage.messageName = fieldInput;
+			setDisplayMessage({
+				...displayMessage,
+				editMode: true,
+			});
+		} else {
+			props.setCreateMessage({ messageName: fieldInput });
+		}
+		clase();
+	}
+	function handleInputs(event) {
+		const { value } = event.target;
+		setFieldInput(value);
 	}
 
-	function handleInputs({ target }) {
-		const { name, value } = target;
-		state[name] = value;
+	function clase() {
+		props.setOpenMessageName(false);
 	}
 
 	return (
 		<div className='add-single-field'>
 			<header className='add-single-field-main-header'>
-				<span onClick={close} className='close'>
+				<span onClick={clase} className='close'>
 					X
 				</span>
 			</header>
-			<div className='add-single-field-input-container'>
-				{firstField}:
+			<div className='add-single-field-field-warpper'>
+				<span className='field-name'>שם ההודעה</span>
 				<input
-					onKeyPress={(event) => {
-						if (event.key === "Enter" && state) {
-							setState({
-								...state,
-							});
-							close();
-						}
-					}}
-					name='messageName'
 					onChange={(event) => handleInputs(event)}
+					className='field-input'
 					type='text'
 				/>
 			</div>
 			<div className='add-single-field-button-container'>
-				<button
-					onClick={() => {
-						if (state) {
-							setState({
-								...state,
-							});
-							close();
-						}
-					}}
-					className=''
-				>
-					{secondField}
-				</button>
+				<button onClick={() => saveMessage(displayMessage)}>הבא</button>
 			</div>
 		</div>
 	);

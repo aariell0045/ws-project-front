@@ -10,7 +10,6 @@ function AddMessage(props) {
 
 	function uploadFile(e) {
 		let file = e.target.files[0];
-		console.log(file);
 		previewFile(file);
 	}
 
@@ -22,7 +21,6 @@ function AddMessage(props) {
 				return alert("בבקשה תתמקד על אחת מתיבות הטקסט");
 			}
 			state.currentMessage.imageSrc = reader.result;
-			console.log(state.currentMessage);
 			setState({
 				...state,
 			});
