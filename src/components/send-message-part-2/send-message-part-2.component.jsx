@@ -4,11 +4,11 @@ import ContactBox from "../contact-box/contact-box.components";
 import { Link } from "react-router-dom";
 import GroupBox from "../list-item-3/list-item-3.component";
 import { useState } from "react";
-import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component"
+import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 
 const groups = [
   {
-    groupName: "ariel",
+    groupName: "אריאל",
     groupLength: 50,
     productionDate: "25.09.2000",
     contactsList: [
@@ -88,7 +88,11 @@ function SendMessagePart2() {
       <div className="send-message-part-2-warpper">
         <div className="send-message-part-2-right-side">
           <header className="send-message-part-2-right-side-main-header">
-            <Link to="/SendMessagePart1"><span ><GoBack/></span></Link>
+            <Link to="/SendMessagePart1">
+              <span>
+                <GoBack />
+              </span>
+            </Link>
             <p>יש לבחור את הקבוצה הרלוונטית:</p>
           </header>
           <input
@@ -103,10 +107,35 @@ function SendMessagePart2() {
               groupsList.map((group, index) => {
                 if (group.groupName.includes(state.searchGroups)) {
                   return (
-                    <GroupBox
-                      key={index}
-                      item={[group.groupName, group.groupLength]}
-                    />
+                    <div
+                      className={
+                        groupsList[index]?.isActive
+                          ? "group-box-clicked"
+                          : "group-box"
+                      }
+                      onClick={() => {
+                        let currentGroupsList = groupsList.map((group, i) => {
+                          if (i === index) {
+                            group.isActive = true;
+                          } else {
+                            group.isActive = false;
+                          }
+                          return group;
+                        });
+
+                        setGroupsList(currentGroupsList);
+
+                        setState({
+                          ...state,
+                          currentGroup: group,
+                        });
+                      }}
+                    >
+                      <GroupBox
+                        key={index}
+                        item={[group.groupName, group.groupLength]}
+                      />
+                    </div>
                   );
                 } else {
                   return null;
@@ -114,7 +143,6 @@ function SendMessagePart2() {
               })}
             {!state.searchGroups &&
               groupsList.map((group, index) => {
-                console.log(group);
                 return (
                   <div
                     className={
@@ -152,36 +180,42 @@ function SendMessagePart2() {
 
         <div className="send-message-part-2-left-side">
           <div className="send-message-part-2-left-side-background"></div>
-          <div className="send-message-part-2-left-side-container">
-            <header className="send-message-part-2-left-side-main-header">
-              <p>שם הקבוצה - 100 משתתפים</p>
-            </header>
+          {state.currentGroup.groupName && (
+            <div className="send-message-part-2-left-side-container">
+              <header className="send-message-part-2-left-side-main-header">
+                <p>
+                  {" "}
+                  <span>{state.currentGroup.groupName}</span> -{" "}
+                  {state.currentGroup.groupLength} משתתפים{" "}
+                </p>
+              </header>
 
-            <div className="contacts-table-headers">
-              <div className="send-message-part2-left-side-list-header-first-column">
-                <span>שם פרטי</span>
+              <div className="contacts-table-headers">
+                <div className="send-message-part2-left-side-list-header-first-column">
+                  <span>שם פרטי</span>
+                </div>
+                <div className="send-message-part2-left-side-list-header-second-column">
+                  <span>שם משפחה</span>
+                </div>
+                <div className="send-message-part2-left-side-list-header-third-column">
+                  <span>טלפון</span>
+                </div>
               </div>
-              <div className="send-message-part2-left-side-list-header-second-column">
-                <span>שם משפחה</span>
-              </div>
-              <div className="send-message-part2-left-side-list-header-third-column">
-                <span>טלפון</span>
+              <div className="contacts-list-container">
+                {state.currentGroup?.contactsList?.map((contact, index) => {
+                  return (
+                    <ContactBox
+                      item={[
+                        contact.contactName,
+                        contact.contactLastName,
+                        contact.contactPhone,
+                      ]}
+                    />
+                  );
+                })}
               </div>
             </div>
-            <div className="contacts-list-container">
-              {state.currentGroup?.contactsList?.map((contact, index) => {
-                return (
-                  <ContactBox
-                    item={[
-                      contact.contactName,
-                      contact.contactLastName,
-                      contact.contactPhone,
-                    ]}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          )}
           <Link to={state.currentGroup.isActive && "/SendMessagePart3"}>
             <div
               style={{ cursor: !state.currentGroup.isActive && "pointer" }}
