@@ -1,64 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ListItems from "../list-items1/list-items.1component";
 import "./groups-list.styles.css";
 
-const groups = [
-  {
-    id: "1",
-    groupName: "ariel",
-    groupLength: 50,
-    productionDate: "25.09.2000",
-    contactsList: [
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0502203450",
-      },
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0512203450",
-      },
-    ],
-  },
-  {
-    id: "2",
-    groupName: "ariel",
-    groupLength: 50,
-    productionDate: "25.09.2000",
-    contactsList: [
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0532203450",
-      },
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0502203450",
-      },
-    ],
-  },
-  {
-    id: "3",
-    groupName: "ariel",
-    groupLength: 50,
-    productionDate: "25.09.2000",
-    contactsList: [
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0582203450",
-      },
-      {
-        contactName: "ariel",
-        contactLastName: "cohen",
-        contactPhone: "0502203450",
-      },
-    ],
-  },
-];
+// const groups = [
+//   {
+//     id: "1",
+//     groupName: "ariel",
+//     groupLength: 50,
+//     productionDate: "25.09.2000",
+//     contactsList: [
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0502203450",
+//       },
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0512203450",
+//       },
+//     ],
+//   },
+//   {
+//     id: "2",
+//     groupName: "ariel",
+//     groupLength: 50,
+//     productionDate: "25.09.2000",
+//     contactsList: [
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0532203450",
+//       },
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0502203450",
+//       },
+//     ],
+//   },
+//   {
+//     id: "3",
+//     groupName: "ariel",
+//     groupLength: 50,
+//     productionDate: "25.09.2000",
+//     contactsList: [
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0582203450",
+//       },
+//       {
+//         contactName: "ariel",
+//         contactLastName: "cohen",
+//         contactPhone: "0502203450",
+//       },
+//     ],
+//   },
+// ];
+
 
 function mergeGroups(groupName, groups) {
   let newGroup = { groupName, contactsList: [] };
@@ -86,10 +88,21 @@ function checkDuplicate(contactsList) {
 
 
 function GroupsList() {
-  const [groupsList, setGroupsList] = useState(groups);
+  const [groupsList, setGroupsList] = useState([]);
   const [state, setState] = useState({
     searchGroups: "",
   });
+
+  const userId=useSelector(state =>state.userReducer.userId);
+  useEffect(async ()=>{
+   const response=await fetch(`http://localhost:8080/groups/${userId}`)
+   const groups= await response.json();
+   console.log(groups);
+   console.log(userId);
+   if(userId){
+     setGroupsList(groups);
+    }
+  },[])
 
   function handleInputs({ target }) {
     const { name, value } = target;
@@ -97,6 +110,7 @@ function GroupsList() {
     currentState[name] = value;
     setState(currentState);
   }
+
 
   function deleteItem(id, container, setContainer) {
     setContainer(container.filter((item) => item.id != id));
