@@ -61,7 +61,6 @@ import "./groups-list.styles.css";
 //   },
 // ];
 
-
 function mergeGroups(groupName, groups) {
   let newGroup = { groupName, contactsList: [] };
   for (let group of groups) {
@@ -86,23 +85,18 @@ function checkDuplicate(contactsList) {
   return newArrayContactsList;
 }
 
-
 function GroupsList() {
   const [groupsList, setGroupsList] = useState([]);
   const [state, setState] = useState({
     searchGroups: "",
   });
 
-  const userId=useSelector(state =>state.userReducer.userId);
-  useEffect(async ()=>{
-   const response=await fetch(`http://localhost:8080/groups/${userId}`)
-   const groups= await response.json();
-   console.log(groups);
-   console.log(userId);
-   if(userId){
-     setGroupsList(groups);
-    }
-  },[])
+  const userId = useSelector((state) => state.userReducer.userId);
+  useEffect(async () => {
+    const response = await fetch(`http://localhost:8080/groups/${userId}`);
+    const groups = await response.json();
+    setGroupsList(groups);
+  }, []);
 
   function handleInputs({ target }) {
     const { name, value } = target;
@@ -111,9 +105,16 @@ function GroupsList() {
     setState(currentState);
   }
 
-
   function deleteItem(id, container, setContainer) {
-    setContainer(container.filter((item) => item.id != id));
+    fetch("http://localhost:8080/group",{
+      method:"DELETE",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        userId,
+        groupId:id
+      })
+    })
+    setContainer(container.filter((item) => item._id != id));
   }
 
   return (
@@ -165,6 +166,7 @@ function GroupsList() {
         {state.searchGroups &&
           groupsList.map((group, index) => {
             if (group.groupName.includes(state.searchGroups)) {
+              
               return (
                 <ListItems
                   id={group.id}
@@ -173,7 +175,7 @@ function GroupsList() {
                   key={index}
                   item={[
                     group.groupName,
-                    group.groupLength,
+                    group.amount,
                     group.productionDate,
                   ]}
                 />
@@ -184,15 +186,16 @@ function GroupsList() {
           })}
         {!state.searchGroups &&
           groupsList.map((group, index) => {
+            console.log(group);
             return (
               <ListItems
-                id={group.id}
+                id={group._id}
                 onClickEvent={deleteItem}
                 onClickEventParams={[groupsList, setGroupsList]}
                 key={index}
                 item={[
                   group.groupName,
-                  group.groupLength,
+                  group.amount,
                   group.productionDate,
                 ]}
               />
