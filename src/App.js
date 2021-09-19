@@ -3,7 +3,7 @@ import Sidebar from "./components/sidebar/Sidebar.component";
 import Home from "./components/home/Home.component";
 import GroupsList from "./components/groups-list/groups-list.component";
 import ContactsList from "./components/contacts-list/contacts-list.component";
-import { Route,useHistory} from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import AddGroup from "./components/add-group/AddGroup.component";
 import MessagesStock from "./components/messages-stock/messages-stock.component";
 import SendMessagePart2 from "./components/send-message-part-2/send-message-part-2.component";
@@ -12,18 +12,16 @@ import SendMessagePart1 from "./components/send-message-part-1/send-message-part
 import SendMessagePart3 from "./components/send-message-part-3/send-message-part-3.component";
 import HistoryList from "./components/history-list/history-list.component";
 import LoginPage from "./components/login-page/login-page.component";
+import { useSelector } from "react-redux";
 
 function App() {
-	
-	const history = useHistory();
-	const path = history.location.pathname;
-	console.log(path);
-	
+	const userId = useSelector((state) => state.userReducer.userId);
+
 	return (
 		<div className='App'>
 			<div id='background'></div>
-			{ path !== "/Login" && <div className='sidebar'></div>}
-			{path !== "/Login" && <Sidebar />}
+			{userId && <div className='sidebar'></div>}
+			{userId && <Sidebar />}
 
 			<Route
 				exact
@@ -100,7 +98,6 @@ function App() {
 					return <HistoryList />;
 				}}
 			/>
-			
 		</div>
 	);
 }
