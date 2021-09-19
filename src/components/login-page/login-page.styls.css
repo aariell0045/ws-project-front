@@ -17,6 +17,13 @@
   outline: none;
 }
 
+.login-page-login-form{
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  align-items: center;
+}
+
 .login-page-logo-container {
   width: 100vw;
   height: fit-content;
