@@ -2,24 +2,20 @@ import React, { useState } from "react";
 import "./add-single-field.styles.css";
 
 function AddSingleField(props) {
-	const [fieldInput, setFieldInput] = useState("");
-	const inputValueKeyName = props.inputValueKeyName;
+	const { containerNameKey, nextStep } = props;
 	const [currentData, setCurrentData] = props.useCurrentData;
-	function saveCurrentData(currentData) {
-		if (currentData) {
-			currentData[inputValueKeyName] = fieldInput;
-			setCurrentData({
-				...currentData,
-				editMode: true,
-			});
-		} else {
-			props.getFieldValue({ [inputValueKeyName]: fieldInput });
-		}
+	const [input, setInput] = useState("");
+
+	function saveContainerName(currentData) {
+		const newCurrentData = { ...currentData };
+		newCurrentData[containerNameKey] = input;
+		setCurrentData(newCurrentData);
+		nextStep();
 		close();
 	}
 	function handleInputs(event) {
 		const { value } = event.target;
-		setFieldInput(value);
+		setInput(value);
 	}
 
 	function close() {
@@ -42,7 +38,7 @@ function AddSingleField(props) {
 				/>
 			</div>
 			<div className='add-single-field-button-container'>
-				<button onClick={() => saveCurrentData(currentData)}>הבא</button>
+				<button onClick={() => saveContainerName(currentData)}>הבא</button>
 			</div>
 		</div>
 	);

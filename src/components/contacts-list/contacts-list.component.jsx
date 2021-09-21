@@ -18,7 +18,6 @@ function ContactsList() {
 	const [state, setState] = useState({
 		searchContacts: "",
 	});
-	console.log(contactsList);
 	const [contactProfile, setContactProfile] = useState(null);
 	const group = useSelector((state) => state.contactReducer.contactsList);
 	const userId = useSelector((state) => state.userReducer.userId);
@@ -30,7 +29,6 @@ function ContactsList() {
 	}
 
 	function deleteItem(contactId, container, setContainer) {
-		console.log(group);
 		fetch("http://localhost:8080/contact", {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
