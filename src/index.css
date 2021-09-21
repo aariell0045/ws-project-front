@@ -33,3 +33,11 @@ textarea:focus {
 p {
 	margin: 0px;
 }
+
+input:focus {
+	background: rgba(255, 255, 255, 0.8);
+}
+
+input {
+	cursor: text;
+}

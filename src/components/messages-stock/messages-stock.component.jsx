@@ -233,9 +233,11 @@ function MessagesStock() {
 			</div>
 			{openMessageName && (
 				<AddSingleField
-					setOpenMessageName={setOpenMessageName}
-					setCreateMessage={setCreateMessage}
-					useDisplayMessage={[displayMessage, setDisplayMessage]}
+					setOpenField={setOpenMessageName}
+					getFieldValue={setCreateMessage}
+					useCurrentData={[displayMessage, setDisplayMessage]}
+					inputValueKeyName={"messageName"}
+					fieldsNames={"שם ההודעה:"}
 				/>
 			)}
 		</section>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import AddContactIcon from "../../icons/icons-components/add-contact-icon/add-contact.component";
 import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 import { useSelector } from "react-redux";
+import ContactProfile from "../contact-profile/contact-profile.component";
 
 // const contacts = [
 //   { id:"1",firstName: "ariel", lastName: "cohen", phoneNumber: "1502203450" },
@@ -17,7 +18,10 @@ function ContactsList() {
 	const [state, setState] = useState({
 		searchContacts: "",
 	});
-
+	console.log(contactsList);
+	const [contactProfile, setContactProfile] = useState(null);
+	const group = useSelector((state) => state.contactReducer.contactsList);
+	const userId = useSelector((state) => state.userReducer.userId);
 	function handleInputs({ target }) {
 		const { name, value } = target;
 		let currentState = { ...state };
@@ -25,15 +29,24 @@ function ContactsList() {
 		setState(currentState);
 	}
 
-	function deleteItem(id, container, setContainer) {
-		setContainer(container.filter((item) => item.id != id));
+	function deleteItem(contactId, container, setContainer) {
+		console.log(group);
+		fetch("http://localhost:8080/contact", {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: userId,
+				groupId: group._id,
+				contactId: contactId,
+			}),
+		});
+		setContainer(container.filter((item) => item._id != contactId));
 	}
 
-	function viewProfileContact(profileContact, setContainer) {
+	function viewProfileContact(profileContact, setContainer = setContactProfile) {
 		setContainer(profileContact);
 	}
 
-	const group = useSelector((state) => state.contactReducer.contactsList);
 	useEffect(() => {
 		setContactsList(group.contacts);
 	}, []);
@@ -97,19 +110,20 @@ function ContactsList() {
 						);
 						if (isContactLastName || isContactName || isContactPhoneNumber) {
 							return (
-                <ListItems
-								id={contact.id}
-								onClickEvent={deleteItem}
-								onClickEventParams={[contactsList, setContactsList]}
-								key={index}
-								openItem={viewProfileContact}
-								item={[
-									contact.contactProfile.contactFirstName,
-									contact.contactProfile.contactLastName,
-									contact.phoneNumber,
-									contact.profileContact,
-								]}
-							/>
+								<ListItems
+									isCombineGroups={null}
+									id={contact._id}
+									onClickEvent={deleteItem}
+									onClickEventParams={[contactsList, setContactsList]}
+									key={index}
+									openItem={viewProfileContact}
+									item={[
+										contact.contactProfile.contactFirstName,
+										contact.contactProfile.contactLastName,
+										contact.phoneNumber,
+										contact.profileContact,
+									]}
+								/>
 							);
 						} else {
 							return null;
@@ -119,7 +133,8 @@ function ContactsList() {
 					contactsList.map((contact, index) => {
 						return (
 							<ListItems
-								id={contact.id}
+								isCombineGroups={null}
+								id={contact._id}
 								onClickEvent={deleteItem}
 								onClickEventParams={[contactsList, setContactsList]}
 								key={index}
@@ -134,6 +149,7 @@ function ContactsList() {
 						);
 					})}
 			</div>
+			{contactProfile && <ContactProfile contactProfile={contactProfile} />}
 		</section>
 	);
 }
