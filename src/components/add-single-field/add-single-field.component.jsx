@@ -3,37 +3,38 @@ import "./add-single-field.styles.css";
 
 function AddSingleField(props) {
 	const [fieldInput, setFieldInput] = useState("");
-	const [displayMessage, setDisplayMessage] = props.useDisplayMessage;
-	function saveMessage(displayMessage) {
-		if (displayMessage) {
-			displayMessage.messageName = fieldInput;
-			setDisplayMessage({
-				...displayMessage,
+	const inputValueKeyName = props.inputValueKeyName;
+	const [currentData, setCurrentData] = props.useCurrentData;
+	function saveCurrentData(currentData) {
+		if (currentData) {
+			currentData[inputValueKeyName] = fieldInput;
+			setCurrentData({
+				...currentData,
 				editMode: true,
 			});
 		} else {
-			props.setCreateMessage({ messageName: fieldInput });
+			props.getFieldValue({ [inputValueKeyName]: fieldInput });
 		}
-		clase();
+		close();
 	}
 	function handleInputs(event) {
 		const { value } = event.target;
 		setFieldInput(value);
 	}
 
-	function clase() {
-		props.setOpenMessageName(false);
+	function close() {
+		props.setOpenField(false);
 	}
 
 	return (
 		<div className='add-single-field'>
 			<header className='add-single-field-main-header'>
-				<span onClick={clase} className='close'>
+				<span onClick={close} className='close'>
 					X
 				</span>
 			</header>
 			<div className='add-single-field-field-warpper'>
-				<span className='field-name'>שם ההודעה</span>
+				<span className='field-name'>{props.fieldsNames}</span>
 				<input
 					onChange={(event) => handleInputs(event)}
 					className='field-input'
@@ -41,7 +42,7 @@ function AddSingleField(props) {
 				/>
 			</div>
 			<div className='add-single-field-button-container'>
-				<button onClick={() => saveMessage(displayMessage)}>הבא</button>
+				<button onClick={() => saveCurrentData(currentData)}>הבא</button>
 			</div>
 		</div>
 	);
