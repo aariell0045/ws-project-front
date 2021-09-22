@@ -54,7 +54,6 @@ function SendMessagePart1() {
 	const [state, setState] = useState({
 		searchMessages: "",
 	});
-	console.log(displayMessage);
 	function handleInputs({ target }) {
 		const { name, value } = target;
 		let currentState = { ...state };

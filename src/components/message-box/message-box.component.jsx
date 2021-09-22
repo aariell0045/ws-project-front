@@ -4,53 +4,51 @@ import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.compon
 import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
 
 function MessageBox(props) {
-	let [firstColumn, secondColumn, thirdColumn] = props.item;
-	const [displayMessage, setDisplayMessage] = props?.useDisplayMessageState || [
-		undefined,
-		undefined,
-	];
-	const [createMessage, setCreateMessage] = props?.useCreateMessageState || [
-		undefined,
-		undefined,
-	];
-	const [isMediaExist, setMediaExist] = useState(false);
+	let {
+		messageName,
+		messageLength,
+		messagesInRow,
+		id,
+		setCurrentMessage,
+		setShowCurrentMessage,
+		resetState,
+		deleteMessage,
+	} = props;
 
-	for (let media of thirdColumn) {
-		if (media.mediaSrc) {
-			setMediaExist(true);
+	function updateCurrentMessage() {
+		let newCurrentMessage = { messageName: "", contentMessage: [] };
+		newCurrentMessage.messageName = messageName;
+		for (let contentMessage of messagesInRow) {
+			newCurrentMessage.contentMessage.push({ ...contentMessage });
 		}
+		resetState();
+		setShowCurrentMessage(true);
+		newCurrentMessage.id = id;
+		setCurrentMessage(newCurrentMessage);
 	}
+
 	return (
-		<div
-			onClick={(event) => {
-				let message = {
-					messageName: firstColumn,
-					contentMessage: JSON.parse(JSON.stringify(thirdColumn)),
-					id: props.id,
-				};
-				setDisplayMessage({ ...message });
-				if (createMessage) {
-					setCreateMessage(null);
-				}
-			}}
-			className='message-box'
-		>
-			<div st className='message-box-background'>
-				{" "}
-			</div>
+		<div onClick={updateCurrentMessage} className='message-box'>
+			<div st className='message-box-background'></div>
 			<header className='message-main-header'>
-				<p className='message-name'>{firstColumn}</p>
-				<p className='messages-in-a-row'>{secondColumn} הודעות ברצף</p>
+				<p className='message-name'>{messageName}</p>
+				<p className='messages-in-a-row'>{messageLength} הודעות ברצף</p>
 			</header>
 			<div className='message-content-first-message-in-row'>
-				{thirdColumn[0].contentField}
+				{messagesInRow.length && messagesInRow[0].contentField}
 			</div>
 			<div className='message-box-footer'>
 				<span className='message-box-media-icon'>
 					<MediaIcon />
 				</span>
 			</div>
-			<span className='message-box-trash-icon'>
+			<span
+				onClick={(event) => {
+					event.stopPropagation();
+					deleteMessage(id);
+				}}
+				className='message-box-trash-icon'
+			>
 				<TrashIcon />
 			</span>
 		</div>

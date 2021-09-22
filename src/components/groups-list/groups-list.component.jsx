@@ -33,16 +33,17 @@ import "./groups-list.styles.css";
 
 function GroupsList() {
 	const [groupsList, setGroupsList] = useState([]);
-	const [currentGroupName, setCurrentGroupName] = useState(null);
+	const [currentGroup, setCurrentGroup] = useState({
+		groupName: "",
+		contacts: [],
+		id: "",
+	});
 	const [state, setState] = useState({
 		searchGroups: "",
 		isCombineGroups: false,
 	});
 
 	const [openSingleField, setOpenSingleField] = useState(false);
-
-	console.log(openSingleField);
-	console.log(currentGroupName);
 
 	function checkedCounter() {
 		let checkedCounter = 0;
@@ -63,11 +64,9 @@ function GroupsList() {
 		}
 
 		if (whichGroup === "groupA") {
-			console.log("groups[0]:", groups[0]);
 			return groups[0];
 		}
 		if (whichGroup === "groupB") {
-			console.log("groups[1]:", groups[1]);
 			return groups[1];
 		}
 	}
@@ -84,13 +83,13 @@ function GroupsList() {
 	}, []);
 
 	useEffect(async () => {
-		if (currentGroupName) {
+		if (currentGroup) {
 			const response = await fetch("http://localhost:8080/combine-groups", {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					userId: userId,
-					groupName: currentGroupName.groupName,
+					groupName: currentGroup.groupName,
 					groupA: returnCurrentGroups("groupA"),
 					groupB: returnCurrentGroups("groupB"),
 				}),
@@ -100,14 +99,13 @@ function GroupsList() {
 			setGroupsList(data.groups);
 		}
 
-		setCurrentGroupName(null);
+		setCurrentGroup({groupName:"", contacts:[], id:""});
 
 		setState({
 			...state,
 			isCombineGroups: false,
 		});
-		console.log("rerender");
-	}, [currentGroupName]);
+	}, [currentGroup]);
 
 	function handleInputs({ target }) {
 		const { name, value } = target;
@@ -130,6 +128,14 @@ function GroupsList() {
 
 	function fetchCurrentContactList(groupOfContacts) {
 		dispatch(fetchContactsList(groupOfContacts));
+	}
+
+	function nextStep() {
+		let bool = false;
+		setState({
+			...state,
+			isCombineGroups: bool,
+		});
 	}
 
 	return (
@@ -241,9 +247,9 @@ function GroupsList() {
 			{openSingleField && (
 				<AddSingleField
 					setOpenField={setOpenSingleField}
-					getFieldValue={setCurrentGroupName}
-					useCurrentData={[currentGroupName, setCurrentGroupName]}
-					inputValueKeyName={"groupName"}
+					nextStep={nextStep}
+					useCurrentData={[currentGroup, setCurrentGroup]}
+					containerNameKey={"groupName"}
 					fieldsNames={"שם הקבוצה החדשה:"}
 				/>
 			)}

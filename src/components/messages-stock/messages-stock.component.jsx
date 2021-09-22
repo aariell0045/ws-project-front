@@ -1,86 +1,139 @@
 import "./messages-stock.styles.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MessageBox from "../message-box/message-box.component";
 import AddMessage from "../add-message/add-message.component";
 import AddMessageIcon from "../../icons/icons-components/add-message/add-message.component";
 import AddEvents from "../add-events/add-events.component";
 import AddSingleField from "../add-single-field/add-single-field.component";
-import EditMessageField from "../add-message-field/add-message-field.component";
 import CreateMessage from "../create-message-filed/create-message-field.component";
 import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
-
-const messages = [
-	{
-		id: "1",
-		messageName: "ariel",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-		isActive: false,
-	},
-	{
-		id: "2",
-		messageName: "ariel",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-		isActive: false,
-	},
-	{
-		id: "3",
-		messageName: "toam",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-		isActive: false,
-	},
-	{
-		id: "4",
-		messageName: "toam",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-		isActive: false,
-	},
-];
+import CurrentMessage from "../add-message-field/add-message-field.component";
+import { useSelector } from "react-redux";
 
 function MessagesStock() {
-	const [messagesList, setMessagesList] = useState(messages);
-	const [displayMessage, setDisplayMessage] = useState(null);
-	const [createMessage, setCreateMessage] = useState(null);
-	const [openMessageName, setOpenMessageName] = useState(false);
-	const [messagesInRow, setMessagesInRow] = useState([{ contentField: "", mediaSrc: "" }]);
-	const [currentMessage, setCurrentMessage] = useState(null);
-	console.log(currentMessage);
+	const [messagesList, setMessagesList] = useState([]);
+	const [currentMessage, setCurrentMessage] = useState({
+		messageName: "",
+		contentMessage: [{ contentField: "", mediaSrc: "" }],
+		id: "",
+	});
+	const [currentFieldIndex, setCurrentFieldIndex] = useState(-1);
+	const [createNewMessage, setCreateNewMessage] = useState(false);
+	const [showCurrentMessage, setShowCurrentMessage] = useState(false);
+	const [openSingleField, setOpenSingleField] = useState(false);
 
-	function claseLeftSide() {
-		setDisplayMessage(null);
+	const userId = useSelector((state) => state.userReducer.userId);
+
+	useEffect(async () => {
+		const response = await fetch(`http://localhost:8080/message/${userId}`);
+		const data = await response.json();
+		setMessagesList(data);
+	}, []);
+
+	async function deleteMessage(id) {
+		const response = await fetch("http://localhost:8080/message", {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: userId,
+				messageId: id,
+			}),
+		});
+		const data = await response.json();
+
+		if (data === "deleted") {
+			const index = messagesList.findIndex((message) => message._id == id);
+			const newMessagesList = [...messagesList];
+			if (currentMessage.id == messagesList[index]._id) resetState();
+			newMessagesList.splice(index, 1);
+			setMessagesList(newMessagesList);
+		}
 	}
 
-	function addName(currentMessage) {
-		if (currentMessage) {
-			currentMessage.contentField += " (שם פרטי) ";
-			setCurrentMessage({ ...currentMessage });
-			setCurrentMessage(null);
-		} else {
-			alert("please focus on the field");
+	function resetState() {
+		const newCurrentMessage = { ...currentMessage };
+		newCurrentMessage.messageName = "";
+		newCurrentMessage.id = "";
+		newCurrentMessage.contentMessage = [{ contentField: "", mediaSrc: "" }];
+		setCurrentMessage(newCurrentMessage);
+		setCreateNewMessage(false);
+		setShowCurrentMessage(false);
+		setCurrentFieldIndex(-1);
+	}
+
+	function AddNameTemplate() {
+		if (currentFieldIndex !== -1) {
+			const newContentMessage = [...currentMessage.contentMessage];
+			newContentMessage[currentFieldIndex].contentField += `( שם פרטי )`;
+			setCurrentMessage({
+				...currentMessage,
+				contentMessage: newContentMessage,
+			});
 		}
 	}
 
 	function uploadImage(event) {
 		if (currentMessage) {
-			// const media = event.target.files[0];
-			// const reader = new FileReader();
-			// reader.readAsDataURL(media);
-			// reader.onloadend = (event) => {
-			// 	const newCurrentMessage = { ...currentMessage };
-			// 	const index = messagesList.findIndex(
-			// 		(message) => newCurrentMessage.id + 1 == message.id
-			// 	);
-			// 	newCurrentMessage.mediaSrc = event.target.result || "";
-			// 	const newMessagesList = [...messagesList];
-			// 	newMessagesList[index].contentMessage.push({
-			// 		contentField: newCurrentMessage.contentField,
-			// 		mediaSrc: newCurrentMessage.mediaSrc,
-			// 	});
-			// 	setMessagesList(newMessagesList);
-			// }
-			alert("didnt work yet");
+			const media = event.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(media);
+			reader.onload = () => {
+				if (currentFieldIndex !== -1) {
+					const newContentMessage = [...currentMessage.contentMessage];
+					newContentMessage[currentFieldIndex].mediaSrc += reader.result;
+					setCurrentMessage({
+						...currentMessage,
+						contentMessage: newContentMessage,
+					});
+				}
+			};
 		} else {
 			alert("please focus on the field");
 		}
+	}
+
+	async function saveMessage() {
+		const newMessagesList = [...messagesList];
+		const index = newMessagesList.findIndex((message) => message._id == currentMessage.id);
+		console.log(index);
+		if (index === -1) {
+			const response = await fetch("http://localhost:8080/message", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: userId,
+					messageName: currentMessage.messageName,
+					contentMessage: currentMessage.contentMessage,
+				}),
+			});
+
+			const newMessage = await response.json();
+			console.log(newMessage);
+
+			newMessagesList.push(newMessage);
+		} else {
+			const response = await fetch("http://localhost:8080/edit-message", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: userId,
+					messageId: currentMessage.id,
+					messageName: currentMessage.messageName,
+					contentMessage: currentMessage.contentMessage,
+				}),
+			});
+
+			const editedMessage = await response.json();
+
+			newMessagesList[index] = editedMessage;
+		}
+		setMessagesList(newMessagesList);
+		resetState();
+	}
+
+	function nextStep() {
+		let bool = true;
+		return showCurrentMessage ? setShowCurrentMessage(bool) : setCreateNewMessage(bool);
 	}
 
 	return (
@@ -91,11 +144,10 @@ function MessagesStock() {
 						<p>מאגר הודעות</p>
 						<input type='text' placeholder='חיפוש במאגר ההודעות' />
 						<button
+							disabled={false}
 							onClick={() => {
-								setDisplayMessage(null);
-								setOpenMessageName(true);
-								setCreateMessage(null);
-								setMessagesInRow([{ contentField: "", mediaSrc: "" }]);
+								resetState();
+								setOpenSingleField(true);
 							}}
 							className='messages-stcok-add-message-icon'
 						>
@@ -104,23 +156,19 @@ function MessagesStock() {
 					</header>
 
 					<div className='messages-list'>
-						{messagesList.map((message, index) => {
-							let item = [
-								message.messageName,
-								message.contentMessage.length,
-								message.contentMessage,
-							];
-							let useDisplayMessageState = [displayMessage, setDisplayMessage];
-							let useCreateMessageState = [createMessage, setCreateMessage];
-
+						{messagesList.map((message) => {
+							console.log(message);
 							return (
 								<MessageBox
-									key={index}
-									id={message.id}
-									item={item}
-									useDisplayMessageState={useDisplayMessageState}
-									useCreateMessageState={useCreateMessageState}
-									color={message.isActive}
+									key={message._id}
+									id={message._id}
+									messageName={message.messageName}
+									messageLength={message.contentMessage.length}
+									messagesInRow={message.contentMessage}
+									setCurrentMessage={setCurrentMessage}
+									setShowCurrentMessage={setShowCurrentMessage}
+									resetState={resetState}
+									deleteMessage={deleteMessage}
 								/>
 							);
 						})}
@@ -129,80 +177,32 @@ function MessagesStock() {
 				<div className='messages-stock-left-side'>
 					<div className='messages-stock-left-side-background'></div>
 					<nav className='message-stcok-left-side-nav-bar'>
-						<button onClick={claseLeftSide}>X</button>
+						<button onClick={resetState}>X</button>
 						<button>icon</button>
 						<button>icon</button>
-						<button
-							disabled={
-								(displayMessage && !displayMessage.editMode) ||
-								(createMessage && false)
-							}
-							onClick={() => {
-								debugger;
-								if (displayMessage) {
-									const index = messagesList.findIndex(
-										(message) => message.id == displayMessage.id
-									);
-
-									const newMessagesList = [...messagesList];
-
-									newMessagesList[index] = {
-										id: newMessagesList[index].id,
-										messageName: displayMessage.messageName,
-										contentMessage: displayMessage.contentMessage,
-									};
-									console.log(newMessagesList);
-
-									setDisplayMessage(null);
-									setMessagesList(newMessagesList);
-								}
-								if (createMessage) {
-									let newMessage = {
-										id: messagesList.length,
-										messageName: createMessage.messageName,
-										contentMessage: messagesInRow,
-									};
-									const newMessagesList = [...messagesList];
-									newMessagesList.push(newMessage);
-
-									setMessagesList(newMessagesList);
-								}
-
-								// setMessagesInRow([{ contentField: "", mediaSrc: "" }]);
-								// setCreateMessage(null);
-							}}
-							className={
-								displayMessage?.editMode || createMessage
-									? "messages-stcok-left-side-nav-bar-save-button-clicked"
-									: "messages-stcok-left-side-nav-bar-save-button"
-							}
-						>
-							שמור
-						</button>
+						<button onClick={saveMessage}>שמור</button>
 					</nav>
 
 					<div className='left-side-display-list'>
-						{displayMessage && (
-							<EditMessageField
-								useDisplayMessageState={[displayMessage, setDisplayMessage]}
-								setOpenMessageName={setOpenMessageName}
-								setCurrentMessage={setCurrentMessage}
+						{showCurrentMessage && (
+							<CurrentMessage
+								useCurrentMessageState={[currentMessage, setCurrentMessage]}
+								setOpenSingleField={setOpenSingleField}
+								setCurrentFieldIndex={setCurrentFieldIndex}
 							/>
 						)}
-						{createMessage && (
-							<CreateMessage
-								currentMessage={createMessage}
-								container={messagesInRow}
-								setContainer={setMessagesInRow}
-								setOpenMessageName={setOpenMessageName}
-								setCurrentMessage={setCurrentMessage}
+						{createNewMessage && (
+							<CurrentMessage
+								useCurrentMessageState={[currentMessage, setCurrentMessage]}
+								setOpenSingleField={setOpenSingleField}
+								setCurrentFieldIndex={setCurrentFieldIndex}
 							/>
 						)}
 					</div>
 					<div className='left-side-footer-container'>
 						<div className='left-side-tools-warpper'>
 							<button
-								onClick={() => addName(currentMessage)}
+								onClick={() => AddNameTemplate()}
 								className='left-side-button-1'
 							>
 								@ הוספת תבנית שם
@@ -231,12 +231,12 @@ function MessagesStock() {
 					</div>
 				</div>
 			</div>
-			{openMessageName && (
+			{openSingleField && (
 				<AddSingleField
-					setOpenField={setOpenMessageName}
-					getFieldValue={setCreateMessage}
-					useCurrentData={[displayMessage, setDisplayMessage]}
-					inputValueKeyName={"messageName"}
+					setOpenField={setOpenSingleField}
+					nextStep={nextStep}
+					useCurrentData={[currentMessage, setCurrentMessage]}
+					containerNameKey={"messageName"}
 					fieldsNames={"שם ההודעה:"}
 				/>
 			)}

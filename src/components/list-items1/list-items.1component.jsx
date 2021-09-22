@@ -15,7 +15,6 @@ function ListItems(props) {
 		boxShadow: `inset 0px 2px 4px rgba(0, 0, 0, 0.25)`,
 		borderRadius: "10px",
 	};
-	console.log(dataItem);
 	return (
 		<div
 			style={dataItem.checked ? object : {}}

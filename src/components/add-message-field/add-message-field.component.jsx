@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
 import "./add-message-field.styles.css";
-function EditMessageField(props) {
-	const [displayMessage, setDisplayMessage] = props.useDisplayMessageState;
-	function handleInputs(event, index, content) {
-		let row = Math.floor(content.contentField.length / 91 + 2);
+function CurrentMessage(props) {
+	const { setCurrentFieldIndex } = props;
+	const [currentMessage, setCurrentMessage] = props.useCurrentMessageState;
+
+	function textEreaSize(event, message) {
+		const { value } = event.target;
+		let row = Math.floor(message.contentField.length / 91 + 2);
 		let counter = 0;
-		for (let val of event.target.value) {
+		for (let val of value) {
 			if (val === "\n") {
 				counter++;
 			}
 		}
-
 		event.nativeEvent.path[0].rows = row + counter;
-		const { value } = event.target;
-		let newMessagesContent = [...displayMessage.contentMessage];
+	}
+
+	function handleInputs(event, index, message) {
 		debugger;
-		newMessagesContent[index].contentField = value;
-		setDisplayMessage({
-			...displayMessage,
-			contentMessage: newMessagesContent,
-			editMode: true,
+		textEreaSize(event, message);
+		const { value } = event.target;
+
+		const newContentMessage = [...currentMessage.contentMessage];
+		newContentMessage[index].contentField = value;
+		setCurrentMessage({
+			...currentMessage,
+			contentMessage: newContentMessage,
 		});
 	}
 
@@ -34,19 +40,19 @@ function EditMessageField(props) {
 		);
 	}
 
-	function addNewField(fieldObj) {
-		let newContainer = [...displayMessage.contentMessage];
-		newContainer.push(fieldObj);
-		setDisplayMessage({
-			...displayMessage,
-			contentMessage: newContainer,
+	function addNewField(field) {
+		let newContentMessage = [...currentMessage.contentMessage];
+		newContentMessage.push(field);
+		setCurrentMessage({
+			...currentMessage,
+			contentMessage: newContentMessage,
 		});
 	}
 
-	function rows(content) {
-		let row = Math.floor(content.contentField.length / 91 + 2);
+	function rows(contentField) {
+		let row = Math.floor(contentField.length / 91 + 2);
 		let counter = 0;
-		for (let val of content.contentField) {
+		for (let val of contentField) {
 			if (val === "\n") {
 				counter++;
 			}
@@ -57,82 +63,57 @@ function EditMessageField(props) {
 		return row;
 	}
 
-	function removeField(event, container, setContainer, index) {
-		const newContainer = { ...container };
+	function removeField(currentMessage, setCurrentMessage, index) {
+		const newCurrentMessage = { ...currentMessage };
 		if (index === 0) {
-			newContainer.contentMessage[index] = { contentField: "", mediaSrc: "" };
-			newContainer.editMode = true;
-			return setContainer(newContainer);
+			newCurrentMessage.contentMessage[index].contentField = "";
+			newCurrentMessage.contentMessage[index].mediaSrc = "";
+		} else {
+			newCurrentMessage.contentMessage.splice(index, 1);
+			newCurrentMessage.editMode = true;
 		}
-		newContainer.contentMessage.splice(index, 1);
-		newContainer.editMode = true;
-		setContainer(newContainer);
+		return setCurrentMessage(newCurrentMessage);
 	}
+
 	return (
 		<div className='add-message-container'>
 			<header className='add-message-container-main-header'>
-				<p onClick={() => props.setOpenMessageName(true)}>
-					{displayMessage.messageName}
+				<p onClick={() => props.setOpenSingleField(true)}>
+					{currentMessage.messageName}
 				</p>
 			</header>
 
-			{displayMessage.contentMessage
-				? displayMessage.contentMessage.map((content, index) => {
-						let row = rows(content);
-						return (
-							<div>
-								<img
-									className='image-url-upload-media'
-									src={content.mediaSrc}
-									alt=''
-								/>
-								<div className='add-message-field'>
-									<textarea
-										onFocus={() => {
-											debugger;
-											props.setCurrentMessage({
-												id: index,
-												...content,
-											});
-										}}
-										id={index}
-										onChange={(event) => {
-											handleInputs(event, index, content);
-										}}
-										value={content.contentField}
-										name=''
-										cols={content.contentField.length + 10 + ""}
-										rows={
-											displayMessage.editMode
-												? Math.floor(
-														content.contentField.length /
-															91 +
-															2
-												  )
-												: row
-										}
-									></textarea>
-									<div
-										onClick={(event) =>
-											removeField(
-												event,
-												displayMessage,
-												setDisplayMessage,
-												index
-											)
-										}
-										className='message-field-trash-icon'
-									>
-										<TrashIcon disabled />
-									</div>
-								</div>
+			{currentMessage.contentMessage.map((message, index) => {
+				let rowLength = rows(message.contentField);
+				let { contentField, mediaSrc } = message;
+				return (
+					<div>
+						<img className='image-url-upload-media' src={mediaSrc} alt='' />
+						<div className='add-message-field'>
+							<textarea
+								id={index}
+								onChange={(event) => handleInputs(event, index, message)}
+								value={contentField}
+								cols={contentField.length + 10 + ""}
+								rows={rowLength}
+								onFocus={() => setCurrentFieldIndex(index)}
+							></textarea>
+							<div
+								onClick={() => {
+									removeField(currentMessage, setCurrentMessage, index);
+								}}
+								className='message-field-trash-icon'
+							>
+								<TrashIcon disabled />
 							</div>
-						);
-				  })
-				: null}
-			{displayMessage.contentMessage.length < 4 && returnField()}
+						</div>
+					</div>
+				);
+			})}
+
+			{currentMessage.contentMessage.length < 4 && returnField()}
 		</div>
 	);
 }
 
-export default EditMessageField;
+export default CurrentMessage;
