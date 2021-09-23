@@ -38,7 +38,8 @@ function LoginPage() {
 						/>
 					</header>
 				</div>
-				<form className='login-page-login-form'
+				<form
+					className='login-page-login-form'
 					onSubmit={async (e) => {
 						e.preventDefault();
 						const response = await fetch("http://localhost:8080/login", {

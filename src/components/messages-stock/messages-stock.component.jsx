@@ -93,6 +93,7 @@ function MessagesStock() {
 	}
 
 	async function saveMessage() {
+		debugger
 		const newMessagesList = [...messagesList];
 		const index = newMessagesList.findIndex((message) => message._id == currentMessage.id);
 		console.log(index);
@@ -136,6 +137,18 @@ function MessagesStock() {
 		return showCurrentMessage ? setShowCurrentMessage(bool) : setCreateNewMessage(bool);
 	}
 
+	function updateCurrentMessage(messageName, messagesInRow, id) {
+		let newCurrentMessage = { messageName: "", contentMessage: [] };
+		newCurrentMessage.messageName = messageName;
+		for (let contentMessage of messagesInRow) {
+			newCurrentMessage.contentMessage.push({ ...contentMessage });
+		}
+		resetState();
+		setShowCurrentMessage(true);
+		newCurrentMessage.id = id;
+		setCurrentMessage(newCurrentMessage);
+	}
+
 	return (
 		<section id='messages-stock'>
 			<div className='messages-stcok-warrper-container'>
@@ -165,10 +178,8 @@ function MessagesStock() {
 									messageName={message.messageName}
 									messageLength={message.contentMessage.length}
 									messagesInRow={message.contentMessage}
-									setCurrentMessage={setCurrentMessage}
-									setShowCurrentMessage={setShowCurrentMessage}
-									resetState={resetState}
 									deleteMessage={deleteMessage}
+									updateCurrentMessage={updateCurrentMessage}
 								/>
 							);
 						})}

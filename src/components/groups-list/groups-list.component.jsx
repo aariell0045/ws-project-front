@@ -70,6 +70,7 @@ function GroupsList() {
 			return groups[1];
 		}
 	}
+	debugger;
 
 	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.userReducer.userId);
@@ -83,7 +84,7 @@ function GroupsList() {
 	}, []);
 
 	useEffect(async () => {
-		if (currentGroup) {
+		if (currentGroup.contacts.length) {
 			const response = await fetch("http://localhost:8080/combine-groups", {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
@@ -98,8 +99,6 @@ function GroupsList() {
 			const data = await response.json();
 			setGroupsList(data.groups);
 		}
-
-		setCurrentGroup({groupName:"", contacts:[], id:""});
 
 		setState({
 			...state,
