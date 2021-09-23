@@ -1,64 +1,38 @@
 import "./send-message-part-1.styles.css";
-import React from "react";
+import React, { useEffect } from "react";
 import MessageBox from "../message-box/message-box.component";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
-const messages = [
-	{
-		id: "1",
-		messageName: "ariel",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-	},
-	{
-		id: "2",
-		messageName: "ariel",
-		contentMessage: [
-			{
-				contentField:
-					"שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!",
-				mediaSrc: "",
-			},
-			{
-				contentField:
-					"שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!",
-				mediaSrc: "",
-			},
-			{
-				contentField:
-					"שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!",
-				mediaSrc: "",
-			},
-			{
-				contentField:
-					"שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!שלום מה קורה אחשלי היקר מכל!!!!!",
-				mediaSrc: "",
-			},
-		],
-	},
-	{
-		id: "3",
-		messageName: "toam",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-	},
-	{
-		id: "4",
-		messageName: "toam",
-		contentMessage: [{ contentField: "שלום מה קורה אחשלי היקר מכל!!!!!", mediaSrc: "" }],
-	},
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrentMessage } from "../index.redux/actions/actions";
 
 function SendMessagePart1() {
-	const [messagesList, setMessageList] = useState(messages);
-	const [displayMessage, setDispalyMessage] = useState(null);
-	const [state, setState] = useState({
-		searchMessages: "",
-	});
+	const [messagesList, setMessagesList] = useState([]);
+	const [currentMessage, setCurrentMessage] = useState({ messageName: "", contentMessage: [] });
+	const [state, setState] = useState({ searchMessages: "" });
+
+	const userId = useSelector((state) => state.userReducer.userId);
+	const dispatch = useDispatch();
+
+	useEffect(async () => {
+		const response = await fetch(`http://localhost:8080/message/${userId}`);
+		const data = await response.json();
+		setMessagesList(data);
+	}, []);
+
 	function handleInputs({ target }) {
 		const { name, value } = target;
 		let currentState = { ...state };
 		currentState[name] = value;
 		setState(currentState);
+	}
+
+	function updateCurrentMessage(messageName, messagesInRow, id) {
+		const newCurrentMessage = { ...currentMessage };
+		newCurrentMessage.messageName = messageName;
+		newCurrentMessage.contentMessage = messagesInRow;
+		newCurrentMessage.id = id;
+		setCurrentMessage(newCurrentMessage);
 	}
 	return (
 		<section id='send-message-part-1'>
@@ -76,93 +50,92 @@ function SendMessagePart1() {
 					/>
 					<div className='send-message-part-1-messages-list'>
 						{state.searchMessages &&
-							messagesList.map((message, index) => {
+							messagesList.map((message) => {
 								if (message.messageName.includes(state.searchMessages)) {
-									let useDisplayMessageState = [
-										displayMessage,
-										setDispalyMessage,
-									];
 									return (
 										<MessageBox
-											key={index}
-											id={message.id}
-											item={[
-												message.messageName,
-												message.contentMessage.length,
-												message.contentMessage,
-											]}
-											useDisplayMessageState={
-												useDisplayMessageState
-											}
+											key={message._id}
+											id={message._id}
+											messageName={message.messageName}
+											messageLength={message.contentMessage.length}
+											messagesInRow={message.contentMessage}
+											deleteMessage={null}
+											updateCurrentMessage={updateCurrentMessage}
+											displayOnly={true}
 										/>
 									);
-								} else {
-									return null;
 								}
+								return null;
 							})}
 						{!state.searchMessages &&
-							messagesList.map((message, index) => {
-								let useDisplayMessageState = [
-									displayMessage,
-									setDispalyMessage,
-								];
-								return (
-									<MessageBox
-										key={index}
-										id={message.id}
-										item={[
-											message.messageName,
-											message.contentMessage.length,
-											message.contentMessage,
-										]}
-										useDisplayMessageState={useDisplayMessageState}
-									/>
-								);
-							})}
+							messagesList.map((message, index) => (
+								<MessageBox
+									key={message._id}
+									id={message._id}
+									messageName={message.messageName}
+									messageLength={message.contentMessage.length}
+									messagesInRow={message.contentMessage}
+									deleteMessage={null}
+									updateCurrentMessage={updateCurrentMessage}
+									displayOnly={true}
+								/>
+							))}
 					</div>
 				</div>
 				<div className='send-message-part-1-left-side'>
 					<div className='send-message-part-1-left-side-background'></div>
-					{displayMessage && (
-						<header className='send-message-part-1-left-side-display-main-header'>
-							<p>{displayMessage.messageName}</p>
-						</header>
-					)}
+					<header className='send-message-part-1-left-side-display-main-header'>
+						<p>{currentMessage.messageName}</p>
+					</header>
 					<div className='send-messages-part-1-left-side-display-messagse-list'>
-						{displayMessage
-							? displayMessage.contentMessage.map((message) => {
-									return (
-										<div
-											style={{
-												width: "fit-content",
-												height: "fit-content",
-											}}
-											id={message.id}
-										>
-											<img
-												className='upload-media'
-												src={message.mediaSrc}
-												alt=''
-											/>
-											<div className='send-messages-part-1-left-side-message-field'>
-												<div contentEditable={false}>
-													<p>{message.contentField}</p>
-												</div>
-											</div>
+						{currentMessage.contentMessage.map((message) => {
+							return (
+								<div
+									style={{
+										maxWidth: "100%",
+										width: "fit-content",
+										height: "fit-content",
+										display: "flex",
+										justifyContent: "flex-start",
+									}}
+									id={message.id}
+								>
+									<img
+										style={{ marginRight: "3vw" }}
+										className='image-url-upload-media'
+										src={message.mediaSrc}
+										alt=''
+									/>
+									<div
+										style={{ minWidth: "15vw" }}
+										className='send-messages-part-1-left-side-message-field'
+									>
+										<div>
+											<p>{message.contentField}</p>
 										</div>
-									);
-							  })
-							: null}
+									</div>
+								</div>
+							);
+						})}
 					</div>
 					<div className='send-message-part-1-left-side-button-warpper'>
 						<Link
-							style={{ cursor: displayMessage && "pointer" }}
-							to={displayMessage ? "/SendMessagePart2" : "/SendMessagePart1"}
+							style={{ cursor: currentMessage && "pointer" }}
+							to={currentMessage ? "/SendMessagePart2" : "/SendMessagePart1"}
 						>
-							<div className='send-message-part-1-left-side-button'>
+							<div
+								onClick={() => {
+									console.log("clicked");
+									dispatch(fetchCurrentMessage(currentMessage));
+								}}
+								className='send-message-part-1-left-side-button'
+							>
 								<div
 									style={{
-										backgroundColor: displayMessage ? "white" : "",
+										backgroundColor: currentMessage.contentMessage
+											.length
+											? "white"
+											: "",
 									}}
 									className='send-message-part-1-left-side-button-background'
 								></div>

@@ -5,30 +5,20 @@ import MediaIcon from "../../icons/icons-components/media-icon/media-icon.compon
 
 function MessageBox(props) {
 	let {
+		updateCurrentMessage,
 		messageName,
 		messageLength,
 		messagesInRow,
 		id,
-		setCurrentMessage,
-		setShowCurrentMessage,
-		resetState,
 		deleteMessage,
+		displayOnly,
 	} = props;
 
-	function updateCurrentMessage() {
-		let newCurrentMessage = { messageName: "", contentMessage: [] };
-		newCurrentMessage.messageName = messageName;
-		for (let contentMessage of messagesInRow) {
-			newCurrentMessage.contentMessage.push({ ...contentMessage });
-		}
-		resetState();
-		setShowCurrentMessage(true);
-		newCurrentMessage.id = id;
-		setCurrentMessage(newCurrentMessage);
-	}
-
 	return (
-		<div onClick={updateCurrentMessage} className='message-box'>
+		<div
+			onClick={() => updateCurrentMessage(messageName, messagesInRow, id)}
+			className='message-box'
+		>
 			<div st className='message-box-background'></div>
 			<header className='message-main-header'>
 				<p className='message-name'>{messageName}</p>
@@ -42,15 +32,17 @@ function MessageBox(props) {
 					<MediaIcon />
 				</span>
 			</div>
-			<span
-				onClick={(event) => {
-					event.stopPropagation();
-					deleteMessage(id);
-				}}
-				className='message-box-trash-icon'
-			>
-				<TrashIcon />
-			</span>
+			{!displayOnly && (
+				<span
+					onClick={(event) => {
+						event.stopPropagation();
+						deleteMessage(id);
+					}}
+					className='message-box-trash-icon'
+				>
+					<TrashIcon />
+				</span>
+			)}
 		</div>
 	);
 }

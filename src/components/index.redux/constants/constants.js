@@ -5,3 +5,8 @@ export const userActionType = {
 export const contactsActionType = {
 	FETCH_CONTACTS_LIST: "FETCH_CONTACTS_LIST",
 };
+
+export const messageToSend = {
+	ADD_CURRENT_MESSAGE: "ADD_CURRENT_MESSAGE",
+	ADD_CURRENT_GROUP: "ADD_CURRENT_GROUP",
+};
