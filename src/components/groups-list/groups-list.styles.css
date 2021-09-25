@@ -97,6 +97,12 @@
 	text-align: right;
 	color: #000000;
 	cursor: pointer;
+	-webkit-transition: background-color 1s ease-out;
+	-moz-transition: background-color 1s ease-out;
+	-o-transition: background-color 1s ease-out;
+	transition: background-color 1s ease-out;
+	transform: scale(1);
+	transition: transform 0.5s;
 }
 
 .groups-page-main-header-merge-groups-button[disabled] {
@@ -108,6 +114,12 @@
 
 .groups-page-main-header-merge-groups-button:hover {
 	background: #ffffff;
+	-webkit-transition: background-color 1s ease-out;
+	-moz-transition: background-color 1s ease-out;
+	-o-transition: background-color 1s ease-out;
+	transition: background-color 1s ease-out;
+	transform: scale(1.1);
+	transition: transform 0.5s;
 }
 
 .groups-page-main-header-add-new-group-button-container {
@@ -124,10 +136,22 @@
 	height: 3vw;
 	width: 3vw;
 	cursor: pointer;
+	-webkit-transition: background-color 1s ease-out;
+	-moz-transition: background-color 1s ease-out;
+	-o-transition: background-color 1s ease-out;
+	transition: background-color 1s ease-out;
+	transform: scale(1);
+	transition: transform 0.5s;
 }
 
 .groups-page-main-header-add-new-group-button:hover {
-	background: #ffffff;
+	background-color: #ffffff;
+	-webkit-transition: background-color 1s ease-out;
+	-moz-transition: background-color 1s ease-out;
+	-o-transition: background-color 1s ease-out;
+	transition: background-color 1s ease-out;
+	transform: scale(1.1);
+	transition: transform 0.5s;
 }
 
 .groups-page-groups-container-header {
@@ -196,6 +220,7 @@
 	align-items: center;
 	overflow-y: scroll;
 	gap: 1vh;
+	padding-top: 1vh;
 }
 
 .groups-page-groups-list::-webkit-scrollbar {
