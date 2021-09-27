@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./add-single-field.styles.css";
 
 function AddSingleField(props) {
-	const { containerNameKey, nextStep } = props;
+	const { containerNameKey, nextStep, setOpenField } = props;
 	const [currentData, setCurrentData] = props.useCurrentData;
 	const [input, setInput] = useState("");
 
 	function saveContainerName(currentData) {
 		const newCurrentData = { ...currentData };
 		newCurrentData[containerNameKey] = input;
+		console.log(newCurrentData);
 		setCurrentData(newCurrentData);
 		nextStep();
 		close();
@@ -19,7 +20,7 @@ function AddSingleField(props) {
 	}
 
 	function close() {
-		props.setOpenField(false);
+		setOpenField(false);
 	}
 
 	return (
