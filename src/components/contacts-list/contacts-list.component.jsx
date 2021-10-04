@@ -19,13 +19,48 @@ function ContactsList() {
 		searchContacts: "",
 	});
 	const [contactProfile, setContactProfile] = useState(null);
+	const [createContact, setCreateContact] = useState(false);
 	const group = useSelector((state) => state.contactReducer.contactsList);
 	const userId = useSelector((state) => state.userReducer.userId);
+	console.log(contactProfile);
 	function handleInputs({ target }) {
 		const { name, value } = target;
 		let currentState = { ...state };
 		currentState[name] = value;
 		setState(currentState);
+	}
+
+	async function editContactProfile(contactId, newContact) {
+		const response = await fetch("http://localhost:8080/edit-group", {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: userId,
+				groupId: group._id,
+				contactId: contactId,
+				newGroupName: group.groupName,
+				newContact: newContact,
+			}),
+		});
+
+		const groups = await response.json();
+		const currentGroup = groups.find((g) => g._id === group._id);
+		setContactsList(currentGroup.contacts);
+	}
+
+	async function addContactToGroup(newContact) {
+		const response = await fetch("http://localhost:8080/contact", {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: userId,
+				groupId: group._id,
+				newContact: newContact,
+			}),
+		});
+
+		const currentGroup = await response.json();
+		setContactsList(currentGroup.contacts);
 	}
 
 	function deleteItem(contactId, container, setContainer) {
@@ -43,6 +78,10 @@ function ContactsList() {
 
 	function viewProfileContact(profileContact, setContainer = setContactProfile) {
 		setContainer(profileContact);
+	}
+	function reset() {
+		setContactProfile(null);
+		setCreateContact(false);
 	}
 
 	useEffect(() => {
@@ -74,7 +113,12 @@ function ContactsList() {
 						/>
 					</div>
 					<div className='contacts-page-main-header-add-new-contact-button-container'>
-						<button className='contacts-page-main-header-add-new-contact-button'>
+						<button
+							onClick={() => {
+								setCreateContact(true);
+							}}
+							className='contacts-page-main-header-add-new-contact-button'
+						>
 							<AddContactIcon />
 						</button>
 					</div>
@@ -119,7 +163,7 @@ function ContactsList() {
 										contact.contactProfile.contactFirstName,
 										contact.contactProfile.contactLastName,
 										contact.phoneNumber,
-										contact.profileContact,
+										contact,
 									]}
 								/>
 							);
@@ -141,13 +185,30 @@ function ContactsList() {
 									contact.contactProfile.contactFirstName,
 									contact.contactProfile.contactLastName,
 									contact.phoneNumber,
-									contact.contactProfile,
+									contact,
 								]}
 							/>
 						);
 					})}
 			</div>
-			{contactProfile && <ContactProfile contactProfile={contactProfile} />}
+			{contactProfile && (
+				<ContactProfile
+					reset={reset}
+					contact={contactProfile}
+					setContactsList={setContactsList}
+					contactsList={contactsList}
+					editGroup={editContactProfile}
+				/>
+			)}
+			{createContact && (
+				<ContactProfile
+					reset={reset}
+					contact={{}}
+					setContactsList={setContactsList}
+					contactsList={contactsList}
+					editGroup={addContactToGroup}
+				/>
+			)}
 		</section>
 	);
 }

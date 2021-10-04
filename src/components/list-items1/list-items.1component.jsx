@@ -49,7 +49,16 @@ function ListItems(props) {
 			<div className='list-items-details-container'>
 				<div className='list-items-first-row'>{firstCoulmn}</div>
 				<div className='list-items-second-row'>{secondCoulmn}</div>
-				<div className='list-items-third-row'>{thirdCoulmn}</div>
+				<div
+					style={{
+						direction: thirdCoulmn.includes("+") ? "ltr" : "rtl",
+						marginRight: thirdCoulmn.includes("+") ? "-24vw" : "rtl",
+						marginLeft: thirdCoulmn.includes("+") ? "16vw" : "rtl",
+					}}
+					className='list-items-third-row'
+				>
+					{thirdCoulmn}
+				</div>
 			</div>
 			<div className='list-items-icons'>
 				<span className='list-items-display-icon'>
