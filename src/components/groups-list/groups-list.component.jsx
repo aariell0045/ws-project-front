@@ -83,13 +83,13 @@ function GroupsList() {
 		setGroupsList(newGroups);
 	}, []);
 
-	useEffect(async () => {
+	async function combineGroups(groupName) {
 		const response = await fetch("http://localhost:8080/combine-groups", {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				userId: userId,
-				groupName: currentGroup.groupName,
+				groupName: groupName,
 				groupA: returnCurrentGroups("groupA"),
 				groupB: returnCurrentGroups("groupB"),
 			}),
@@ -102,7 +102,7 @@ function GroupsList() {
 			...state,
 			isCombineGroups: false,
 		});
-	}, [currentGroup]);
+	}
 
 	function handleInputs({ target }) {
 		const { name, value } = target;
@@ -127,12 +127,14 @@ function GroupsList() {
 		dispatch(fetchContactsList(groupOfContacts));
 	}
 
-	function nextStep() {
+	function nextStep(groupName) {
+		console.log(groupName);
 		let bool = false;
 		setState({
 			...state,
 			isCombineGroups: bool,
 		});
+		combineGroups(groupName);
 	}
 
 	return (
@@ -178,7 +180,7 @@ function GroupsList() {
 					</div>
 					<div className='groups-page-main-header-add-new-group-button-container'>
 						<Link to='/AddGroup'>
-							<div className='groups-page-main-header-add-new-group-button' >
+							<div className='groups-page-main-header-add-new-group-button'>
 								<NewGroupIcon />
 							</div>
 						</Link>
@@ -248,6 +250,7 @@ function GroupsList() {
 					useCurrentData={[currentGroup, setCurrentGroup]}
 					containerNameKey={"groupName"}
 					fieldsNames={"שם הקבוצה החדשה:"}
+					isCombineGroups={true}
 				/>
 			)}
 			{state.isCombineGroups && (

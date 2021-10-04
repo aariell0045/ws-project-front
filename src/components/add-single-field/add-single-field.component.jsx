@@ -11,7 +11,7 @@ function AddSingleField(props) {
 		newCurrentData[containerNameKey] = input;
 		console.log(newCurrentData);
 		setCurrentData(newCurrentData);
-		nextStep();
+		props.isCombineGroups ? nextStep(input) : nextStep();
 		close();
 	}
 	function handleInputs(event) {
