@@ -1,7 +1,6 @@
 import "./contact-box.styls.css";
 function ContactBox(props) {
 	let { phoneNumber, contactProfile } = props;
-	console.log(contactProfile);
 	return (
 		<div className='contact-container'>
 			<div className='contact-firstname-box'>

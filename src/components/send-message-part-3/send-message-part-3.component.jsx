@@ -10,8 +10,6 @@ function SendMessagePart3() {
 	const currentGroup = useSelector((state) => state.messageToSendReducer.currentGroup);
 	const currentMessage = useSelector((state) => state.messageToSendReducer.currentMessage);
 
-	console.log("currentGroup:", currentGroup);
-	console.log("currentMessage:", currentMessage);
 
 	return (
 		<section id='send-message-part3'>
@@ -26,7 +24,6 @@ function SendMessagePart3() {
 				</header>
 				<div className='content-phone-box'>
 					{currentMessage.contentMessage.map((message) => {
-						console.log(message);
 						return (
 							<div
 								style={{

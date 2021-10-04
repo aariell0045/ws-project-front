@@ -74,7 +74,7 @@ function ListItems(props) {
 					title='delete'
 					className='list-items-trash-icon'
 				>
-					<TrashIcon disabled={state.disabled} />
+					<TrashIcon disabled={!state.disabled} />
 				</div>
 			</div>
 			{state.moveToContacts && <Redirect to='/Contacts' />}

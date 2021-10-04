@@ -125,7 +125,6 @@ function SendMessagePart1() {
 						>
 							<div
 								onClick={() => {
-									console.log("clicked");
 									dispatch(fetchCurrentMessage(currentMessage));
 								}}
 								className='send-message-part-1-left-side-button'

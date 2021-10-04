@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import NewGroupIcon from "../../icons/icons-components/new-group-component/new-group-icon-.component";
 import AddSingleField from "../add-single-field/add-single-field.component";
 import { fetchContactsList } from "../index.redux/actions/actions";
 import ListItems from "../list-items1/list-items.1component";
@@ -95,7 +96,6 @@ function GroupsList() {
 		});
 
 		const data = await response.json();
-		console.log(data.groups);
 		setGroupsList(data.groups);
 
 		setState({
@@ -178,9 +178,9 @@ function GroupsList() {
 					</div>
 					<div className='groups-page-main-header-add-new-group-button-container'>
 						<Link to='/AddGroup'>
-							<button className='groups-page-main-header-add-new-group-button'>
-								icon
-							</button>
+							<div className='groups-page-main-header-add-new-group-button' >
+								<NewGroupIcon />
+							</div>
 						</Link>
 					</div>
 				</div>

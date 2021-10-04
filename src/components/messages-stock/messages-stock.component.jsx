@@ -73,14 +73,19 @@ function MessagesStock() {
 	}
 
 	function uploadImage(event) {
+		const reader = new FileReader();
+		const fromData = new FormData();
+
+		debugger;
+
+		reader.readAsDataURL(event.target.files[0]);
 		if (currentMessage) {
-			const media = event.target.files[0];
-			const reader = new FileReader();
-			reader.readAsDataURL(media);
 			reader.onload = () => {
 				if (currentFieldIndex !== -1) {
 					const newContentMessage = [...currentMessage.contentMessage];
-					newContentMessage[currentFieldIndex].mediaSrc += reader.result;
+					fromData.append("media", JSON.stringify(reader.result));
+					console.log(event.target.files[0].path);
+					newContentMessage[currentFieldIndex].mediaSrc = fromData;
 					setCurrentMessage({
 						...currentMessage,
 						contentMessage: newContentMessage,
@@ -93,10 +98,11 @@ function MessagesStock() {
 	}
 
 	async function saveMessage() {
-		debugger
+		debugger;
 		const newMessagesList = [...messagesList];
 		const index = newMessagesList.findIndex((message) => message._id == currentMessage.id);
-		console.log(index);
+
+		console.log(currentMessage.contentMessage);
 		if (index === -1) {
 			const response = await fetch("http://localhost:8080/message", {
 				method: "PUT",
@@ -109,7 +115,6 @@ function MessagesStock() {
 			});
 
 			const newMessage = await response.json();
-			console.log(newMessage);
 
 			newMessagesList.push(newMessage);
 		} else {
@@ -170,7 +175,6 @@ function MessagesStock() {
 
 					<div className='messages-list'>
 						{messagesList.map((message) => {
-							console.log(message);
 							return (
 								<MessageBox
 									key={message._id}
@@ -226,6 +230,7 @@ function MessagesStock() {
 									type='file'
 									id='upload-media'
 									name='upload-media'
+									multiple
 									style={{ display: "none" }}
 								/>
 
