@@ -17,14 +17,12 @@ function SendMessagePart2() {
 
 	const [currentGroup, setCurrentGroup] = useState({ groupName: "", contacts: [], id: "" });
 
-	console.log(currentGroup);
 	const userId = useSelector((state) => state.userReducer.userId);
 	const dispatch = useDispatch();
 
 	useEffect(async () => {
 		const response = await fetch(`http://localhost:8080/groups/${userId}`);
 		const data = await response.json();
-		console.log(data);
 		setGroupsList(data);
 	}, []);
 
@@ -57,7 +55,6 @@ function SendMessagePart2() {
 					<div className='send-message-part-2-right-side-groupsList'>
 						{state.searchGroups &&
 							groupsList.map((group, index) => {
-								console.log(group);
 								if (group.groupName.includes(state.searchGroups)) {
 									return (
 										<div

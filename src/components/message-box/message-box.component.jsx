@@ -14,6 +14,18 @@ function MessageBox(props) {
 		displayOnly,
 	} = props;
 
+	function displayMessageContent(messageContent) {
+		return messageContent.split("").map((char, index) => {
+			if (index === 100) {
+				return "...";
+			}
+			if (index > 100) {
+				return null;
+			}
+			return char;
+		});
+	}
+
 	return (
 		<div
 			onClick={() => updateCurrentMessage(messageName, messagesInRow, id)}
@@ -25,7 +37,7 @@ function MessageBox(props) {
 				<p className='messages-in-a-row'>{messageLength} הודעות ברצף</p>
 			</header>
 			<div className='message-content-first-message-in-row'>
-				{messagesInRow.length && messagesInRow[0].contentField}
+				{messagesInRow.length && displayMessageContent(messagesInRow[0].contentField)}
 			</div>
 			<div className='message-box-footer'>
 				<span className='message-box-media-icon'>

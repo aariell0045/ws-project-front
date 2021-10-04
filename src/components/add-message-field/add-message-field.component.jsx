@@ -86,9 +86,18 @@ function CurrentMessage(props) {
 			{currentMessage.contentMessage.map((message, index) => {
 				let rowLength = rows(message.contentField);
 				let { contentField, mediaSrc } = message;
+				debugger;
+				const newMediaSrc = mediaSrc?.get ? JSON.parse(mediaSrc?.get("media")) : null;
+				console.log(newMediaSrc);
 				return (
 					<div>
-						<img className='image-url-upload-media' src={mediaSrc} alt='' />
+						{mediaSrc && (
+							<img
+								className='image-url-upload-media'
+								src={newMediaSrc}
+								alt=''
+							/>
+						)}
 						<div className='add-message-field'>
 							<textarea
 								id={index}
