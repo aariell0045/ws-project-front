@@ -13,7 +13,7 @@ import SendMessagePart3 from "./components/send-message-part-3/send-message-part
 import HistoryList from "./components/history-list/history-list.component";
 import LoginPage from "./components/login-page/login-page.component";
 import { useSelector } from "react-redux";
-
+import { Redirect } from "react-router-dom";
 function App() {
 	const userId = useSelector((state) => state.userReducer.userId);
 
@@ -22,6 +22,7 @@ function App() {
 			<div id='background'></div>
 			{userId && <div className='sidebar'></div>}
 			{userId && <Sidebar />}
+			{!userId && <Redirect to='/Login' />}
 
 			<Route
 				exact
