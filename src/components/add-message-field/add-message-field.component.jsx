@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PlusIcon from "../../icons/icons-components/plus-icon/plus-icon.component";
 import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
 import "./add-message-field.styles.css";
 function CurrentMessage(props) {
@@ -34,7 +35,10 @@ function CurrentMessage(props) {
 		return (
 			<div className='add-new-field'>
 				<span onClick={() => addNewField({ contentField: "", mediaSrc: "" })}>
-					הוספת תת הודעה{" "}
+					<div style={{ display: "flex", alignItems: "center" }}>
+						<PlusIcon />
+						הוספת תת הודעה
+					</div>
 				</span>
 			</div>
 		);

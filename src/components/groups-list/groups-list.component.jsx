@@ -1,3 +1,4 @@
+import { getByPlaceholderText } from "@testing-library/dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -80,7 +81,7 @@ function GroupsList() {
 		const newGroups = groups.map((group) => {
 			return { ...group, checked: false };
 		});
-		setGroupsList(newGroups);
+		setGroupsList(newGroups.reverse());
 	}, []);
 
 	async function combineGroups(groupName) {

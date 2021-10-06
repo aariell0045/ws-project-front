@@ -85,7 +85,7 @@ function ContactsList() {
 	}
 
 	useEffect(() => {
-		setContactsList(group.contacts);
+		setContactsList(group.contacts.reverse());
 	}, []);
 	return (
 		<section id='contacts-page'>
