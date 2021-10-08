@@ -7,7 +7,38 @@ import PhoneIcon from "../../icons/icons-components/phone-icon/phone-icon.compon
 import * as XLSX from "xlsx";
 import { getByPlaceholderText } from "@testing-library/dom";
 import { useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
+function BasicSelect(props) {
+	const { filterGender, setFilterGender } = props;
+	const handleChange = (event) => {
+		event.stopPropagation();
+		setFilterGender(event.target.value);
+	};
+
+	return (
+		<Box sx={{ minWidth: 120 }}>
+			<FormControl fullWidth>
+				<InputLabel id='demo-simple-select-label'>סננן לפי מגדר</InputLabel>
+				<Select
+					labelId='demo-simple-select-label'
+					id='demo-simple-select'
+					value={filterGender}
+					label='Age'
+					onChange={handleChange}
+				>
+					<MenuItem value={"without-gender"}>ללא מגדר</MenuItem>
+					<MenuItem value={"male"}>זכר</MenuItem>
+					<MenuItem value={"female"}>נקבה</MenuItem>
+				</Select>
+			</FormControl>
+		</Box>
+	);
+}
 
 function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
 	return (
@@ -65,7 +96,6 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
 								onChange={(event) => handleInputs(event)}
 								name='emial'
 								maxLength='1'
-								
 								type='text'
 							/>
 						</div>
@@ -125,6 +155,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
 function AddGroup() {
 	const [uploadFileWith, setUploadFile] = useState("xlsx");
 	const [groupName, setGroupName] = useState("");
+	const [filterGender, setFilterGender] = React.useState("without-gender");
 	const [openPickFields, setOpenPickFields] = useState(false);
 	const [checkFields, setCheckFields] = useState({
 		firstname: false,
@@ -145,7 +176,7 @@ function AddGroup() {
 	});
 
 	console.log(fileProfile);
-	
+
 	const userId = useSelector((state) => state.userReducer.userId);
 
 	function handleInputs(event) {
@@ -182,6 +213,7 @@ function AddGroup() {
 					profile: fileProfile,
 					userId: userId,
 					groupName: groupName,
+					filterGender: filterGender,
 				}),
 			});
 			const fileData = await response.json();
@@ -228,6 +260,12 @@ function AddGroup() {
 						<div>
 							<PhoneIcon />
 						</div>
+					</div>
+					<div className='selector'>
+						<BasicSelect
+							filterGender={filterGender}
+							setFilterGender={setFilterGender}
+						/>
 					</div>
 				</div>
 				{uploadFileWith === "xlsx"

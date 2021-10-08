@@ -138,12 +138,6 @@
 	height: 70%;
 }
 
-.message-stcok-left-side-nav-bar button {
-	background-color: inherit;
-	border: none;
-	cursor: pointer;
-}
-
 .left-side-display-list {
 	width: 100%;
 	height: 70vh;
@@ -256,4 +250,13 @@
 	margin-top: 2vh;
 
 	color: #ffffff;
+}
+
+.message-stock-left-side-nav-bar-save-button {
+	background-color: #fd8c4c;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: 10px;
+	width: 7vw;
+	height: 4vh;
 }

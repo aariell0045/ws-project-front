@@ -247,3 +247,15 @@
 	bottom: 2vh;
 	position: absolute;
 }
+
+.selector {
+	position: absolute;
+	top: 10vh;
+	width: 10vw;
+	left: 30%;
+}
+
+.selector label {
+	z-index: 1;
+	margin-top: 1vh;
+}

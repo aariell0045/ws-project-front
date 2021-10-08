@@ -195,7 +195,12 @@ function MessagesStock() {
 						<button onClick={resetState}>X</button>
 						<button>icon</button>
 						<button>icon</button>
-						<button onClick={saveMessage}>שמור</button>
+						<button
+							className='message-stock-left-side-nav-bar-save-button'
+							onClick={saveMessage}
+						>
+							שמור
+						</button>
 					</nav>
 
 					<div className='left-side-display-list'>
