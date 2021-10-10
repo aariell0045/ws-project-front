@@ -80,6 +80,12 @@ function SendMessagePart2() {
 							groupsList.map((group) => {
 								return (
 									<div
+										style={{
+											backgroundColor:
+												currentGroup._id == group._id
+													? "white"
+													: "",
+										}}
 										onClick={() => {
 											setCurrentGroup({ ...group });
 										}}
@@ -88,6 +94,7 @@ function SendMessagePart2() {
 										<GroupBox
 											key={group._id}
 											id={group._id}
+											currentGroup={currentGroup}
 											groupName={group.groupName}
 											groupAmount={group.amount}
 										/>
@@ -132,9 +139,15 @@ function SendMessagePart2() {
 							</div>
 						</div>
 					)}
-					<Link to={currentGroup && "/SendMessagePart3"}>
+					<Link
+						to={
+							currentGroup.contacts.length
+								? "/SendMessagePart3"
+								: "/SendMessagePart2"
+						}
+					>
 						<div
-							style={{ cursor: currentGroup && "pointer" }}
+							style={{ cursor: currentGroup.contacts.length && "pointer" }}
 							className='send-message-part-2-left-side-button-warpper'
 						>
 							<div
@@ -145,7 +158,7 @@ function SendMessagePart2() {
 							>
 								<div
 									className={
-										currentGroup
+										currentGroup.contacts.length
 											? "send-message-part-2-left-side-button-background-ready"
 											: "send-message-part-2-left-side-button-background"
 									}

@@ -90,7 +90,6 @@ function CurrentMessage(props) {
 			{currentMessage.contentMessage.map((message, index) => {
 				let rowLength = rows(message.contentField);
 				let { contentField, mediaSrc } = message;
-				debugger;
 				const newMediaSrc = mediaSrc?.get ? JSON.parse(mediaSrc?.get("media")) : null;
 				console.log(newMediaSrc);
 				return (

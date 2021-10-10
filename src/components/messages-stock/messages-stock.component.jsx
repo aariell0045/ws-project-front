@@ -10,6 +10,8 @@ import MediaIcon from "../../icons/icons-components/media-icon/media-icon.compon
 import CurrentMessage from "../add-message-field/add-message-field.component";
 import { useSelector } from "react-redux";
 
+const emojiList = ["😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣",];
+
 function MessagesStock() {
 	const [messagesList, setMessagesList] = useState([]);
 	const [currentMessage, setCurrentMessage] = useState({
@@ -21,7 +23,7 @@ function MessagesStock() {
 	const [createNewMessage, setCreateNewMessage] = useState(false);
 	const [showCurrentMessage, setShowCurrentMessage] = useState(false);
 	const [openSingleField, setOpenSingleField] = useState(false);
-
+	const [openEmojiList, setOpenEmojiList] = useState(false);
 	const userId = useSelector((state) => state.userReducer.userId);
 
 	useEffect(async () => {
@@ -76,8 +78,6 @@ function MessagesStock() {
 		const reader = new FileReader();
 		const fromData = new FormData();
 
-		debugger;
-
 		reader.readAsDataURL(event.target.files[0]);
 		if (currentMessage) {
 			reader.onload = () => {
@@ -98,7 +98,6 @@ function MessagesStock() {
 	}
 
 	async function saveMessage() {
-		debugger;
 		const newMessagesList = [...messagesList];
 		const index = newMessagesList.findIndex((message) => message._id == currentMessage.id);
 
@@ -175,6 +174,7 @@ function MessagesStock() {
 
 					<div className='messages-list'>
 						{messagesList.map((message) => {
+							console.log(currentMessage.contentMessage);
 							return (
 								<MessageBox
 									key={message._id}
@@ -184,6 +184,7 @@ function MessagesStock() {
 									messagesInRow={message.contentMessage}
 									deleteMessage={deleteMessage}
 									updateCurrentMessage={updateCurrentMessage}
+									currentMessage={currentMessage}
 								/>
 							);
 						})}
@@ -192,10 +193,11 @@ function MessagesStock() {
 				<div className='messages-stock-left-side'>
 					<div className='messages-stock-left-side-background'></div>
 					<nav className='message-stcok-left-side-nav-bar'>
-						<button onClick={resetState}>X</button>
-						<button>icon</button>
-						<button>icon</button>
+						<div onClick={resetState}>X</div>
+						<div>icon</div>
+						<div>icon</div>
 						<button
+							disabled={showCurrentMessage || createNewMessage ? false : true}
 							className='message-stock-left-side-nav-bar-save-button'
 							onClick={saveMessage}
 						>
@@ -220,6 +222,13 @@ function MessagesStock() {
 						)}
 					</div>
 					<div className='left-side-footer-container'>
+						{openEmojiList && (
+							<div className='emoji-list'>
+								{emojiList.map((emoji) => {
+									return <li>{emoji}</li>;
+								})}
+							</div>
+						)}
 						<div className='left-side-tools-warpper'>
 							<button
 								onClick={() => AddNameTemplate()}
@@ -246,7 +255,12 @@ function MessagesStock() {
 										</div>
 									</label>
 								</div>
-								<button className='left-side-button-5'>icon</button>
+								<button
+									onClick={() => setOpenEmojiList(!openEmojiList)}
+									className='left-side-button-5'
+								>
+									😀
+								</button>
 							</div>
 						</div>
 					</div>
