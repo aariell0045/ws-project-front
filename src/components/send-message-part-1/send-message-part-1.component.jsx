@@ -78,6 +78,7 @@ function SendMessagePart1() {
 									deleteMessage={null}
 									updateCurrentMessage={updateCurrentMessage}
 									displayOnly={true}
+									currentMessage={currentMessage}
 								/>
 							))}
 					</div>
@@ -100,12 +101,6 @@ function SendMessagePart1() {
 									}}
 									id={message.id}
 								>
-									<img
-										style={{ marginRight: "3vw" }}
-										className='image-url-upload-media'
-										src={message.mediaSrc}
-										alt=''
-									/>
 									<div
 										style={{ minWidth: "15vw" }}
 										className='send-messages-part-1-left-side-message-field'
@@ -121,7 +116,11 @@ function SendMessagePart1() {
 					<div className='send-message-part-1-left-side-button-warpper'>
 						<Link
 							style={{ cursor: currentMessage && "pointer" }}
-							to={currentMessage ? "/SendMessagePart2" : "/SendMessagePart1"}
+							to={
+								currentMessage.contentMessage.length
+									? "/SendMessagePart2"
+									: "/SendMessagePart1"
+							}
 						>
 							<div
 								onClick={() => {

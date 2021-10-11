@@ -260,3 +260,27 @@
 	width: 7vw;
 	height: 4vh;
 }
+
+.message-stock-left-side-nav-bar-save-button[disabled] {
+	background-color: #ffc9a9;
+}
+
+.emoji-list {
+	position: absolute;
+	left: 5vw;
+	display: flex;
+	list-style: none;
+	flex-wrap: wrap;
+	width: 20vw;
+	background-color: white;
+	justify-content: center;
+	align-items: center;
+	height: fit-content;
+	padding: 1em;
+	margin-top: -19vh;
+}
+
+.emoji-list li {
+	cursor: pointer;
+	font-size: 1.25em;
+}

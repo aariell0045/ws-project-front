@@ -12,6 +12,7 @@ function MessageBox(props) {
 		id,
 		deleteMessage,
 		displayOnly,
+		currentMessage,
 	} = props;
 
 	function displayMessageContent(messageContent) {
@@ -28,10 +29,15 @@ function MessageBox(props) {
 
 	return (
 		<div
-			onClick={() => updateCurrentMessage(messageName, messagesInRow, id)}
+			onClick={(event) => {
+				updateCurrentMessage(messageName, messagesInRow, id);
+			}}
 			className='message-box'
 		>
-			<div st className='message-box-background'></div>
+			<div
+				style={{ backgroundColor: currentMessage.id == id ? "white" : "" }}
+				className='message-box-background'
+			></div>
 			<header className='message-main-header'>
 				<p className='message-name'>{messageName}</p>
 				<p className='messages-in-a-row'>{messageLength} הודעות ברצף</p>
@@ -52,7 +58,7 @@ function MessageBox(props) {
 					}}
 					className='message-box-trash-icon'
 				>
-					<TrashIcon />
+					<TrashIcon disabled={currentMessage.id == id ? false : true} />
 				</span>
 			)}
 		</div>
