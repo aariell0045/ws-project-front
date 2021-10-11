@@ -9,8 +9,64 @@ import CreateMessage from "../create-message-filed/create-message-field.componen
 import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
 import CurrentMessage from "../add-message-field/add-message-field.component";
 import { useSelector } from "react-redux";
+// const reader = new FileReader();
+// const fromData = new FormData();
 
-const emojiList = ["😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣","😀", "😃", "😄", "😁","😅", "🤣",];
+// reader.readAsDataURL(event.target.files[0]);
+// if (currentMessage) {
+// 	reader.onload = () => {
+// 		if (currentFieldIndex !== -1) {
+// 			const newContentMessage = [...currentMessage.contentMessage];
+// 			fromData.append("media", JSON.stringify(reader.result));
+// 			console.log(event.target.files[0].path);
+// 			newContentMessage[currentFieldIndex].mediaSrc = fromData;
+// 			setCurrentMessage({
+// 				...currentMessage,
+// 				contentMessage: newContentMessage,
+// 			});
+// 		}
+// 	};
+// } else {
+// 	alert("please focus on the field");
+// }
+const emojiList = [
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+	"😀",
+	"😃",
+	"😄",
+	"😁",
+	"😅",
+	"🤣",
+];
 
 function MessagesStock() {
 	const [messagesList, setMessagesList] = useState([]);
@@ -74,24 +130,28 @@ function MessagesStock() {
 		}
 	}
 
-	function uploadImage(event) {
-		const reader = new FileReader();
+	async function uploadImage(files) {
 		const fromData = new FormData();
+		fromData.append("file", files[0]);
+		fromData.append("upload_preset", "p5tka4xo");
 
-		reader.readAsDataURL(event.target.files[0]);
+		const response = await fetch("https://api.cloudinary.com/v1_1/dz7i3o5mo/image/upload", {
+			method: "POST",
+			body: fromData,
+		});
+
+		const data = await response.json();
+		console.log(data);
 		if (currentMessage) {
-			reader.onload = () => {
-				if (currentFieldIndex !== -1) {
-					const newContentMessage = [...currentMessage.contentMessage];
-					fromData.append("media", JSON.stringify(reader.result));
-					console.log(event.target.files[0].path);
-					newContentMessage[currentFieldIndex].mediaSrc = fromData;
-					setCurrentMessage({
-						...currentMessage,
-						contentMessage: newContentMessage,
-					});
-				}
-			};
+			if (currentFieldIndex !== -1) {
+				const newContentMessage = [...currentMessage.contentMessage];
+
+				newContentMessage[currentFieldIndex].mediaSrc = data.url;
+				setCurrentMessage({
+					...currentMessage,
+					contentMessage: newContentMessage,
+				});
+			}
 		} else {
 			alert("please focus on the field");
 		}
@@ -240,7 +300,7 @@ function MessagesStock() {
 								<button className='left-side-button-3'>/</button>
 								<button className='left-side-button-2'>B</button>
 								<input
-									onChange={(event) => uploadImage(event)}
+									onChange={(event) => uploadImage(event.target.files)}
 									type='file'
 									id='upload-media'
 									name='upload-media'

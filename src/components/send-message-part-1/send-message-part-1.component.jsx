@@ -97,10 +97,22 @@ function SendMessagePart1() {
 										width: "fit-content",
 										height: "fit-content",
 										display: "flex",
-										justifyContent: "flex-start",
+										flexDirection: "column",
+										alignItems: "flex-start",
 									}}
 									id={message.id}
 								>
+									{message.mediaSrc && (
+										<img
+											style={{
+												marginBottom: "1vh",
+												marginRight: "3vw",
+											}}
+											className='image-url-upload-media'
+											src={message.mediaSrc}
+											alt=''
+										/>
+									)}
 									<div
 										style={{ minWidth: "15vw" }}
 										className='send-messages-part-1-left-side-message-field'
