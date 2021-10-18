@@ -5,11 +5,22 @@ import { Link } from "react-router-dom";
 import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 import { useSelector } from "react-redux";
 import DisplayPhone from "../../icons/icons-components/display-phone/display-phone.component";
+const { ipcRenderer } = window.require("electron");
+
+const elementsSelectores = {
+	whatsappPage: "app",
+	contentInput: "",
+	sidebarInput: "",
+	openMediaOptions: "span[data-icon='clip']",
+	sandClock: "span[data-icon='msg-time']",
+	inputFile: "input[type='file']",
+	sendButton: "",
+	sendButtonWidthMedia: "",
+};
 
 function SendMessagePart3() {
 	const currentGroup = useSelector((state) => state.messageToSendReducer.currentGroup);
 	const currentMessage = useSelector((state) => state.messageToSendReducer.currentMessage);
-
 
 	return (
 		<section id='send-message-part3'>
@@ -92,7 +103,17 @@ function SendMessagePart3() {
 			</div>
 			<div className='send-message-part3-warpper'>
 				<div className='send-message-part-3-button-warpper'>
-					<div className='send-message-part-3-button'>
+					<div
+						onClick={() => {
+							console.log("hello");
+							ipcRenderer.send("start", {
+								elementsSelectores,
+								currentMessage,
+								currentGroup,
+							});
+						}}
+						className='send-message-part-3-button'
+					>
 						<div className='send-message-part-3-button-background'></div>
 						לשליחה דרך
 					</div>
