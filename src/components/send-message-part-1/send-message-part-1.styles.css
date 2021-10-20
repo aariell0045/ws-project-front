@@ -158,6 +158,7 @@
 	padding: 2vh 1vw;
 	padding-bottom: 5vh;
 	margin-right: 3vw;
+	white-space: pre-wrap;
 }
 
 .send-messages-part-1-left-side-message-field p {
