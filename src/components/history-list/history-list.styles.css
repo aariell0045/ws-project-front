@@ -87,7 +87,7 @@
   cursor: pointer;
 }
 
-.history-page-list-item:hover{
+.history-page-list-item:hover {
   background: #ffffff;
 }
 
@@ -103,17 +103,17 @@
 }
 
 .history-page-content-message-name {
-	font-family: Assistant;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 1.3vw;
-	line-height: 33px;
-	/* identical to box height */
-  
-	text-align: right;
-  
-	color: #000000;
-  }
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.3vw;
+  line-height: 33px;
+  /* identical to box height */
+
+  text-align: right;
+
+  color: #000000;
+}
 .history-page-content {
   font-family: Assistant;
   font-style: normal;
@@ -158,17 +158,16 @@
 }
 
 .history-page-content-header {
-	font-family: Assistant;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 1.2vw;
-	line-height: 33px;
-	/* identical to box height */
-	
-	text-align: right;
-	
-	color: #FFFFFF;
-	
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2vw;
+  line-height: 33px;
+  /* identical to box height */
+
+  text-align: right;
+
+  color: #ffffff;
 }
 
 .history-page-icon-header {
@@ -187,7 +186,7 @@
 .history-page-list-open-item-icon {
   position: absolute;
   left: 2vw;
-  height: 60%;
+  height: 3.5vh;
   display: flex;
   align-items: center;
   padding-top: 1.8vh;

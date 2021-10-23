@@ -1,5 +1,5 @@
 import "./send-message-part-3.styles.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
@@ -16,6 +16,7 @@ function SendMessagePart3() {
   const currentMessage = useSelector(
     (state) => state.messageToSendReducer.currentMessage
   );
+  console.log(currentMessage);
   const userId = useSelector((state) => state.userReducer.userId);
 
   const elementsSelectores = {
