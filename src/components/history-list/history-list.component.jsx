@@ -26,7 +26,6 @@ function HistoryList() {
   useEffect(async () => {
     const response = await fetch(`http://localhost:8080/history/${userId}`);
     const history = await response.json();
-    console.log(history);
     setHistoryList(history);
   }, []);
 
