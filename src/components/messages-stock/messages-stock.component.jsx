@@ -9,6 +9,7 @@ import CreateMessage from "../create-message-filed/create-message-field.componen
 import MediaIcon from "../../icons/icons-components/media-icon/media-icon.component";
 import CurrentMessage from "../add-message-field/add-message-field.component";
 import { useSelector } from "react-redux";
+const { ipcRenderer } = window.require("electron");
 // const reader = new FileReader();
 // const fromData = new FormData();
 
@@ -142,34 +143,39 @@ function MessagesStock() {
     }
   }
 
-  async function uploadImage(files) {
-    const fromData = new FormData();
-    fromData.append("file", files[0]);
-    fromData.append("upload_preset", "p5tka4xo");
+  async function uploadImage(event) {
+    const fullPath = event.target.files[0].path;
+    const fileReader = new FileReader();
+    const httpData = fileReader.readAsDataURL(fullPath);
+    console.log(httpData);
 
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/dz7i3o5mo/image/upload",
-      {
-        method: "POST",
-        body: fromData,
-      }
-    );
+    // const fromData = new FormData();
+    // fromData.append("file", files[0]);
+    // fromData.append("upload_preset", "p5tka4xo");
 
-    const data = await response.json();
-    console.log(data);
-    if (currentMessage) {
-      if (currentFieldIndex !== -1) {
-        const newContentMessage = [...currentMessage.contentMessage];
+    // const response = await fetch(
+    //   "https://api.cloudinary.com/v1_1/dz7i3o5mo/image/upload",
+    //   {
+    //     method: "POST",
+    //     body: fromData,
+    //   }
+    // );
 
-        newContentMessage[currentFieldIndex].mediaSrc = data.url;
-        setCurrentMessage({
-          ...currentMessage,
-          contentMessage: newContentMessage,
-        });
-      }
-    } else {
-      alert("please focus on the field");
-    }
+    // const data = await response.json();
+    // console.log(data);
+    // if (currentMessage) {
+    //   if (currentFieldIndex !== -1) {
+    //     const newContentMessage = [...currentMessage.contentMessage];
+
+    //     newContentMessage[currentFieldIndex].mediaSrc = data.url;
+    //     setCurrentMessage({
+    //       ...currentMessage,
+    //       contentMessage: newContentMessage,
+    //     });
+    //   }
+    // } else {
+    //   alert("please focus on the field");
+    // }
   }
 
   async function saveMessage() {
@@ -354,7 +360,7 @@ function MessagesStock() {
                 <button className="left-side-button-3">/</button>
                 <button className="left-side-button-2">B</button>
                 <input
-                  onChange={(event) => uploadImage(event.target.files)}
+                  onChange={(event) => uploadImage(event)}
                   type="file"
                   id="upload-media"
                   name="upload-media"

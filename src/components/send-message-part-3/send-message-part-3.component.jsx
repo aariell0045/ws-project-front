@@ -6,10 +6,16 @@ import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.compo
 import { useSelector } from "react-redux";
 import DisplayPhone from "../../icons/icons-components/display-phone/display-phone.component";
 
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+
 const { ipcRenderer } = window.require("electron");
 
 function SendMessagePart3() {
   const [starterIndex, setStarterIndex] = useState(0);
+  const [currentMessageFromState, setCurrentMessageFromState] = useState(null);
   const currentGroup = useSelector(
     (state) => state.messageToSendReducer.currentGroup
   );
@@ -19,20 +25,40 @@ function SendMessagePart3() {
   console.log(currentMessage);
   const userId = useSelector((state) => state.userReducer.userId);
 
+  useEffect(() => {
+    setCurrentMessageFromState(currentMessage);
+  }, []);
+
   const elementsSelectores = {
     caps: { setPageLoadStrategy: "eager", setAlertBehavior: "accept" },
     forBrowser: "chrome",
     whatsappSideBar: "side",
-    contentInput: "",
-    sidebarInput: "",
-    openMediaOptions: "span[data-icon='clip']",
-    sandClock: "span[data-icon='msg-time']",
+    messageInput: "_13NKt",
+    openMediaSpan: "span[data-icon='clip']",
     inputFile: "input[type='file']",
-    sendButton: "",
-    sendButtonWidthMedia: "",
+    sendButtonWidthMedia: "_165_h",
+    sendButton: "_4sWnG",
+    contactBox:"_2_TVt",
+    contactMenu:"_2oldI",
+    sendedToArcive:"_3ya1x",
+    sandClock: "span[data-icon='msg-time']",
     userId: userId,
     starterIndex: starterIndex,
   };
+
+  function uploadMedia(event, index) {
+    const newMessage = { ...currentMessageFromState };
+    newMessage.contentMessage[index].mediaSrc = event.target.files[0].path;
+    setCurrentMessageFromState(newMessage);
+    console.log(index);
+  }
+
+  function restImage(index) {
+    const newMessage = { ...currentMessageFromState };
+    newMessage.contentMessage[index].mediaSrc = "";
+    console.log(newMessage);
+    setCurrentMessageFromState(newMessage);
+  }
 
   return (
     <section id="send-message-part3">
@@ -46,21 +72,66 @@ function SendMessagePart3() {
           <p>כל הפרטים לפני ששולחים:</p>
         </header>
         <div className="content-phone-box">
-          {currentMessage.contentMessage.map((message) => {
+          {currentMessage.contentMessage.map((message, index) => {
+            console.log(index);
             return (
               <div
+                key={index}
                 style={{
                   width: "fit-content",
                   height: "fit-content",
                 }}
                 id={message.id}
               >
-                <img
-                  style={{ marginRight: "3vw" }}
-                  className="image-url-upload-media"
-                  src={message.mediaSrc}
-                  alt=""
-                />
+                <picture>
+                  {message.mediaSrc && (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1vw",
+                        padding: "1vw",
+                      }}
+                    >
+                      <FontAwesomeIcon size="2x" icon={faCheckCircle} />
+                      <span>התמונה עלתה בהצלחה</span>
+                      <span
+                        onClick={() => {
+                          restImage(index);
+                        }}
+                      >
+                        X
+                      </span>
+                    </div>
+                  )}
+                  {!message.mediaSrc && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginBottom: "2em",
+                      }}
+                    >
+                      <input
+                        accept=".jpg, .png, .gif, .svg, .jpeg, .mp4, .mov, .wmv, .flv, .avi, .avchd, .mkv, .webm,"
+                        style={{ display: "none" }}
+                        type="file"
+                        name={index + ""}
+                        id={index + ""}
+                        onChange={(event) => {
+                          uploadMedia(event, index);
+                        }}
+                      />
+                      <label style={{ zIndex: 1 }} htmlFor={index + ""}>
+                        <Button style={{ zIndex: -1 }} variant="contained">
+                          העלאת קובץ
+                        </Button>
+                      </label>
+                    </div>
+                  )}
+                </picture>
+
                 <div
                   style={{ minWidth: "15vw" }}
                   className="send-messages-part-1-left-side-message-field"
@@ -134,7 +205,7 @@ function SendMessagePart3() {
               console.log("hello");
               ipcRenderer.send("start", {
                 elementsSelectores,
-                currentMessage,
+                currentMessage: currentMessageFromState,
                 currentGroup,
               });
             }}
