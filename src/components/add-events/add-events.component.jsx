@@ -1,15 +1,17 @@
 import "./add-events.styles.css";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 function AddEvents(props) {
-  const { tasksDetails } = props;
+  const { tasksDetails, isEvents, isTasks } = props;
   const [state, setState] = useState({
     taskName: "",
-    taskDescription: "",
+    taskContent: "",
     taskColor: "",
     colorBar: true,
   });
 
+  const userId = useSelector((state) => state.userReducer.userId);
   const COLORS = {
     RED: {
       color: "#FD4C4C",
@@ -49,11 +51,57 @@ function AddEvents(props) {
     setState(currentState);
   }
 
-  function addTask(taskDetails) {
+  async function addTask(taskDetails) {
     const [tasks, setTasks] = [...props.useTasks];
-    let currentTasksState = [...tasks];
-    currentTasksState.push({ ...taskDetails });
-    setTasks(currentTasksState);
+    console.log(isTasks);
+    console.log(isEvents);
+    if (props.windowKey === "openAddTaskWindow") {
+      const response = await fetch("http://localhost:8080/task", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          taskName: taskDetails.taskName,
+          taskColor: taskDetails.taskColor,
+          taskContent: taskDetails.taskContent,
+          userId: userId,
+        }),
+      });
+      const data = await response.json();
+      console.log("data:", data);
+      const newTask = {
+        ...data,
+        isOpen: false,
+      };
+      let currentTasksState = [...tasks];
+      currentTasksState.push({ ...newTask });
+      setTasks(currentTasksState);
+    }
+    console.log(taskDetails);
+    if (props.windowKey === "openAddEventWindow") {
+      const response = await fetch("http://localhost:8080/event", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName: taskDetails.taskName,
+          eventColor: taskDetails.taskColor,
+          eventContent: taskDetails.taskContent,
+          userId: userId,
+        }),
+      });
+      const data = await response.json();
+      console.log("data:", data);
+      const newTask = {
+        ...{
+          taskName: data.eventName,
+          taskColor: data.eventColor,
+          taskContent: data.eventContent,
+        },
+        isOpen: false,
+      };
+      let currentTasksState = [...tasks];
+      currentTasksState.push({ ...newTask });
+      setTasks(currentTasksState);
+    }
   }
 
   function handleInputs({ target }) {
@@ -92,7 +140,7 @@ function AddEvents(props) {
           <p>תיאור:</p>
           <textarea
             onChange={(event) => handleInputs(event)}
-            name="taskDescription"
+            name="taskContent"
             className="add-events-content"
             id=""
             rows="3"
@@ -141,7 +189,7 @@ function AddEvents(props) {
           onClick={() => {
             addTask({
               taskName: state.taskName,
-              taskDescription: state.taskDescription,
+              taskContent: state.taskContent,
               taskColor: state.taskColor,
               isOpen: false,
             });
