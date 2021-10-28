@@ -14,93 +14,101 @@ import HistoryList from "./components/history-list/history-list.component";
 import LoginPage from "./components/login-page/login-page.component";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import UserProfile from "./components/user-profile/user-profile.component";
 function App() {
-	const userId = useSelector((state) => state.userReducer.userId);
+  const userId = useSelector((state) => state.userReducer.userId);
 
-	return (
-		<div className='App'>
-			<div id='background'></div>
-			{userId && <div className='sidebar'></div>}
-			{userId && <Sidebar />}
-			{!userId && <Redirect to='/Login' />}
+  return (
+    <div className="App">
+      <div id="background"></div>
+      {userId && <div className="sidebar"></div>}
+      {userId && <Sidebar />}
+      {!userId && <Redirect to="/Login" />}
 
-			<Route
-				exact
-				path='/Login'
-				render={() => {
-					return <LoginPage />;
-				}}
-			/>
+      <Route
+        exact
+        path="/Login"
+        render={() => {
+          return <LoginPage />;
+        }}
+      />
 
-			<Route
-				exact
-				path='/Home'
-				render={() => {
-					return <Home />;
-				}}
-			/>
-			<Route
-				exact
-				path='/Groups'
-				render={() => {
-					return <GroupsList />;
-				}}
-			/>
+      <Route
+        exact
+        path="/Home"
+        render={() => {
+          return <Home />;
+        }}
+      />
+      <Route
+        exact
+        path="/Groups"
+        render={() => {
+          return <GroupsList />;
+        }}
+      />
 
-			<Route
-				exact
-				path='/Contacts'
-				render={() => {
-					return <ContactsList />;
-				}}
-			/>
+      <Route
+        exact
+        path="/Contacts"
+        render={() => {
+          return <ContactsList />;
+        }}
+      />
 
-			<Route
-				exact
-				path='/AddGroup'
-				render={() => {
-					return <AddGroup />;
-				}}
-			/>
-			<Route
-				exact
-				path='/MessagesStock'
-				render={() => {
-					return <MessagesStock />;
-				}}
-			/>
+      <Route
+        exact
+        path="/AddGroup"
+        render={() => {
+          return <AddGroup />;
+        }}
+      />
+      <Route
+        exact
+        path="/MessagesStock"
+        render={() => {
+          return <MessagesStock />;
+        }}
+      />
 
-			<Route
-				exact
-				path='/SendMessagePart2'
-				render={() => {
-					return <SendMessagePart2 />;
-				}}
-			/>
+      <Route
+        exact
+        path="/SendMessagePart2"
+        render={() => {
+          return <SendMessagePart2 />;
+        }}
+      />
 
-			<Route
-				exact
-				path='/SendMessagePart1'
-				render={() => {
-					return <SendMessagePart1 />;
-				}}
-			/>
-			<Route
-				exact
-				path='/SendMessagePart3'
-				render={() => {
-					return <SendMessagePart3 />;
-				}}
-			/>
-			<Route
-				exact
-				path='/HistoryList'
-				render={() => {
-					return <HistoryList />;
-				}}
-			/>
-		</div>
-	);
+      <Route
+        exact
+        path="/SendMessagePart1"
+        render={() => {
+          return <SendMessagePart1 />;
+        }}
+      />
+      <Route
+        exact
+        path="/SendMessagePart3"
+        render={() => {
+          return <SendMessagePart3 />;
+        }}
+      />
+      <Route
+        exact
+        path="/HistoryList"
+        render={() => {
+          return <HistoryList />;
+        }}
+      />
+      <Route
+        exact
+        path="/UserProfile"
+        render={() => {
+          return <UserProfile />;
+        }}
+      />
+    </div>
+  );
 }
 
 export default App;
