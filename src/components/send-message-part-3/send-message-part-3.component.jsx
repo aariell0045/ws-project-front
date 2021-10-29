@@ -1,12 +1,9 @@
 import "./send-message-part-3.styles.css";
 import React, { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 import { useSelector } from "react-redux";
 import DisplayPhone from "../../icons/icons-components/display-phone/display-phone.component";
-
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +12,7 @@ const { ipcRenderer } = window.require("electron");
 
 function SendMessagePart3() {
   const [starterIndex, setStarterIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(0);
   const [currentMessageFromState, setCurrentMessageFromState] = useState(null);
   const currentGroup = useSelector(
     (state) => state.messageToSendReducer.currentGroup
@@ -22,11 +20,12 @@ function SendMessagePart3() {
   const currentMessage = useSelector(
     (state) => state.messageToSendReducer.currentMessage
   );
-  console.log(currentMessage);
   const userId = useSelector((state) => state.userReducer.userId);
-
   useEffect(() => {
     setCurrentMessageFromState(currentMessage);
+    setEndIndex(currentGroup.contacts.length);
+    setStarterIndex(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const elementsSelectores = {
@@ -38,25 +37,24 @@ function SendMessagePart3() {
     inputFile: "input[type='file']",
     sendButtonWidthMedia: "_165_h",
     sendButton: "_4sWnG",
-    contactBox:"_2_TVt",
-    contactMenu:"_2oldI",
-    sendedToArcive:"_3ya1x",
+    contactBox: "_2_TVt",
+    contactMenu: "_2oldI",
+    sendedToArcive: "_3ya1x",
     sandClock: "span[data-icon='msg-time']",
     userId: userId,
-    starterIndex: starterIndex,
+    starterIndex: +starterIndex <= 0 ? 0 : +starterIndex - 1,
+    endIndex: +endIndex <= 0 ? 0 : +endIndex,
   };
 
   function uploadMedia(event, index) {
     const newMessage = { ...currentMessageFromState };
     newMessage.contentMessage[index].mediaSrc = event.target.files[0].path;
     setCurrentMessageFromState(newMessage);
-    console.log(index);
   }
 
   function restImage(index) {
     const newMessage = { ...currentMessageFromState };
     newMessage.contentMessage[index].mediaSrc = "";
-    console.log(newMessage);
     setCurrentMessageFromState(newMessage);
   }
 
@@ -73,7 +71,6 @@ function SendMessagePart3() {
         </header>
         <div className="content-phone-box">
           {currentMessage.contentMessage.map((message, index) => {
-            console.log(index);
             return (
               <div
                 key={index}
@@ -185,13 +182,25 @@ function SendMessagePart3() {
         </div>
         <div className="starter-index-container">
           <br />
-          <p>מאיפה תרצה להתחיל את ההרצה</p>
+          <p>איפה תרצה להתחיל את ההרצה</p>
           <input
             onChange={(event) => {
               setStarterIndex(event.target.value);
             }}
             placeholder=""
-            defaultValue="0"
+            defaultValue="1"
+            type="number"
+            name=""
+            id=""
+          />
+          <br />
+          <p>איפה תרצה לסיים את ההרצה</p>
+          <input
+            onChange={(event) => {
+              setEndIndex(event.target.value);
+            }}
+            placeholder=""
+            defaultValue={`${currentGroup.contacts.length}`}
             type="number"
             name=""
             id=""
@@ -202,7 +211,6 @@ function SendMessagePart3() {
         <div className="send-message-part-3-button-warpper">
           <div
             onClick={() => {
-              console.log("hello");
               ipcRenderer.send("start", {
                 elementsSelectores,
                 currentMessage: currentMessageFromState,
