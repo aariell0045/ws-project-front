@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CsvIcon from "../../icons/regular-icons-src/csv.svg";
+const { ipcRenderer } = window.require("electron");
 
 function BasicSelect(props) {
   const { filterGender, setFilterGender } = props;
@@ -188,38 +189,41 @@ function AddGroup() {
     });
   }
 
-  async function uploadExcelFile(file) {
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
+  async function uploadExcelFile(event) {
+    const file = event.target.files[0];
+    ipcRenderer.send("upload:file", file.path);
+    // const reader = new FileReader();
+    // reader.readAsArrayBuffer(file);
 
-    reader.onload = async (event) => {
-      const arrayBuffer = event.target.result;
-      const workbook = XLSX.read(arrayBuffer, { type: "buffer" });
-      const workSheetName = workbook.SheetNames[0];
-      const workSheet = workbook.Sheets[workSheetName];
-      const data = await XLSX.utils.sheet_to_json(workSheet);
-      let ws = [];
-      for (let i = 0; i < data.length - 1; i++) {
-        let tempArray = [];
-        for (let key in data[i]) {
-          tempArray.push(data[i][key]);
-        }
-        ws.push(tempArray);
-      }
-      const response = await fetch("http://localhost:8080/group", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          excelFile: ws,
-          profile: fileProfile,
-          userId: userId,
-          groupName: groupName,
-          filterGender: filterGender,
-        }),
-      });
-      const fileData = await response.json();
-      console.log(fileData);
-    };
+    // reader.onload = async (event) => {
+    //   const arrayBuffer = event.target.result;
+    //   console.log(arrayBuffer);
+    // const workbook = XLSX.read(arrayBuffer, { type: "buffer" });
+    // const workSheetName = workbook.SheetNames[0];
+    // const workSheet = workbook.Sheets[workSheetName];
+    // const data = await XLSX.utils.sheet_to_json(workSheet);
+    // let ws = [];
+    // for (let i = 0; i < data.length - 1; i++) {
+    //   let tempArray = [];
+    //   for (let key in data[i]) {
+    //     tempArray.push(data[i][key]);
+    //   }
+    //   ws.push(tempArray);
+    // }
+    // const response = await fetch("http://localhost:8080/group", {
+    //   method: "PUT",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     excelFile: arrayBuffer,
+    //     profile: fileProfile,
+    //     userId: userId,
+    //     groupName: groupName,
+    //     filterGender: filterGender,
+    //   }),
+    // });
+    // const fileData = await response.json();
+    // console.log(fileData);
+    // };
   }
 
   return (
@@ -290,7 +294,7 @@ function AddGroup() {
         )}
       </main>
       <input
-        onChange={(event) => uploadExcelFile(event.target.files[0])}
+        onChange={(event) => uploadExcelFile(event)}
         type="file"
         accept=".xlsx, .xls, .excel, .svc"
         style={{ display: "none" }}
