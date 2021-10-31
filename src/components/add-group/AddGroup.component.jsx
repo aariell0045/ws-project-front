@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PickFields from "../pick-fields/pick-fields.component";
 import ExcelIcon from "../../icons/icons-components/excel-icon/excel-icon.component";
 import PhoneIcon from "../../icons/icons-components/phone-icon/phone-icon.component";
-import * as XLSX from "xlsx";
+// import * as XLSX from "xlsx";
 import { getByPlaceholderText } from "@testing-library/dom";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
