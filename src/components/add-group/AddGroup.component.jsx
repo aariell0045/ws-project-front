@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./add-group.styles.css";
 import { Link } from "react-router-dom";
 import PickFields from "../pick-fields/pick-fields.component";
 import ExcelIcon from "../../icons/icons-components/excel-icon/excel-icon.component";
 import PhoneIcon from "../../icons/icons-components/phone-icon/phone-icon.component";
-// import * as XLSX from "xlsx";
 import { getByPlaceholderText } from "@testing-library/dom";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
@@ -14,9 +13,23 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CsvIcon from "../../icons/regular-icons-src/csv.svg";
 const { ipcRenderer } = window.require("electron");
+let uploadFileData = {};
+let [dataTable, setDataTable] = [null, null];
+ipcRenderer.on("data-table", async (event, data) => {
+  setDataTable(data);
+  uploadFileData.excelFile = data;
+  const response = await fetch("http://localhost:8080/group", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(uploadFileData),
+  });
+  const fileData = await response.json();
+  console.log(fileData);
+});
 
 function BasicSelect(props) {
   const { filterGender, setFilterGender } = props;
+  [dataTable, setDataTable] = props.useTable;
   const handleChange = (event) => {
     event.stopPropagation();
     setFilterGender(event.target.value);
@@ -167,6 +180,7 @@ function AddGroup() {
     birthdate: false,
     email: false,
   });
+  [dataTable, setDataTable] = useState();
   const [fileProfile, setFileProfile] = useState({
     phoneNumber: "",
     firstname: "",
@@ -176,8 +190,6 @@ function AddGroup() {
     birthdate: "",
     email: "",
   });
-
-  console.log(fileProfile);
 
   const userId = useSelector((state) => state.userReducer.userId);
 
@@ -189,41 +201,15 @@ function AddGroup() {
     });
   }
 
-  async function uploadExcelFile(event) {
-    const file = event.target.files[0];
-    ipcRenderer.send("upload:file", file.path);
-    // const reader = new FileReader();
-    // reader.readAsArrayBuffer(file);
-
-    // reader.onload = async (event) => {
-    //   const arrayBuffer = event.target.result;
-    //   console.log(arrayBuffer);
-    // const workbook = XLSX.read(arrayBuffer, { type: "buffer" });
-    // const workSheetName = workbook.SheetNames[0];
-    // const workSheet = workbook.Sheets[workSheetName];
-    // const data = await XLSX.utils.sheet_to_json(workSheet);
-    // let ws = [];
-    // for (let i = 0; i < data.length - 1; i++) {
-    //   let tempArray = [];
-    //   for (let key in data[i]) {
-    //     tempArray.push(data[i][key]);
-    //   }
-    //   ws.push(tempArray);
-    // }
-    // const response = await fetch("http://localhost:8080/group", {
-    //   method: "PUT",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     excelFile: arrayBuffer,
-    //     profile: fileProfile,
-    //     userId: userId,
-    //     groupName: groupName,
-    //     filterGender: filterGender,
-    //   }),
-    // });
-    // const fileData = await response.json();
-    // console.log(fileData);
-    // };
+  async function sendFileDataToElectron() {
+    uploadFileData = {
+      ...uploadFileData,
+      profile: fileProfile,
+      userId: userId,
+      groupName: groupName,
+      filterGender: filterGender,
+    };
+    ipcRenderer.send("upload:file", "");
   }
 
   return (
@@ -279,6 +265,7 @@ function AddGroup() {
             <BasicSelect
               filterGender={filterGender}
               setFilterGender={setFilterGender}
+              useTable={[dataTable, setDataTable]}
             />
           </div>
         </div>
@@ -293,16 +280,11 @@ function AddGroup() {
           />
         )}
       </main>
-      <input
-        onChange={(event) => uploadExcelFile(event)}
-        type="file"
-        accept=".xlsx, .xls, .excel, .svc"
-        style={{ display: "none" }}
-        name="input-file"
-        id="input-file"
-      />
-      <label className="upload-xlsx-input-file" htmlFor="input-file">
-        העלאת קובץ
+      <label
+        onClick={(event) => sendFileDataToElectron(event)}
+        className="upload-xlsx-input-file"
+      >
+        Click
       </label>
     </section>
   );
