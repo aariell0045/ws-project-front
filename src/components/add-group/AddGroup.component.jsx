@@ -286,6 +286,7 @@ function AddGroup() {
       >
         Click
       </label>
+      <div></div>
     </section>
   );
 }
