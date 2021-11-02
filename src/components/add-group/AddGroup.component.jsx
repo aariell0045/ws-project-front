@@ -18,14 +18,11 @@ let [dataTable, setDataTable] = [null, null];
 ipcRenderer.on("data-table", async (event, data) => {
   setDataTable(data);
   uploadFileData.excelFile = data;
-  const response = await fetch(
-    `${process.env.React_App_HEROKU_SERVER_URL}/group`,
-    {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(uploadFileData),
-    }
-  );
+  const response = await fetch(`http://localhost:8080/group`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(uploadFileData),
+  });
   const fileData = await response.json();
   console.log(fileData);
 });

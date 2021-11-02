@@ -31,20 +31,17 @@ function ContactsList() {
   }
 
   async function editContactProfile(contactId, newContact) {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/edit-group`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          groupId: group._id,
-          contactId: contactId,
-          newGroupName: group.groupName,
-          newContact: newContact,
-        }),
-      }
-    );
+    const response = await fetch(`http://localhost:8080/edit-group`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userId,
+        groupId: group._id,
+        contactId: contactId,
+        newGroupName: group.groupName,
+        newContact: newContact,
+      }),
+    });
 
     const groups = await response.json();
     const currentGroup = groups.find((g) => g._id === group._id);
@@ -52,25 +49,22 @@ function ContactsList() {
   }
 
   async function addContactToGroup(newContact) {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/contact`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          groupId: group._id,
-          newContact: newContact,
-        }),
-      }
-    );
+    const response = await fetch(`http://localhost:8080/contact`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userId,
+        groupId: group._id,
+        newContact: newContact,
+      }),
+    });
 
     const currentGroup = await response.json();
     setContactsList(currentGroup.contacts);
   }
 
   function deleteItem(contactId, container, setContainer) {
-    fetch(`${process.env.React_App_HEROKU_SERVER_URL}/contact`, {
+    fetch(`http://localhost:8080/contact`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
