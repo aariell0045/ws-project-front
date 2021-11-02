@@ -75,15 +75,11 @@ function GroupsList() {
 
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userReducer.userId);
-  useEffect(() => {
-    const fetchGroups = async () => {
-      const response = await fetch(
-        `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
-      );
-      const groups = await response.json();
-      return groups;
-    };
-    const groups = fetchGroups();
+  useEffect(async () => {
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
+    );
+    const groups = await response.json();
     const newGroups = groups.map((group) => {
       return { ...group, checked: false };
     });
