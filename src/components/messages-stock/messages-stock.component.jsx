@@ -85,20 +85,25 @@ function MessagesStock() {
   const userId = useSelector((state) => state.userReducer.userId);
 
   useEffect(async () => {
-    const response = await fetch(`http://localhost:8080/message/${userId}`);
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/message/${userId}`
+    );
     const data = await response.json();
     setMessagesList(data);
   }, []);
 
   async function deleteMessage(id) {
-    const response = await fetch("http://localhost:8080/message", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: userId,
-        messageId: id,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/message`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: userId,
+          messageId: id,
+        }),
+      }
+    );
     const data = await response.json();
 
     if (data === "deleted") {
@@ -186,30 +191,36 @@ function MessagesStock() {
 
     console.log(currentMessage.contentMessage);
     if (index === -1) {
-      const response = await fetch("http://localhost:8080/message", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          messageName: currentMessage.messageName,
-          contentMessage: currentMessage.contentMessage,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.React_App_HEROKU_SERVER_URL}/message`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: userId,
+            messageName: currentMessage.messageName,
+            contentMessage: currentMessage.contentMessage,
+          }),
+        }
+      );
 
       const newMessage = await response.json();
 
       newMessagesList.push(newMessage);
     } else {
-      const response = await fetch("http://localhost:8080/edit-message", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          messageId: currentMessage.id,
-          messageName: currentMessage.messageName,
-          contentMessage: currentMessage.contentMessage,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.React_App_HEROKU_SERVER_URL}/edit-message`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: userId,
+            messageId: currentMessage.id,
+            messageName: currentMessage.messageName,
+            contentMessage: currentMessage.contentMessage,
+          }),
+        }
+      );
 
       const editedMessage = await response.json();
 

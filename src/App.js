@@ -17,14 +17,13 @@ import { Redirect } from "react-router-dom";
 import UserProfile from "./components/user-profile/user-profile.component";
 function App() {
   const userId = useSelector((state) => state.userReducer.userId);
-
+  console.log(process.env.React_App_HEROKU_SERVER_URL);
   return (
     <div className="App">
       <div id="background"></div>
       {userId && <div className="sidebar"></div>}
       {userId && <Sidebar />}
       {!userId && <Redirect to="/Login" />}
-
       <Route
         exact
         path="/Login"
