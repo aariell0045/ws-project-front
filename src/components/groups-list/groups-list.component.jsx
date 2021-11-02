@@ -117,9 +117,9 @@ function GroupsList() {
     setState(currentState);
   }
 
-  function deleteItem(id, container, setContainer) {
+  async function deleteItem(id, container, setContainer) {
     try {
-      fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
+      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
