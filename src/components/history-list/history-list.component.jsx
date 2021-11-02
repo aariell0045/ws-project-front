@@ -24,7 +24,9 @@ function HistoryList() {
   const userId = useSelector((state) => state.userReducer.userId);
 
   useEffect(async () => {
-    const response = await fetch(`http://localhost:8080/history/${userId}`);
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/history/${userId}`
+    );
     const history = await response.json();
     setHistoryList(history);
   }, []);

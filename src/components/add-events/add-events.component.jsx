@@ -56,16 +56,19 @@ function AddEvents(props) {
     console.log(isTasks);
     console.log(isEvents);
     if (props.windowKey === "openAddTaskWindow") {
-      const response = await fetch("http://localhost:8080/task", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          taskName: taskDetails.taskName,
-          taskColor: taskDetails.taskColor,
-          taskContent: taskDetails.taskContent,
-          userId: userId,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.React_App_HEROKU_SERVER_URL}/task`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            taskName: taskDetails.taskName,
+            taskColor: taskDetails.taskColor,
+            taskContent: taskDetails.taskContent,
+            userId: userId,
+          }),
+        }
+      );
       const data = await response.json();
       console.log("data:", data);
       const newTask = {
@@ -78,16 +81,19 @@ function AddEvents(props) {
     }
     console.log(taskDetails);
     if (props.windowKey === "openAddEventWindow") {
-      const response = await fetch("http://localhost:8080/event", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          eventName: taskDetails.taskName,
-          eventColor: taskDetails.taskColor,
-          eventContent: taskDetails.taskContent,
-          userId: userId,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.React_App_HEROKU_SERVER_URL}/event`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            eventName: taskDetails.taskName,
+            eventColor: taskDetails.taskColor,
+            eventContent: taskDetails.taskContent,
+            userId: userId,
+          }),
+        }
+      );
       const data = await response.json();
       console.log("data:", data);
       const newTask = {

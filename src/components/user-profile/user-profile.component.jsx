@@ -7,7 +7,7 @@ function UserProfile() {
 
   useEffect(async () => {
     const response = await fetch(
-      `http://localhost:8080/messages-status/${userId}`
+      `${process.env.React_App_HEROKU_SERVER_URL}/messages-status/${userId}`
     );
     const status = await response.json();
     setStatusMessages(+status);
