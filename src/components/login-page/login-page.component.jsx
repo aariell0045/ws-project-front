@@ -42,14 +42,17 @@ function LoginPage() {
           className="login-page-login-form"
           onSubmit={async (e) => {
             e.preventDefault();
-            const response = await fetch(`http://localhost:8080/login`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                userName: state.userName,
-                password: state.password,
-              }),
-            });
+            const response = await fetch(
+              `${process.env.React_App_HEROKU_SERVER_URL}/login`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  userName: state.userName,
+                  password: state.password,
+                }),
+              }
+            );
             const data = await response.json();
             if (data.result === true && data.userId) {
               dispatch(addUserId(data.userId));

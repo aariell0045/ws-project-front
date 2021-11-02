@@ -18,7 +18,9 @@ function SendMessagePart1() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const response = await fetch(`http://localhost:8080/message/${userId}`);
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/message/${userId}`
+    );
     const data = await response.json();
     setMessagesList(data);
   }, []);

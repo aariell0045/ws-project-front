@@ -20,8 +20,12 @@ function Home() {
   const userId = useSelector((state) => state.userReducer.userId);
 
   useEffect(async () => {
-    const eventResponse = await fetch(`http://localhost:8080/event/${userId}`);
-    const taskResponse = await fetch(`http://localhost:8080/task/${userId}`);
+    const eventResponse = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/event/${userId}`
+    );
+    const taskResponse = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/task/${userId}`
+    );
     const eventData = await eventResponse.json();
     const taskData = await taskResponse.json();
     const newEventData = eventData.map((event) => {
@@ -52,7 +56,7 @@ function Home() {
   async function deleteItem(id, windowKey, container, setContainer) {
     console.log(windowKey);
     if (windowKey === "openAddTaskWindow") {
-      await fetch(`http://localhost:8080/task`, {
+      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/task`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -66,7 +70,7 @@ function Home() {
       }
       setContainer(container.filter((item) => item._id != id));
     } else {
-      await fetch(`http://localhost:8080/event`, {
+      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/event`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

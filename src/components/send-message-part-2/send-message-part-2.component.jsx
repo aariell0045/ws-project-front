@@ -25,7 +25,9 @@ function SendMessagePart2() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const response = await fetch(`http://localhost:8080/groups/${userId}`);
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
+    );
     const data = await response.json();
     setGroupsList(data);
   }, []);
