@@ -75,11 +75,15 @@ function GroupsList() {
 
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userReducer.userId);
-  useEffect(async () => {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
-    );
-    const groups = await response.json();
+  useEffect(() => {
+    const fetchGroups = async () => {
+      const response = await fetch(
+        `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
+      );
+      const groups = await response.json();
+      return groups;
+    };
+    const groups = fetchGroups();
     const newGroups = groups.map((group) => {
       return { ...group, checked: false };
     });
@@ -118,14 +122,20 @@ function GroupsList() {
   }
 
   async function deleteItem(id, container, setContainer) {
-    await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId,
-        groupId: id,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.React_App_HEROKU_SERVER_URL}/group`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId,
+          groupId: id,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    console.log(data);
 
     setContainer(container.filter((item) => item._id != id));
   }
