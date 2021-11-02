@@ -118,18 +118,15 @@ function GroupsList() {
   }
 
   async function deleteItem(id, container, setContainer) {
-    try {
-      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId,
-          groupId: id,
-        }),
-      });
-    } catch (err) {
-      alert(err.name, ":", err.message);
-    }
+    await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        groupId: id,
+      }),
+    });
+
     setContainer(container.filter((item) => item._id != id));
   }
 
