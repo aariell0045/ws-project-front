@@ -69,8 +69,8 @@ function ContactsList() {
     setContactsList(currentGroup.contacts);
   }
 
-  function deleteItem(contactId, container, setContainer) {
-    fetch(`${process.env.React_App_HEROKU_SERVER_URL}/contact`, {
+  async function deleteItem(contactId, container, setContainer) {
+    await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/contact`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
