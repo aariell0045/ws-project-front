@@ -59,14 +59,15 @@ function SendMessagePart1() {
                 if (message.messageName.includes(state.searchMessages)) {
                   return (
                     <MessageBox
-                      key={message._id}
-                      id={message._id}
-                      messageName={message.messageName}
-                      messageLength={message.contentMessage.length}
-                      messagesInRow={message.contentMessage}
-                      deleteMessage={null}
-                      updateCurrentMessage={updateCurrentMessage}
-                      displayOnly={true}
+                    key={message._id}
+                    id={message._id}
+                    messageName={message.messageName}
+                    messageLength={message.contentMessage.length}
+                    messagesInRow={message.contentMessage}
+                    deleteMessage={null}
+                    updateCurrentMessage={updateCurrentMessage}
+                    displayOnly={true}
+                    currentMessage={currentMessage}
                     />
                   );
                 }
