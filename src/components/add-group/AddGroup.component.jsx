@@ -13,26 +13,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CsvIcon from "../../icons/regular-icons-src/csv.svg";
 const { ipcRenderer } = window.require("electron");
-let uploadFileData = {};
-let [dataTable, setDataTable] = [null, null];
-ipcRenderer.on("data-table", async (event, data) => {
-  setDataTable(data);
-  uploadFileData.excelFile = data;
-  const response = await fetch(
-    `${process.env.React_App_HEROKU_SERVER_URL}/group`,
-    {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(uploadFileData),
-    }
-  );
-  const fileData = await response.json();
-  console.log(fileData);
-});
+
 
 function BasicSelect(props) {
   const { filterGender, setFilterGender } = props;
-  [dataTable, setDataTable] = props.useTable;
   const handleChange = (event) => {
     event.stopPropagation();
     setFilterGender(event.target.value);
@@ -183,7 +167,6 @@ function AddGroup() {
     birthdate: false,
     email: false,
   });
-  [dataTable, setDataTable] = useState();
   const [fileProfile, setFileProfile] = useState({
     phoneNumber: "",
     firstname: "",
@@ -193,6 +176,7 @@ function AddGroup() {
     birthdate: "",
     email: "",
   });
+  let uploadFileData = {};
 
   const userId = useSelector((state) => state.userReducer.userId);
 
@@ -206,13 +190,13 @@ function AddGroup() {
 
   async function sendFileDataToElectron() {
     uploadFileData = {
-      ...uploadFileData,
       profile: fileProfile,
       userId: userId,
       groupName: groupName,
       filterGender: filterGender,
+      excelFile: null,
     };
-    ipcRenderer.send("upload:file", "");
+    ipcRenderer.send("upload:file", uploadFileData);
   }
 
   return (
@@ -268,7 +252,6 @@ function AddGroup() {
             <BasicSelect
               filterGender={filterGender}
               setFilterGender={setFilterGender}
-              useTable={[dataTable, setDataTable]}
             />
           </div>
         </div>
