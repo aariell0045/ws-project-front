@@ -22,7 +22,6 @@ function ContactsList() {
   const [createContact, setCreateContact] = useState(false);
   const group = useSelector((state) => state.contactReducer.contactsList);
   const userId = useSelector((state) => state.userReducer.userId);
-  console.log(contactProfile);
   function handleInputs({ target }) {
     const { name, value } = target;
     let currentState = { ...state };

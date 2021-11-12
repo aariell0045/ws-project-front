@@ -5,7 +5,6 @@ import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.compon
 import "./list-item2.styles.css";
 function ListItem2(props) {
   let { itemColor, itemName, itemDescription, itemIsOpen } = props;
-  console.log(props.openItem);
   return (
     <div className="task-box-warpper">
       <div className={itemIsOpen ? "task-box-open" : "task-box-close"}>

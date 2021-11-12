@@ -53,8 +53,6 @@ function AddEvents(props) {
 
   async function addTask(taskDetails) {
     const [tasks, setTasks] = [...props.useTasks];
-    console.log(isTasks);
-    console.log(isEvents);
     if (props.windowKey === "openAddTaskWindow") {
       const response = await fetch(
         `${process.env.React_App_HEROKU_SERVER_URL}/task`,
@@ -70,7 +68,6 @@ function AddEvents(props) {
         }
       );
       const data = await response.json();
-      console.log("data:", data);
       const newTask = {
         ...data,
         isOpen: false,
@@ -79,7 +76,6 @@ function AddEvents(props) {
       currentTasksState.push({ ...newTask });
       setTasks(currentTasksState);
     }
-    console.log(taskDetails);
     if (props.windowKey === "openAddEventWindow") {
       const response = await fetch(
         `${process.env.React_App_HEROKU_SERVER_URL}/event`,
@@ -95,7 +91,6 @@ function AddEvents(props) {
         }
       );
       const data = await response.json();
-      console.log("data:", data);
       const newTask = {
         ...{
           taskName: data.eventName,

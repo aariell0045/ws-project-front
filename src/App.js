@@ -3,7 +3,7 @@ import Sidebar from "./components/sidebar/Sidebar.component";
 import Home from "./components/home/Home.component";
 import GroupsList from "./components/groups-list/groups-list.component";
 import ContactsList from "./components/contacts-list/contacts-list.component";
-import { Route, useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import AddGroup from "./components/add-group/AddGroup.component";
 import MessagesStock from "./components/messages-stock/messages-stock.component";
 import SendMessagePart2 from "./components/send-message-part-2/send-message-part-2.component";
@@ -17,7 +17,6 @@ import { Redirect } from "react-router-dom";
 import UserProfile from "./components/user-profile/user-profile.component";
 function App() {
   const userId = useSelector((state) => state.userReducer.userId);
-  console.log(process.env.React_App_HEROKU_SERVER_URL);
   return (
     <div className="App">
       <div id="background"></div>

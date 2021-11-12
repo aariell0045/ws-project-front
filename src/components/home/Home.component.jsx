@@ -54,7 +54,6 @@ function Home() {
   }
 
   async function deleteItem(id, windowKey, container, setContainer) {
-    console.log(windowKey);
     if (windowKey === "openAddTaskWindow") {
       await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/task`, {
         method: "DELETE",
@@ -64,9 +63,7 @@ function Home() {
           taksId: id,
         }),
       });
-      console.log(id);
       for (let item of container) {
-        console.log(item._id != id);
       }
       setContainer(container.filter((item) => item._id != id));
     } else {
@@ -78,9 +75,7 @@ function Home() {
           eventId: id,
         }),
       });
-      console.log(id);
       for (let item of container) {
-        console.log(item._id != id);
       }
       setContainer(container.filter((item) => item._id != id));
     }

@@ -152,7 +152,6 @@ function MessagesStock() {
     const fullPath = event.target.files[0].path;
     const fileReader = new FileReader();
     const httpData = fileReader.readAsDataURL(fullPath);
-    console.log(httpData);
 
     // const fromData = new FormData();
     // fromData.append("file", files[0]);
@@ -189,7 +188,6 @@ function MessagesStock() {
       (message) => message._id == currentMessage.id
     );
 
-    console.log(currentMessage.contentMessage);
     if (index === -1) {
       const response = await fetch(
         `${process.env.React_App_HEROKU_SERVER_URL}/message`,
@@ -277,7 +275,6 @@ function MessagesStock() {
           <div className="messages-list">
             {searchMessageInput &&
               messagesList.map((message) => {
-                console.log(currentMessage.contentMessage);
                 if (message.messageName.includes(searchMessageInput)) {
                   return (
                     <MessageBox
@@ -297,7 +294,6 @@ function MessagesStock() {
               })}
             {!searchMessageInput &&
               messagesList.map((message) => {
-                console.log(currentMessage.contentMessage);
                 return (
                   <MessageBox
                     key={message._id}
