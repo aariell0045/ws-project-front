@@ -12,8 +12,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CsvIcon from "../../icons/regular-icons-src/csv.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIdCard } from "@fortawesome/free-solid-svg-icons";
 const { ipcRenderer } = window.require("electron");
-
 
 function BasicSelect(props) {
   const { filterGender, setFilterGender } = props;
@@ -187,7 +188,74 @@ function AddGroup() {
       [name]: value,
     });
   }
+  async function uploadVcfFile(event) {
+    console.log(event.target.files[0]);
+    const reader = new FileReader();
+    let tempArray = [];
+    let tempObject = {};
 
+    let tempKey = "";
+    reader.readAsText(event.target.files[0], "[\u0590-\u05ff]");
+    reader.onload = async (e) => {
+      let vcfFile = e.target.result;
+      vcfFile = vcfFile.split("\n");
+      const tempArrayData = vcfFile[0].split("");
+      console.log(tempArrayData);
+      for (let i = 0; i < tempArrayData.length; i++) {
+        if (tempArrayData[i] === ":") {
+          break;
+        }
+        tempKey += tempArrayData[i];
+      }
+      let index = 0;
+      console.log(vcfFile);
+      vcfFile.forEach((row, i) => {
+        if (row.includes(tempKey) && i !== 0) {
+          tempArray.push(tempObject);
+          tempObject = {};
+          index = 0;
+        }
+
+        tempObject[index] = row.split(":");
+        index++;
+      });
+
+      const contacts = tempArray.map((obj) => {
+        let contact = {
+          contactProfile: {
+            contactFirstName: "",
+          },
+          phoneNumber: "",
+        };
+        for (let key in obj) {
+          for (let i = 0; i < obj[key].length; i++) {
+            if (obj[key][i]?.trim("") === "FN") {
+              contact.contactProfile.contactFirstName = obj[key][i + 1];
+            }
+            if (obj[key][i]?.trim("")?.includes("TEL")) {
+              let phoneNumber = obj[key][i + 1].replace(/\D/g, "");
+
+              contact.phoneNumber = phoneNumber;
+            }
+          }
+        }
+
+        return contact;
+      });
+
+      console.log("done");
+      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: userId,
+          groupName: groupName,
+          excelFile: contacts,
+          type: "vcf",
+        }),
+      });
+    };
+  }
   async function sendFileDataToElectron() {
     uploadFileData = {
       profile: fileProfile,
@@ -235,7 +303,7 @@ function AddGroup() {
             </div>
           </div>
           <div
-            onClick={() => setUploadFile("phone")}
+            onClick={() => setUploadFile("vcf")}
             className="phone-icon-container"
           >
             <div
@@ -243,9 +311,17 @@ function AddGroup() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                flexDirection: "column",
+                gap: "1em",
+                marginTop: "-2.3vw",
               }}
             >
-              <img className="icon-image-csv" src={CsvIcon} alt="" />
+              <div style={{ fontSize: "1vw" }}>{"ייצוא קבצים מהפלאפון"}</div>
+              <FontAwesomeIcon
+                style={{ color: "rgba(92,114,222)" }}
+                size={"3x"}
+                icon={faIdCard}
+              />
             </div>
           </div>
           <div className="selector">
@@ -266,12 +342,34 @@ function AddGroup() {
           />
         )}
       </main>
-      <label
-        onClick={(event) => sendFileDataToElectron(event)}
-        className="upload-xlsx-input-file"
-      >
-        Click
+      <label htmlFor="upload-contacts" className="upload-xlsx-input-file">
+        העלאת קובץ
       </label>
+      {uploadFileWith === "vcf" ? (
+        <input
+          onChange={(event) => {
+            if (uploadFileWith === "vcf") {
+              return uploadVcfFile(event);
+            }
+          }}
+          id="upload-contacts"
+          name="upload-contacts"
+          style={{ display: "none" }}
+          type="file"
+        />
+      ) : (
+        <button
+          onClick={(event) => {
+            if (uploadFileWith === "vcf") {
+              return;
+            }
+            sendFileDataToElectron(event);
+          }}
+          id="upload-contacts"
+          name="upload-contacts"
+          style={{ display: "none" }}
+        ></button>
+      )}
       <div></div>
     </section>
   );
