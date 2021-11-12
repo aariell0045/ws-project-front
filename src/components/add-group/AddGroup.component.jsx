@@ -14,7 +14,23 @@ import Select from "@mui/material/Select";
 import CsvIcon from "../../icons/regular-icons-src/csv.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
+import { fontSize } from "@mui/system";
 const { ipcRenderer } = window.require("electron");
+
+function uploadVcf() {
+  return (
+    <div
+      style={{
+        maxWidth: "50%",
+        margin: "5em",
+      }}
+    >
+      <p style={{ lineHeight: "3vh", fontSize: "1.4em" }}>
+        מצב ייצוא קבצים מהפלאפון לחץ על העלאת קובץ כדי להמשיך
+      </p>
+    </div>
+  );
+}
 
 function BasicSelect(props) {
   const { filterGender, setFilterGender } = props;
@@ -189,7 +205,6 @@ function AddGroup() {
     });
   }
   async function uploadVcfFile(event) {
-    console.log(event.target.files[0]);
     const reader = new FileReader();
     let tempArray = [];
     let tempObject = {};
@@ -200,7 +215,6 @@ function AddGroup() {
       let vcfFile = e.target.result;
       vcfFile = vcfFile.split("\n");
       const tempArrayData = vcfFile[0].split("");
-      console.log(tempArrayData);
       for (let i = 0; i < tempArrayData.length; i++) {
         if (tempArrayData[i] === ":") {
           break;
@@ -208,7 +222,6 @@ function AddGroup() {
         tempKey += tempArrayData[i];
       }
       let index = 0;
-      console.log(vcfFile);
       vcfFile.forEach((row, i) => {
         if (row.includes(tempKey) && i !== 0) {
           tempArray.push(tempObject);
@@ -243,7 +256,6 @@ function AddGroup() {
         return contact;
       });
 
-      console.log("done");
       await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -297,6 +309,9 @@ function AddGroup() {
           <div
             onClick={() => setUploadFile("xlsx")}
             className="xlsx-icon-container"
+            style={{
+              border: uploadFileWith === "xlsx" ? "1px solid black" : "",
+            }}
           >
             <div>
               <ExcelIcon />
@@ -305,6 +320,9 @@ function AddGroup() {
           <div
             onClick={() => setUploadFile("vcf")}
             className="phone-icon-container"
+            style={{
+              border: !(uploadFileWith === "xlsx") ? "1px solid black" : "",
+            }}
           >
             <div
               style={{
@@ -313,7 +331,6 @@ function AddGroup() {
                 alignItems: "center",
                 flexDirection: "column",
                 gap: "1em",
-                marginTop: "-2.3vw",
               }}
             >
               <div style={{ fontSize: "1vw" }}>{"ייצוא קבצים מהפלאפון"}</div>
@@ -322,6 +339,13 @@ function AddGroup() {
                 size={"3x"}
                 icon={faIdCard}
               />
+              <div
+                style={{
+                  fontSize: "1.2vw",
+                }}
+              >
+                {"VCF"}
+              </div>
             </div>
           </div>
           <div className="selector">
@@ -333,7 +357,7 @@ function AddGroup() {
         </div>
         {uploadFileWith === "xlsx"
           ? uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs)
-          : null}
+          : uploadVcf()}
         {openPickFields && (
           <PickFields
             checkFields={checkFields}

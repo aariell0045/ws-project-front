@@ -4,7 +4,6 @@ import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-do
 
 function ListItem4(props) {
   let [massageName, groupName, date, media] = props.item;
-  console.log(media);
   return (
     <div className="history-page-list-item">
       <div className="history-page-list-first-item history-page-list-content-item-warpper">

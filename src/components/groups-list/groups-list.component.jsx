@@ -131,7 +131,6 @@ function GroupsList() {
     );
 
     const data = await response.json();
-    console.log(data);
     setContainer(container.filter((item) => item._id != id));
   }
 
@@ -140,7 +139,6 @@ function GroupsList() {
   }
 
   function nextStep(groupName) {
-    console.log(groupName);
     let bool = false;
     setState({
       ...state,

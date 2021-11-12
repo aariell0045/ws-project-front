@@ -40,7 +40,6 @@ function HistoryList() {
 
   function checkMedia(contentMessage) {
     const response = contentMessage?.some((media) => media.mediaSrc.length);
-    console.log(response);
     if (response === undefined) {
       return "";
     }
@@ -114,9 +113,7 @@ function HistoryList() {
           })}
         {!state.searchHistory &&
           historyList.map((history, index) => {
-            console.log(history.contentMessage);
             const isMedia = checkMedia(history.contentMessage);
-            console.log(isMedia);
             return (
               <ListItem4
                 key={index}

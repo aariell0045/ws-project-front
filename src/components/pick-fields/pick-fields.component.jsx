@@ -31,7 +31,6 @@ function PickFields(props) {
     setOpenPickFields(false);
   }
 
-  console.log(checkFields);
   return (
     <div className="pick-fields-canvas">
       <header className="pick-fields-header">
