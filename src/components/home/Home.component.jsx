@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AddEvents from "../add-events/add-events.component";
 import "./home.styles.css";
-import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-down-icon.component";
-import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
-import ArrowLeftIcon from "../../icons/icons-components/arrow-left-icon/arrow-left-icon.component";
 import ListItem2 from "../list-item-2/list-item2.component";
-import image2 from "../../images/qr-code.png";
 import { useSelector } from "react-redux";
+import Calender from "../calender/calender.component";
 
 function Home() {
   const [state, setState] = useState({
@@ -19,25 +16,14 @@ function Home() {
   const [events, setEvents] = useState([]);
   const userId = useSelector((state) => state.userReducer.userId);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const eventResponse = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/event/${userId}`
-    );
     const taskResponse = await fetch(
       `${process.env.React_App_HEROKU_SERVER_URL}/task/${userId}`
     );
-    const eventData = await eventResponse.json();
     const taskData = await taskResponse.json();
-    const newEventData = eventData.map((event) => {
-      return {
-        ...event,
-        taskName: event.eventName,
-        taskColor: event.eventColor,
-        taskContent: event.eventContent,
-      };
-    });
     setTasks(taskData);
-    setEvents(newEventData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function openWindow(windowKey) {
@@ -63,8 +49,6 @@ function Home() {
           taksId: id,
         }),
       });
-      for (let item of container) {
-      }
       setContainer(container.filter((item) => item._id != id));
     } else {
       await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/event`, {
@@ -75,8 +59,6 @@ function Home() {
           eventId: id,
         }),
       });
-      for (let item of container) {
-      }
       setContainer(container.filter((item) => item._id != id));
     }
   }
@@ -111,10 +93,10 @@ function Home() {
               {tasks.map((task, index) => {
                 return (
                   <ListItem2
+                    key={index}
                     id={task._id}
                     onClickEvent={deleteItem}
                     onClickEventParams={[tasks, setTasks]}
-                    key={index}
                     itemColor={task.taskColor}
                     itemName={task.taskName}
                     itemDescription={task.taskContent}
@@ -142,34 +124,17 @@ function Home() {
 
         <div className="home-page-left-side">
           <div className="home-page-right-warpper">
-            <div className="calander">
-              <div className="calander-date">
-                <p className="home-page-left-arrow">left</p>
-                <p className="home-page-date-content">פברואר 2021</p>
-                <p classNames="home-page-left-arrow">right</p>
-              </div>
-              <div className="week-days-warpper">
-                <div className="week-days">
-                  <p className="day">א'</p>
-                  <p className="day">ב'</p>
-                  <p className="day">ג'</p>
-                  <p className="day">ד'</p>
-                  <p className="day">ה'</p>
-                  <p className="day">ו'</p>
-                  <p className="day">ש'</p>
-                </div>
-              </div>
-              <div className="dates-list"></div>
-            </div>
+            <Calender events={events} setEvents={setEvents} />
             <div className="home-page-events">
               <div className="calander-date">
                 <p className="home-page-left-arrow">left</p>
                 <p className="home-page-date-content">פברואר 2021</p>
-                <p classNames="home-page-left-arrow">right</p>
+                <p className="home-page-left-arrow">right</p>
               </div>
               <div className="my-tasks-list-warpper">
                 <div className="my-events-list">
-                  {events.map((event, index) => {
+                  {/* {events.map((e, index) => {
+                    let { event } = e;
                     return (
                       <ListItem2
                         id={event._id}
@@ -187,7 +152,7 @@ function Home() {
                         windowKey="openAddEventWindow"
                       />
                     );
-                  })}
+                  })} */}
                 </div>
                 <div className="my-task-button-warpper-2 my-task-button-warpper">
                   <button

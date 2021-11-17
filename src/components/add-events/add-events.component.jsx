@@ -1,7 +1,7 @@
 import "./add-events.styles.css";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import COLORS from "./constents";
 function AddEvents(props) {
   const { tasksDetails, isEvents, isTasks } = props;
   const [state, setState] = useState({
@@ -12,28 +12,6 @@ function AddEvents(props) {
   });
 
   const userId = useSelector((state) => state.userReducer.userId);
-  const COLORS = {
-    RED: {
-      color: "#FD4C4C",
-      name: "RED",
-    },
-    GREEN: {
-      color: "#36F27B",
-      name: "GREEN",
-    },
-    MUSTARD: {
-      color: "#C0AD00",
-      name: "MUSTARD",
-    },
-    PURPLE: {
-      color: "#834CFD",
-      name: "PURPLE",
-    },
-    ORANGE: {
-      color: "#FD8C4C",
-      name: "ORANGE",
-    },
-  };
 
   const [colorBar, setColorBar] = useState([
     COLORS.RED,
@@ -77,28 +55,25 @@ function AddEvents(props) {
       setTasks(currentTasksState);
     }
     if (props.windowKey === "openAddEventWindow") {
+      const event = {
+        eventName: taskDetails.taskName,
+        eventColor: taskDetails.taskColor,
+        eventContent: taskDetails.taskContent,
+      };
       const response = await fetch(
         `${process.env.React_App_HEROKU_SERVER_URL}/event`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            eventName: taskDetails.taskName,
-            eventColor: taskDetails.taskColor,
-            eventContent: taskDetails.taskContent,
+            eventDate: "22/11/2021",
             userId: userId,
+            ...event,
           }),
         }
       );
       const data = await response.json();
-      const newTask = {
-        ...{
-          taskName: data.eventName,
-          taskColor: data.eventColor,
-          taskContent: data.eventContent,
-        },
-        isOpen: false,
-      };
+      const newTask = { isOpen: false, ...data };
       let currentTasksState = [...tasks];
       currentTasksState.push({ ...newTask });
       setTasks(currentTasksState);
