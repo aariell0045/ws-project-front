@@ -2,6 +2,7 @@ import "./add-events.styles.css";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import COLORS from "./constents";
+import close from "./handler.js";
 function AddEvents(props) {
   const { tasksDetails, isEvents, isTasks } = props;
   const [state, setState] = useState({
@@ -20,14 +21,6 @@ function AddEvents(props) {
     COLORS.PURPLE,
     COLORS.ORANGE,
   ]);
-
-  function close(windowKey) {
-    const [state, setState] = props.useState;
-    let currentState = { ...state };
-    currentState[windowKey] = false;
-    currentState.pointerEvents = "";
-    setState(currentState);
-  }
 
   async function addTask(taskDetails) {
     const [tasks, setTasks] = [...props.useTasks];
@@ -98,7 +91,7 @@ function AddEvents(props) {
   return (
     <div className="add-events-container">
       <div className="add-events-header">
-        <span onClick={() => close(props.windowKey)}>X</span>
+        <span onClick={() => close(props.windowKey, props.useState)}>X</span>
         <p>{tasksDetails[0]}</p>
       </div>
 
