@@ -6,7 +6,7 @@ function CsvIcon() {
       version="1.1"
       width="512px"
       height="512px"
-      style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+      style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fillRule:evenodd; clipRule:evenodd"
     >
       <g>
         <path

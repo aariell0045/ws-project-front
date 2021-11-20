@@ -17,7 +17,7 @@
   outline: none;
 }
 
-.login-page-login-form{
+.login-page-login-form {
   display: flex;
   flex-direction: column;
   gap: 3vh;
@@ -39,6 +39,10 @@
   margin-bottom: 10vh;
 }
 
+.login-page-wesend-logo {
+  width: 110%;
+}
+
 .login-page-logo img {
   left: 0px;
   position: absolute;
@@ -48,6 +52,7 @@
   left: 0px;
   margin-left: -0.5vw;
   top: -0.3vw;
+  width: 100%;
 }
 
 .login-page-user-name-container {
@@ -65,7 +70,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
 
 .login-page-user-name {
   font-family: Assistant;
@@ -115,7 +119,7 @@
   cursor: pointer;
 }
 
-.login-page-sign-in-button:hover{
+.login-page-sign-in-button:hover {
   background: #ffffff;
 }
 
@@ -126,7 +130,6 @@
   align-items: center;
   height: 5vh;
   margin-right: 7.7vw;
-  
 }
 
 .login-page-forgot-password {
@@ -160,10 +163,10 @@
 }
 
 .login-page-forgot-password-container {
-   width: 11vw;
-   display: flex;
-   justify-content: end;
-   cursor: pointer;
+  width: 11vw;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
 }
 
 .login-page-password-box {

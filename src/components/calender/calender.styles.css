@@ -1,0 +1,119 @@
+.dates-list {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+}
+
+.calender-component {
+	width: fit-content;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.calender-container {
+	width: fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+}
+
+.calender-day-card-container {
+	height: 45px;
+	width: 45px;
+	border-radius: 50%;
+	background-color: orange;
+	border: 1px solid gray;
+}
+
+.calender-cube {
+	width: 53px;
+	height: 53px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0.1em;
+	color: black;
+	position: relative;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.calender-cube-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: white;
+	opacity: 0.4;
+	z-index: -1;
+}
+
+.saved-events {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #fd8c4c;
+	top: 6px;
+	z-index: 0;
+}
+
+.calender-right-arrow-icon {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.calender-left-arrow-icon {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+	display: flex;
+	justify-content: flex-start;
+	margin-right: -13px;
+}
+
+.calender-date {
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.3vw;
+	line-height: 33px;
+	text-align: right;
+	width: 100%;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.home-page-date-content {
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.3vw;
+	line-height: 33px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	text-align: right;
+	user-select: none;
+	color: #ffffff;
+}

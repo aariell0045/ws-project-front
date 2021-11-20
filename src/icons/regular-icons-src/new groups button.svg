@@ -9,8 +9,8 @@
 <circle cx="34.812" cy="21.0242" r="2.57048" transform="rotate(39.4962 34.812 21.0242)" stroke="black"/>
 <line x1="26.7947" y1="24.0213" x2="32.0584" y2="21.3895" stroke="black"/>
 <line x1="35.409" y1="23.662" x2="34.5318" y2="29.803" stroke="black"/>
-<path d="M41.1667 25.6667L41.1667 32.6667" stroke="black" stroke-linecap="round"/>
-<path d="M44.6667 29.1667L37.6667 29.1667" stroke="black" stroke-linecap="round"/>
+<path d="M41.1667 25.6667L41.1667 32.6667" stroke="black" strokeLinecap="round"/>
+<path d="M44.6667 29.1667L37.6667 29.1667" stroke="black" strokeLinecap="round"/>
 <defs>
 <filter id="filter0_d" x="0" y="0" width="62" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

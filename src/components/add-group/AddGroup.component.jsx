@@ -71,7 +71,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
         </span>
       </div>
       <div className="selects-container">
-        <div classNames="xlsx-upload-format-input-warpper">
+        <div className="xlsx-upload-format-input-warpper">
           <div className="xlsx-upload-format-input-box">
             <input
               onChange={(event) => handleInputs(event)}
@@ -83,7 +83,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           <div className="xlsx-upload-format-input-header">פלאפון</div>
         </div>
         {checkFields.firstname && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}
@@ -96,7 +96,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           </div>
         )}
         {checkFields.lastname && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}
@@ -109,7 +109,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           </div>
         )}
         {checkFields.emial && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}
@@ -122,7 +122,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           </div>
         )}
         {checkFields.gender && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}
@@ -135,7 +135,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           </div>
         )}
         {checkFields.age && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}
@@ -148,7 +148,7 @@ function uploadXlsxFormat(setOpenPickFields, checkFields, handleInputs) {
           </div>
         )}
         {checkFields.birthday && (
-          <div classNames="xlsx-upload-format-input-warpper">
+          <div className="xlsx-upload-format-input-warpper">
             <div className="xlsx-upload-format-input-box">
               <input
                 onChange={(event) => handleInputs(event)}

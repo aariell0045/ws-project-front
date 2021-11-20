@@ -1,55 +1,50 @@
-.aside-bar{
-    flex-direction: column;
-    display: inline-flex;
-	justify-content: center;
-	width: 10vw;
-	height: fit-content;
-	z-index: 0;
-	
+.aside-bar {
+  flex-direction: column;
+  display: inline-flex;
+  justify-content: center;
+  width: 10vw;
+  height: fit-content;
+  z-index: 0;
 }
 
 .logo {
-	list-style: none;
-	color: #FFFFFF;
-	font-family: Assistant;
-	font-style: normal;
-	font-size: 3.5vw;
-	font-weight: 800;
-	margin-right: 9%;
-	margin-top: 2.5%;
-	margin-bottom: 5vh;
-	user-select: none;
+  list-style: none;
+  color: #ffffff;
+  font-family: Assistant;
+  font-style: normal;
+  font-size: 3.5vw;
+  font-weight: 800;
+  margin-right: 9%;
+  margin-top: 2.5%;
+  margin-bottom: 5vh;
+  user-select: none;
 }
 
 .list {
-	font-family: Assistant;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 1.2vw;
-	text-align: right;
-	list-style: none;
-	color: #000000;
-	margin-top: 4vh;
-	width: 100%;
-	text-align: start;
-	padding-right: 0.7vw;
-	display: flex;
-	width: 10vw;
-	gap: 1vw;
-	
-	
+  font-family: Assistant;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2vw;
+  text-align: right;
+  list-style: none;
+  color: #000000;
+  margin-top: 4vh;
+  width: 100%;
+  text-align: start;
+  padding-right: 0.7vw;
+  display: flex;
+  width: 10vw;
+  gap: 1vw;
 }
 
 .list-1 {
-	margin-top: 6vh;
+  margin-top: 6vh;
 }
 
 .list:hover {
-	text-decoration: underline;
-
+  text-decoration: underline;
 }
 
-.list-6{
-	margin-top: 30vh;
+.list-6 {
+  margin-top: 30vh;
 }
- 

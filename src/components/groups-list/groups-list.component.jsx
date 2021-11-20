@@ -34,256 +34,255 @@ import "./groups-list.styles.css";
 // }
 
 function GroupsList() {
-  const [groupsList, setGroupsList] = useState([]);
-  const [currentGroup, setCurrentGroup] = useState({
-    groupName: "",
-    contacts: [],
-    id: "",
-  });
-  const [state, setState] = useState({
-    searchGroups: "",
-    isCombineGroups: false,
-  });
+	const [groupsList, setGroupsList] = useState([]);
+	const [currentGroup, setCurrentGroup] = useState({
+		groupName: "",
+		contacts: [],
+		id: "",
+	});
+	const [state, setState] = useState({
+		searchGroups: "",
+		isCombineGroups: false,
+	});
 
-  const [openSingleField, setOpenSingleField] = useState(false);
+	const [openSingleField, setOpenSingleField] = useState(false);
 
-  function checkedCounter() {
-    let checkedCounter = 0;
-    for (let group of groupsList) {
-      if (group.checked) {
-        checkedCounter++;
-      }
-    }
-    return checkedCounter;
-  }
+	function checkedCounter() {
+		let checkedCounter = 0;
+		for (let group of groupsList) {
+			if (group.checked) {
+				checkedCounter++;
+			}
+		}
+		return checkedCounter;
+	}
 
-  function returnCurrentGroups(whichGroup) {
-    let groups = [];
-    for (let group of groupsList) {
-      if (group.checked) {
-        groups.push(group);
-      }
-    }
+	function returnCurrentGroups(whichGroup) {
+		let groups = [];
+		for (let group of groupsList) {
+			if (group.checked) {
+				groups.push(group);
+			}
+		}
 
-    if (whichGroup === "groupA") {
-      return groups[0];
-    }
-    if (whichGroup === "groupB") {
-      return groups[1];
-    }
-  }
+		if (whichGroup === "groupA") {
+			return groups[0];
+		}
+		if (whichGroup === "groupB") {
+			return groups[1];
+		}
+	}
 
-  const dispatch = useDispatch();
-  const userId = useSelector((state) => state.userReducer.userId);
-  useEffect(async () => {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
-    );
-    const groups = await response.json();
-    const newGroups = groups.map((group) => {
-      return { ...group, checked: false };
-    });
-    setGroupsList(newGroups.reverse());
-  }, []);
+	const dispatch = useDispatch();
+	const userId = useSelector((state) => state.userReducer.userId);
+	useEffect(async () => {
+		const response = await fetch(
+			`${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
+		);
+		const groups = await response.json();
+		const newGroups = groups.map((group) => {
+			return { ...group, checked: false };
+		});
+		setGroupsList(newGroups.reverse());
+	}, []);
 
-  async function combineGroups(groupName) {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/combine-groups`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          groupName: groupName,
-          groupA: returnCurrentGroups("groupA"),
-          groupB: returnCurrentGroups("groupB"),
-        }),
-      }
-    );
+	async function combineGroups(groupName) {
+		const response = await fetch(
+			`${process.env.React_App_HEROKU_SERVER_URL}/combine-groups`,
+			{
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: userId,
+					groupName: groupName,
+					groupA: returnCurrentGroups("groupA"),
+					groupB: returnCurrentGroups("groupB"),
+				}),
+			}
+		);
 
-    const data = await response.json();
-    setGroupsList(data.groups);
+		const data = await response.json();
+		setGroupsList(data.groups);
 
-    setState({
-      ...state,
-      isCombineGroups: false,
-    });
-  }
+		setState({
+			...state,
+			isCombineGroups: false,
+		});
+	}
 
-  function handleInputs({ target }) {
-    const { name, value } = target;
-    let currentState = { ...state };
-    currentState[name] = value;
-    setState(currentState);
-  }
+	function handleInputs({ target }) {
+		const { name, value } = target;
+		let currentState = { ...state };
+		currentState[name] = value;
+		setState(currentState);
+	}
 
-  async function deleteItem(id, container, setContainer) {
-    const response = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/group`,
-      {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId,
-          groupId: id,
-        }),
-      }
-    );
+	async function deleteItem(id, container, setContainer) {
+		const response = await fetch(
+			`${process.env.React_App_HEROKU_SERVER_URL}/group`,
+			{
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId,
+					groupId: id,
+				}),
+			}
+		);
 
-    const data = await response.json();
-    setContainer(container.filter((item) => item._id != id));
-  }
+		setContainer(container.filter((item) => item._id != id));
+	}
 
-  function fetchCurrentContactList(groupOfContacts) {
-    dispatch(fetchContactsList(groupOfContacts));
-  }
+	function fetchCurrentContactList(groupOfContacts) {
+		dispatch(fetchContactsList(groupOfContacts));
+	}
 
-  function nextStep(groupName) {
-    let bool = false;
-    setState({
-      ...state,
-      isCombineGroups: bool,
-    });
-    combineGroups(groupName);
-  }
+	function nextStep(groupName) {
+		let bool = false;
+		setState({
+			...state,
+			isCombineGroups: bool,
+		});
+		combineGroups(groupName);
+	}
 
-  return (
-    <section id="groups-page">
-      <header className="groups-page-main-header">
-        <div className="groups-page-main-header-right-side">
-          <div className="groups-page-main-header-title-container">
-            <p className="groups-page-main-header-title">כל הקבוצות שלי</p>
-          </div>
-        </div>
+	return (
+		<section id="groups-page">
+			<header className="groups-page-main-header">
+				<div className="groups-page-main-header-right-side">
+					<div className="groups-page-main-header-title-container">
+						<p className="groups-page-main-header-title">כל הקבוצות שלי</p>
+					</div>
+				</div>
 
-        <div className="groups-page-main-header-left-side">
-          <div className="groups-page-main-header-search-container">
-            <input
-              name="searchGroups"
-              className="groups-page-main-header-search"
-              type="text"
-              placeholder="חיפוש משתתפים או קבוצות"
-              onChange={(event) => handleInputs(event)}
-            />
-          </div>
-          <div className="groups-page-main-header-merge-groups-button-container">
-            <button
-              disabled={
-                !state.isCombineGroups || 2 === checkedCounter() ? false : true
-              }
-              onClick={() => {
-                if (2 === checkedCounter()) {
-                  setOpenSingleField(true);
-                } else {
-                  setState({
-                    ...state,
-                    isCombineGroups: true,
-                  });
-                }
-              }}
-              className="groups-page-main-header-merge-groups-button"
-            >
-              {state.isCombineGroups ? "איחוד" : "איחוד קבוצות"}
-            </button>
-          </div>
-          <div className="groups-page-main-header-add-new-group-button-container">
-            <Link to="/AddGroup">
-              <div className="groups-page-main-header-add-new-group-button">
-                <NewGroupIcon />
-              </div>
-            </Link>
-          </div>
-        </div>
-      </header>
+				<div className="groups-page-main-header-left-side">
+					<div className="groups-page-main-header-search-container">
+						<input
+							name="searchGroups"
+							className="groups-page-main-header-search"
+							type="text"
+							placeholder="חיפוש משתתפים או קבוצות"
+							onChange={(event) => handleInputs(event)}
+						/>
+					</div>
+					<div className="groups-page-main-header-merge-groups-button-container">
+						<button
+							disabled={
+								!state.isCombineGroups || 2 === checkedCounter() ? false : true
+							}
+							onClick={() => {
+								if (2 === checkedCounter()) {
+									setOpenSingleField(true);
+								} else {
+									setState({
+										...state,
+										isCombineGroups: true,
+									});
+								}
+							}}
+							className="groups-page-main-header-merge-groups-button"
+						>
+							{state.isCombineGroups ? "איחוד" : "איחוד קבוצות"}
+						</button>
+					</div>
+					<div className="groups-page-main-header-add-new-group-button-container">
+						<Link to="/AddGroup">
+							<div className="groups-page-main-header-add-new-group-button">
+								<NewGroupIcon />
+							</div>
+						</Link>
+					</div>
+				</div>
+			</header>
 
-      <div className="groups-page-groups-container-header">
-        <div className="groups-page-groups-container-header-first-column">
-          <p>שם הקבוצה</p>
-        </div>
-        <div className="groups-page-groups-container-header-second-column">
-          <p>כמות משתתפים</p>
-        </div>
-        <div className="groups-page-groups-container-header-third-column">
-          <p>תאריך יצירה</p>
-        </div>
-      </div>
-      <div className="groups-page-groups-list">
-        {state.searchGroups &&
-          groupsList.map((group, index) => {
-            if (group.groupName.includes(state.searchGroups)) {
-              return (
-                <ListItems
-                  isCombineGroups={state.isCombineGroups}
-                  id={group._id}
-                  onClickEvent={deleteItem}
-                  onClickEventParams={[groupsList, setGroupsList]}
-                  openItem={fetchCurrentContactList}
-                  key={index}
-                  item={[
-                    group.groupName,
-                    group.amount,
-                    group.productionDate,
-                    group,
-                  ]}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        {!state.searchGroups &&
-          groupsList.map((group, index) => {
-            return (
-              <ListItems
-                isCombineGroups={state.isCombineGroups}
-                id={group._id}
-                onClickEvent={deleteItem}
-                onClickEventParams={[groupsList, setGroupsList]}
-                openItem={fetchCurrentContactList}
-                key={index}
-                item={[
-                  group.groupName,
-                  group.amount,
-                  group.productionDate,
-                  group,
-                ]}
-              />
-            );
-          })}
-      </div>
-      {openSingleField && (
-        <AddSingleField
-          setOpenField={setOpenSingleField}
-          nextStep={nextStep}
-          useCurrentData={[currentGroup, setCurrentGroup]}
-          containerNameKey={"groupName"}
-          fieldsNames={"שם הקבוצה החדשה:"}
-          isCombineGroups={true}
-        />
-      )}
-      {state.isCombineGroups && (
-        <button
-          onClick={() => {
-            const newGroupList = groupsList.map((group) => {
-              if (group.checked) {
-                group.checked = false;
-              }
-              return group;
-            });
+			<div className="groups-page-groups-container-header">
+				<div className="groups-page-groups-container-header-first-column">
+					<p>שם הקבוצה</p>
+				</div>
+				<div className="groups-page-groups-container-header-second-column">
+					<p>כמות משתתפים</p>
+				</div>
+				<div className="groups-page-groups-container-header-third-column">
+					<p>תאריך יצירה</p>
+				</div>
+			</div>
+			<div className="groups-page-groups-list">
+				{state.searchGroups &&
+					groupsList.map((group, index) => {
+						if (group.groupName.includes(state.searchGroups)) {
+							return (
+								<ListItems
+									isCombineGroups={state.isCombineGroups}
+									id={group._id}
+									onClickEvent={deleteItem}
+									onClickEventParams={[groupsList, setGroupsList]}
+									openItem={fetchCurrentContactList}
+									key={index}
+									item={[
+										group.groupName,
+										group.amount,
+										group.productionDate,
+										group,
+									]}
+								/>
+							);
+						} else {
+							return null;
+						}
+					})}
+				{!state.searchGroups &&
+					groupsList.map((group, index) => {
+						return (
+							<ListItems
+								isCombineGroups={state.isCombineGroups}
+								id={group._id}
+								onClickEvent={deleteItem}
+								onClickEventParams={[groupsList, setGroupsList]}
+								openItem={fetchCurrentContactList}
+								key={index}
+								item={[
+									group.groupName,
+									group.amount,
+									group.productionDate,
+									group,
+								]}
+							/>
+						);
+					})}
+			</div>
+			{openSingleField && (
+				<AddSingleField
+					setOpenField={setOpenSingleField}
+					nextStep={nextStep}
+					useCurrentData={[currentGroup, setCurrentGroup]}
+					containerNameKey={"groupName"}
+					fieldsNames={"שם הקבוצה החדשה:"}
+					isCombineGroups={true}
+				/>
+			)}
+			{state.isCombineGroups && (
+				<button
+					onClick={() => {
+						const newGroupList = groupsList.map((group) => {
+							if (group.checked) {
+								group.checked = false;
+							}
+							return group;
+						});
 
-            setGroupsList(newGroupList);
-            setState({
-              ...state,
-              isCombineGroups: false,
-            });
-          }}
-          className="remove-combine-groups-mode"
-        >
-          בטל איחוד
-        </button>
-      )}
-    </section>
-  );
+						setGroupsList(newGroupList);
+						setState({
+							...state,
+							isCombineGroups: false,
+						});
+					}}
+					className="remove-combine-groups-mode"
+				>
+					בטל איחוד
+				</button>
+			)}
+		</section>
+	);
 }
 
 export default GroupsList;

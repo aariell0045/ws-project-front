@@ -1,226 +1,157 @@
 import React, { useEffect, useState } from "react";
 import AddEvents from "../add-events/add-events.component";
 import "./home.styles.css";
-import ArrowDownIcon from "../../icons/icons-components/arrow-down-icon/arrow-down-icon.component";
-import TrashIcon from "../../icons/icons-components/trash-icon/trash-icon.component";
-import ArrowLeftIcon from "../../icons/icons-components/arrow-left-icon/arrow-left-icon.component";
 import ListItem2 from "../list-item-2/list-item2.component";
-import image2 from "../../images/qr-code.png";
 import { useSelector } from "react-redux";
+import Calender from "../calender/calender.component";
 
 function Home() {
-  const [state, setState] = useState({
-    openAddTaskWindow: false,
-    openAddEventWindow: false,
-    pointerEvents: "",
-  });
+	const [state, setState] = useState({
+		openAddTaskWindow: false,
+		openAddEventWindow: false,
+		pointerEvents: "",
+	});
 
-  const [tasks, setTasks] = useState([]);
-  const [events, setEvents] = useState([]);
-  const userId = useSelector((state) => state.userReducer.userId);
+	const [tasks, setTasks] = useState([]);
+	const [events, setEvents] = useState([]);
+	const userId = useSelector((state) => state.userReducer.userId);
 
-  useEffect(async () => {
-    const eventResponse = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/event/${userId}`
-    );
-    const taskResponse = await fetch(
-      `${process.env.React_App_HEROKU_SERVER_URL}/task/${userId}`
-    );
-    const eventData = await eventResponse.json();
-    const taskData = await taskResponse.json();
-    const newEventData = eventData.map((event) => {
-      return {
-        ...event,
-        taskName: event.eventName,
-        taskColor: event.eventColor,
-        taskContent: event.eventContent,
-      };
-    });
-    setTasks(taskData);
-    setEvents(newEventData);
-  }, []);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	useEffect(async () => {
+		const taskResponse = await fetch(
+			`${process.env.React_App_HEROKU_SERVER_URL}/task/${userId}`
+		);
+		const taskData = await taskResponse.json();
+		setTasks(taskData);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-  function openWindow(windowKey) {
-    let currentState = { ...state };
-    currentState.pointerEvents = "none";
-    currentState[windowKey] = true;
-    setState(currentState);
-  }
+	function openWindow(windowKey) {
+		let currentState = { ...state };
+		currentState.pointerEvents = "none";
+		currentState[windowKey] = true;
+		setState(currentState);
+	}
 
-  function openItem(itemContainer, index, setContainer) {
-    let currentTaksState = [...itemContainer];
-    currentTaksState[index].isOpen = !currentTaksState[index].isOpen;
-    setContainer(currentTaksState);
-  }
+	function openItem(itemContainer, index, setContainer) {
+		let currentTaksState = [...itemContainer];
+		currentTaksState[index].isOpen = !currentTaksState[index].isOpen;
+		setContainer(currentTaksState);
+	}
 
-  async function deleteItem(id, windowKey, container, setContainer) {
-    if (windowKey === "openAddTaskWindow") {
-      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/task`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          taksId: id,
-        }),
-      });
-      for (let item of container) {
-      }
-      setContainer(container.filter((item) => item._id != id));
-    } else {
-      await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/event`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userId,
-          eventId: id,
-        }),
-      });
-      for (let item of container) {
-      }
-      setContainer(container.filter((item) => item._id != id));
-    }
-  }
+	async function deleteItem(id, windowKey, container, setContainer) {
+		if (windowKey === "openAddTaskWindow") {
+			const response = await fetch(
+				`${process.env.React_App_HEROKU_SERVER_URL}/task`,
+				{
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						userId: userId,
+						taksId: id,
+					}),
+				}
+			);
+			const user = await response.json();
+			console.log(user);
+			setContainer(container.filter((item) => item._id != id));
+		} else {
+			await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/event`, {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: userId,
+					eventId: id,
+				}),
+			});
+			setContainer(container.filter((item) => item._id != id));
+		}
+	}
 
-  return (
-    <section id="home-page">
-      <div
-        style={{ pointerEvents: state.pointerEvents }}
-        className="home-page-warpper"
-      >
-        <div className="home-page-right-side">
-          <header className="home-page-left-side-main-header">
-            <p className="home-page-left-side-header-content">
-              ערב טוב,
-              <span className="home-page-left-side-header-content-username-name">
-                ישראל
-              </span>
-              !
-            </p>
-            <input
-              className="home-page-left-side-main-input"
-              type="text"
-              placeholder={`חיפוש מהיר, (לדוג' שם קבוצה או שם הודעה..)`}
-            />
-          </header>
+	return (
+		<section id="home-page">
+			<div
+				style={{ pointerEvents: state.pointerEvents }}
+				className="home-page-warpper"
+			>
+				<div className="home-page-right-side">
+					<header className="home-page-left-side-main-header">
+						<p className="home-page-left-side-header-content">
+							ערב טוב,
+							<span className="home-page-left-side-header-content-username-name">
+								ישראל
+							</span>
+							!
+						</p>
+						<input
+							className="home-page-left-side-main-input"
+							type="text"
+							placeholder={`חיפוש מהיר, (לדוג' שם קבוצה או שם הודעה..)`}
+						/>
+					</header>
 
-          <div className="my-tasks-container">
-            <div className="my-tasks-main-header">
-              <p className="my-tasks-header-content">המשימות שלי</p>
-            </div>
-            <div className="my-tasks-list">
-              {tasks.map((task, index) => {
-                return (
-                  <ListItem2
-                    id={task._id}
-                    onClickEvent={deleteItem}
-                    onClickEventParams={[tasks, setTasks]}
-                    key={index}
-                    itemColor={task.taskColor}
-                    itemName={task.taskName}
-                    itemDescription={task.taskContent}
-                    itemIsOpen={task.isOpen}
-                    index={index}
-                    openItem={openItem}
-                    itemContainer={tasks}
-                    setContainer={setTasks}
-                    windowKey="openAddTaskWindow"
-                  />
-                );
-              })}
-            </div>
-            <div className="my-task-button-warpper">
-              <button
-                disabled={state.openAddTaskWindow}
-                onClick={() => openWindow("openAddTaskWindow")}
-                className="add-new-task-button"
-              >
-                משימה חדשה
-              </button>
-            </div>
-          </div>
-        </div>
+					<div className="my-tasks-container">
+						<div className="my-tasks-main-header">
+							<p className="my-tasks-header-content">המשימות שלי</p>
+						</div>
+						<div className="my-tasks-list">
+							{tasks.map((task, index) => {
+								return (
+									<ListItem2
+										key={index}
+										id={task._id}
+										onClickEvent={deleteItem}
+										onClickEventParams={[tasks, setTasks]}
+										itemColor={task.taskColor}
+										itemName={task.taskName}
+										itemDescription={task.taskContent}
+										itemIsOpen={task.isOpen}
+										index={index}
+										openItem={openItem}
+										itemContainer={tasks}
+										setContainer={setTasks}
+										windowKey="openAddTaskWindow"
+									/>
+								);
+							})}
+						</div>
+						<div className="my-task-button-warpper">
+							<button
+								disabled={state.openAddTaskWindow}
+								onClick={() => openWindow("openAddTaskWindow")}
+								className="add-new-task-button"
+							>
+								משימה חדשה
+							</button>
+						</div>
+					</div>
+				</div>
 
-        <div className="home-page-left-side">
-          <div className="home-page-right-warpper">
-            <div className="calander">
-              <div className="calander-date">
-                <p className="home-page-left-arrow">left</p>
-                <p className="home-page-date-content">פברואר 2021</p>
-                <p classNames="home-page-left-arrow">right</p>
-              </div>
-              <div className="week-days-warpper">
-                <div className="week-days">
-                  <p className="day">א'</p>
-                  <p className="day">ב'</p>
-                  <p className="day">ג'</p>
-                  <p className="day">ד'</p>
-                  <p className="day">ה'</p>
-                  <p className="day">ו'</p>
-                  <p className="day">ש'</p>
-                </div>
-              </div>
-              <div className="dates-list"></div>
-            </div>
-            <div className="home-page-events">
-              <div className="calander-date">
-                <p className="home-page-left-arrow">left</p>
-                <p className="home-page-date-content">פברואר 2021</p>
-                <p classNames="home-page-left-arrow">right</p>
-              </div>
-              <div className="my-tasks-list-warpper">
-                <div className="my-events-list">
-                  {events.map((event, index) => {
-                    return (
-                      <ListItem2
-                        id={event._id}
-                        onClickEvent={deleteItem}
-                        onClickEventParams={[events, setEvents]}
-                        key={index}
-                        itemColor={event.taskColor}
-                        itemName={event.taskName}
-                        itemDescription={event.taskContent}
-                        itemIsOpen={event.isOpen}
-                        index={index}
-                        openItem={openItem}
-                        itemContainer={events}
-                        setContainer={setEvents}
-                        windowKey="openAddEventWindow"
-                      />
-                    );
-                  })}
-                </div>
-                <div className="my-task-button-warpper-2 my-task-button-warpper">
-                  <button
-                    disabled={state.openAddEventWindow}
-                    onClick={() => openWindow("openAddEventWindow")}
-                    className="add-new-task-button"
-                  >
-                    אירוע חדש
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {state.openAddTaskWindow && (
-        <AddEvents
-          useState={[state, setState]}
-          useTasks={[tasks, setTasks]}
-          tasksDetails={["משימה חדשה", "שם משימה"]}
-          windowKey="openAddTaskWindow"
-        />
-      )}
-      {state.openAddEventWindow && (
-        <AddEvents
-          useState={[state, setState]}
-          useTasks={[events, setEvents]}
-          tasksDetails={["אירוע חדש", "שם אירוע"]}
-          windowKey="openAddEventWindow"
-        />
-      )}
-    </section>
-  );
+				<div className="home-page-left-side">
+					<div className="home-page-right-warpper">
+						<Calender />
+						<div className="home-page-events"></div>
+					</div>
+				</div>
+			</div>
+			{state.openAddTaskWindow && (
+				<AddEvents
+					useState={[state, setState]}
+					useTasks={[tasks, setTasks]}
+					tasksDetails={["משימה חדשה", "שם משימה"]}
+					windowKey="openAddTaskWindow"
+				/>
+			)}
+			{state.openAddEventWindow && (
+				<AddEvents
+					useState={[state, setState]}
+					useTasks={[events, setEvents]}
+					tasksDetails={["אירוע חדש", "שם אירוע"]}
+					windowKey="openAddEventWindow"
+				/>
+			)}
+		</section>
+	);
 }
 
 export default Home;
