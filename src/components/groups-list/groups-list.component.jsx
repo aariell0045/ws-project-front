@@ -76,9 +76,7 @@ function GroupsList() {
 	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.userReducer.userId);
 	useEffect(async () => {
-		const response = await fetch(
-			`${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`
-		);
+		const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`);
 		const groups = await response.json();
 		const newGroups = groups.map((group) => {
 			return { ...group, checked: false };
@@ -87,22 +85,19 @@ function GroupsList() {
 	}, []);
 
 	async function combineGroups(groupName) {
-		const response = await fetch(
-			`${process.env.React_App_HEROKU_SERVER_URL}/combine-groups`,
-			{
-				method: "PUT",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					userId: userId,
-					groupName: groupName,
-					groupA: returnCurrentGroups("groupA"),
-					groupB: returnCurrentGroups("groupB"),
-				}),
-			}
-		);
+		const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/combine-groups`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId: userId,
+				groupName: groupName,
+				groupA: returnCurrentGroups("groupA"),
+				groupB: returnCurrentGroups("groupB"),
+			}),
+		});
 
 		const data = await response.json();
-		setGroupsList(data.groups);
+		setGroupsList(data.groups.reverse());
 
 		setState({
 			...state,
@@ -118,17 +113,14 @@ function GroupsList() {
 	}
 
 	async function deleteItem(id, container, setContainer) {
-		const response = await fetch(
-			`${process.env.React_App_HEROKU_SERVER_URL}/group`,
-			{
-				method: "DELETE",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					userId,
-					groupId: id,
-				}),
-			}
-		);
+		await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userId,
+				groupId: id,
+			}),
+		});
 
 		setContainer(container.filter((item) => item._id != id));
 	}
@@ -167,9 +159,7 @@ function GroupsList() {
 					</div>
 					<div className="groups-page-main-header-merge-groups-button-container">
 						<button
-							disabled={
-								!state.isCombineGroups || 2 === checkedCounter() ? false : true
-							}
+							disabled={!state.isCombineGroups || 2 === checkedCounter() ? false : true}
 							onClick={() => {
 								if (2 === checkedCounter()) {
 									setOpenSingleField(true);
@@ -218,12 +208,7 @@ function GroupsList() {
 									onClickEventParams={[groupsList, setGroupsList]}
 									openItem={fetchCurrentContactList}
 									key={index}
-									item={[
-										group.groupName,
-										group.amount,
-										group.productionDate,
-										group,
-									]}
+									item={[group.groupName, group.amount, group.productionDate, group]}
 								/>
 							);
 						} else {
@@ -240,12 +225,7 @@ function GroupsList() {
 								onClickEventParams={[groupsList, setGroupsList]}
 								openItem={fetchCurrentContactList}
 								key={index}
-								item={[
-									group.groupName,
-									group.amount,
-									group.productionDate,
-									group,
-								]}
+								item={[group.groupName, group.amount, group.productionDate, group]}
 							/>
 						);
 					})}

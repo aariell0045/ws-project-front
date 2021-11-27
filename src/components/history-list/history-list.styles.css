@@ -1,193 +1,214 @@
 #hisotry-page {
-  width: 100%;
-  height: 100vh;
+	width: 100%;
+	height: 100vh;
 }
 
 .history-page-main-header {
-  display: grid;
-  width: 100%;
-  height: fit-content;
-  grid-template-columns: repeat(2, 1fr);
-  padding-top: 6vh;
+	display: grid;
+	width: 100%;
+	height: fit-content;
+	grid-template-columns: repeat(2, 1fr);
+	padding-top: 6vh;
 }
 
 .history-page-main-header-right-side {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .history-page-main-header-left-side {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
 
 .history-page-main-header-text-content {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.7vw;
-  padding-right: 4vw;
-  color: #ffffff;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.7vw;
+	padding-right: 4vw;
+	color: #ffffff;
 }
 
 .history-page-main-header-input {
-  background: rgba(255, 255, 255, 0.2);
-  border: 0.11vw solid #000000;
-  border-radius: 2vh;
-  width: 25vw;
-  height: 5vh;
-  outline: none;
-  padding-right: 1em;
-  font-size: 1vw;
-  margin-left: 5vw;
+	background: rgba(255, 255, 255, 0.2);
+	border: 0.11vw solid #000000;
+	border-radius: 2vh;
+	width: 25vw;
+	height: 5vh;
+	outline: none;
+	padding-right: 1em;
+	font-size: 1vw;
+	margin-left: 5vw;
 }
 
 .history-page-main-header-input::placeholder {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1vw;
-  /* identical to box height */
-  text-align: right;
-  color: #000000;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1vw;
+	/* identical to box height */
+	text-align: right;
+	color: #000000;
 }
 
 .history-page-list-container {
-  width: 100%;
-  height: 75vh;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: center;
-  gap: 1vh;
-  overflow-y: scroll;
-  margin-top: 1vh;
+	width: 100%;
+	height: 75vh;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	align-items: center;
+	gap: 1vh;
+	overflow-y: scroll;
+	margin-top: 1vh;
 }
 
 .history-page-list-container::-webkit-scrollbar {
-  width: 0px;
+	width: 0px;
 }
 
 .history-page-list-four-item {
-  margin-left: 7vw;
+	margin-left: 7vw;
+}
+
+.history-page-list-item-wrapper {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	width: 90%;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 10px;
 }
 
 .history-page-list-item {
-  width: 90%;
-  height: 6.5vh;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  display: flex;
-  justify-content: flex-start;
-  gap: 6vw;
-  min-height: 6.5vh;
-  position: relative;
-  cursor: pointer;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	position: relative;
+	cursor: pointer;
+	grid-gap: 6vw;
+	gap: 6vw;
+	min-height: 6.5vh;
 }
 
-.history-page-list-item:hover {
-  background: #ffffff;
+.history-page-list-item-wrapper:hover {
+	background: #ffffff;
 }
 
 .history-page-list-content-item-warpper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-top: 15px;
+
+	width: 100%;
 }
 
 .history-page-list-first-item {
-  margin-right: -3vw;
+	margin-right: -3vw;
 }
 
 .history-page-content-message-name {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.3vw;
-  line-height: 33px;
-  /* identical to box height */
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.3vw;
+	line-height: 33px;
+	/* identical to box height */
 
-  text-align: right;
+	text-align: right;
 
-  color: #000000;
+	color: #000000;
 }
 .history-page-content {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 1.3vw;
-  line-height: 33px;
-  /* identical to box height */
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 1.3vw;
+	line-height: 33px;
+	/* identical to box height */
 
-  text-align: right;
+	text-align: right;
 
-  color: #000000;
+	color: #000000;
 }
 
 .history-page-icon {
-  font-size: 0.9vw;
+	font-size: 0.9vw;
 }
 
 .history-page-list-container-header {
-  width: 100%;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  margin-top: 5vh;
+	width: 100%;
+	height: 5vh;
+	display: flex;
+	justify-content: center;
+	margin-top: 5vh;
 }
 
 .history-page-list-item-header {
-  width: 90%;
-  height: 5vh;
-  border-radius: 10px;
-  display: flex;
-  justify-content: flex-start;
-  gap: 6vw;
-  min-height: 5vh;
-  /* background-color: none; */
+	width: 90%;
+	height: 5vh;
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+	gap: 6vw;
+	min-height: 5vh;
+	/* background-color: none; */
 }
 
 .history-page-list-content-item-warpper-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .history-page-content-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.2vw;
-  line-height: 33px;
-  /* identical to box height */
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.2vw;
+	line-height: 33px;
+	/* identical to box height */
 
-  text-align: right;
+	text-align: right;
 
-  color: #ffffff;
+	color: #ffffff;
 }
 
 .history-page-icon-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 0.9vw;
-  line-height: 33px;
-  /* identical to box height */
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 0.9vw;
+	line-height: 33px;
+	/* identical to box height */
 
-  text-align: right;
+	text-align: right;
 
-  color: #ffffff;
+	color: #ffffff;
 }
 
 .history-page-list-open-item-icon {
-  position: absolute;
-  left: 2vw;
-  height: 3.5vh;
-  display: flex;
-  align-items: center;
-  padding-top: 1.8vh;
+	position: absolute;
+	left: 2vw;
+	height: 3.5vh;
+	display: flex;
+	align-items: center;
+	padding-top: 1.8vh;
+}
+
+.history-content {
+	width: 90%;
+}
+
+.history-content p {
+	white-space: pre-wrap;
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 45px;
 }

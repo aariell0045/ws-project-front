@@ -4,33 +4,23 @@ import { useSelector } from "react-redux";
 import * as Handler from "./handler.js";
 import * as CONSTENT from "./constents.js";
 import "./calender.styles.css";
-import Events from "../events/event.component.jsx";
+import Events from "../events/events.component.jsx";
 import RightArrowIcon from "../../icons/icons-components/right-icon-arrow";
 import LeftArrowIcon from "../../icons/icons-components/left-icon-arrow/index.jsx";
 function Calender() {
 	const [events, setEvents] = useState([]);
-	const [currentDayInTheWeek, setCurrentDayInTheWeek] = useState(
-		new Date().getDay()
-	);
+	const [currentDayInTheWeek, setCurrentDayInTheWeek] = useState(new Date().getDay());
 	const [yearSlider, setYearSlider] = useState(new Date().getFullYear());
 	const [monthSlider, setMonthSlider] = useState(new Date().getMonth() + 1);
-	const [calenderTemplate, setCalenderTemplate] = useState(
-		CONSTENT.CALENDER_TEMPLATE
-	);
+	const [calenderTemplate, setCalenderTemplate] = useState(CONSTENT.CALENDER_TEMPLATE);
 	const [currentDate, setCurrentDate] = useState(
-		`${new Date().getDate()}/${
-			new Date().getMonth() + 1
-		}/${new Date().getFullYear()}`
+		`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`
 	);
 	const userId = useSelector((state) => state.userReducer.userId);
 
 	useEffect(() => {
 		let isMounted = true;
-		const newClaenderTemplate = Handler.calenderTemplateFun(
-			calenderTemplate,
-			monthSlider,
-			yearSlider
-		);
+		const newClaenderTemplate = Handler.calenderTemplateFun(calenderTemplate, monthSlider, yearSlider);
 		setCalenderTemplate(newClaenderTemplate);
 		(async (userId) => {
 			const allEvents = await Handler.fetchAllEvents(userId);
@@ -42,13 +32,7 @@ function Calender() {
 	}, []);
 	console.log("renderer");
 
-	const sliderMove = Handler.monthsSlider(
-		monthSlider,
-		setMonthSlider,
-		calenderTemplate,
-		yearSlider,
-		setYearSlider
-	);
+	const sliderMove = Handler.monthsSlider(monthSlider, setMonthSlider, calenderTemplate, yearSlider, setYearSlider);
 
 	return (
 		<div className="calender">
@@ -108,16 +92,11 @@ function Calender() {
 											>
 												<div
 													style={{
-														opacity:
-															`${day}/${monthSlider}/${yearSlider}` ===
-															currentDate
-																? 1
-																: 0.4,
+														opacity: `${day}/${monthSlider}/${yearSlider}` === currentDate ? 1 : 0.4,
 													}}
 													className="calender-cube-background"
 												></div>
-												{events[`${day}/${monthSlider}/${yearSlider}`]?.events
-													?.length ? (
+												{events[`${day}/${monthSlider}/${yearSlider}`]?.events?.length ? (
 													<span className="saved-events"></span>
 												) : null}
 												{day}

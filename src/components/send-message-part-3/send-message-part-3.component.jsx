@@ -7,18 +7,15 @@ import DisplayPhone from "../../icons/icons-components/display-phone/display-pho
 import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import WhatsappIcon from "../../icons/icons-components/whatsapp-icon";
 const { ipcRenderer } = window.require("electron");
 
 function SendMessagePart3() {
 	const [starterIndex, setStarterIndex] = useState(0);
 	const [endIndex, setEndIndex] = useState(0);
 	const [currentMessageFromState, setCurrentMessageFromState] = useState(null);
-	const currentGroup = useSelector(
-		(state) => state.messageToSendReducer.currentGroup
-	);
-	const currentMessage = useSelector(
-		(state) => state.messageToSendReducer.currentMessage
-	);
+	const currentGroup = useSelector((state) => state.messageToSendReducer.currentGroup);
+	const currentMessage = useSelector((state) => state.messageToSendReducer.currentMessage);
 	const userId = useSelector((state) => state.userReducer.userId);
 	useEffect(() => {
 		setCurrentMessageFromState(currentMessage);
@@ -68,80 +65,69 @@ function SendMessagePart3() {
 					</Link>
 					<p>כל הפרטים לפני ששולחים:</p>
 				</header>
-				<div className="content-phone-box">
-					{currentMessage.contentMessage.map((message, index) => {
-						return (
-							<div
-								key={index}
-								style={{
-									width: "fit-content",
-									height: "fit-content",
-								}}
-								id={message.id}
-							>
-								<picture>
-									{message.mediaSrc && (
-										<div
-											style={{
-												display: "flex",
-												alignItems: "center",
-												gap: "1vw",
-												padding: "1vw",
-											}}
-										>
-											<FontAwesomeIcon size="2x" icon={faCheckCircle} />
-											<span>התמונה עלתה בהצלחה</span>
-											<span
-												onClick={() => {
-													restImage(index);
+				<div className="display-phone">
+					<div className="display-phone-content">
+						{currentMessage.contentMessage.map((message, index) => {
+							return (
+								<>
+									<picture key={index}>
+										{message.mediaSrc && (
+											<div
+												style={{
+													display: "flex",
+													alignItems: "center",
+													gap: "1vw",
+													padding: "1vw",
 												}}
 											>
-												X
-											</span>
-										</div>
-									)}
-									{!message.mediaSrc && (
-										<div
-											style={{
-												display: "flex",
-												justifyContent: "center",
-												alignItems: "center",
-												marginBottom: "2em",
-											}}
-										>
-											<input
-												accept=".jpg, .png, .gif, .svg, .jpeg, .mp4, .mov, .wmv, .flv, .avi, .avchd, .mkv, .webm,"
-												style={{ display: "none" }}
-												type="file"
-												name={index + ""}
-												id={index + ""}
-												onChange={(event) => {
-													uploadMedia(event, index);
+												<FontAwesomeIcon size="2x" icon={faCheckCircle} />
+												<span>התמונה עלתה בהצלחה</span>
+												<span
+													onClick={() => {
+														restImage(index);
+													}}
+												>
+													X
+												</span>
+											</div>
+										)}
+										{!message.mediaSrc && (
+											<div
+												style={{
+													display: "flex",
+													justifyContent: "center",
+													alignItems: "center",
+													margin: "2em 0px",
 												}}
-											/>
-											<label style={{ zIndex: 1 }} htmlFor={index + ""}>
-												<Button style={{ zIndex: -1 }} variant="contained">
-													העלאת קובץ
-												</Button>
-											</label>
-										</div>
-									)}
-								</picture>
+											>
+												<input
+													accept=".jpg, .png, .gif, .svg, .jpeg, .mp4, .mov, .wmv, .flv, .avi, .avchd, .mkv, .webm,"
+													style={{ display: "none" }}
+													type="file"
+													name={index + ""}
+													id={index + ""}
+													onChange={(event) => {
+														uploadMedia(event, index);
+													}}
+												/>
+												<label style={{ zIndex: 1 }} htmlFor={index + ""}>
+													<Button style={{ zIndex: -1 }} variant="contained">
+														העלאת קובץ
+													</Button>
+												</label>
+											</div>
+										)}
+									</picture>
 
-								<div
-									style={{ minWidth: "15vw" }}
-									className="send-messages-part-1-left-side-message-field"
-								>
-									<div>
-										<p>{message.contentField}</p>
+									<div style={{ minWidth: "15vw" }} className="send-messages-part-1-left-side-message-field">
+										<div>
+											<p>{message.contentField}</p>
+										</div>
 									</div>
-								</div>
-							</div>
-						);
-					})}
-				</div>
-				<div>
-					<DisplayPhone />
+								</>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 
@@ -151,9 +137,7 @@ function SendMessagePart3() {
 						<p>ההודעה תשלח לקבוצות הבאות:</p>
 					</header>
 
-					<div className="send-message-part3-group-name-container">
-						{currentGroup.groupName}
-					</div>
+					<div className="send-message-part3-group-name-container">{currentGroup.groupName}</div>
 				</div>
 
 				<header className="send-message-part3-sub-header">
@@ -162,16 +146,12 @@ function SendMessagePart3() {
 				<div className="send-message-part3-conditions-container">
 					<article className="send-message-part3-conditions-container-content">
 						<p>
-							כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל
-							יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו
-							כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים
-							כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל
-							תנאי השימוש כל יהיו כתובים כל תנאי השימושכל יהיו כתובים כל תנאי
-							השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש
-							כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימושכל יהיו
-							כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים
-							כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל
-							תנאי השימוש
+							כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים
+							כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש
+							כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימושכל יהיו כתובים כל
+							תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל
+							יהיו כתובים כל תנאי השימושכל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל
+							תנאי השימוש כל יהיו כתובים כל תנאי השימוש כל יהיו כתובים כל תנאי השימוש
 						</p>
 					</article>
 					<div className="i-agree-line">
@@ -218,8 +198,9 @@ function SendMessagePart3() {
 						}}
 						className="send-message-part-3-button"
 					>
-						<div className="send-message-part-3-button-background"></div>
+						<div disabled={false} className="send-message-part-3-button-background"></div>
 						לשליחה דרך
+						<WhatsappIcon />
 					</div>
 				</div>
 			</div>

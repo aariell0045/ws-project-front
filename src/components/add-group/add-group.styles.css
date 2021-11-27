@@ -1,265 +1,264 @@
 #add-group-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 
 .back-to-group a {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 2vh;
-  color: #ffffff;
-  cursor: pointer;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 2vh;
+	color: #ffffff;
+	cursor: pointer;
 }
 
 .back-to-group {
-  width: 100%;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 2vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #ffffff;
-  padding-top: 3vh;
-  padding-right: 3vw;
-  margin-bottom: 4vh;
+	width: 100%;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 2vh;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	color: #ffffff;
+	padding-top: 3vh;
+	padding-right: 3vw;
+	margin-bottom: 4vh;
 }
 
 #main-add-group-content {
-  width: 90%;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+	width: 90%;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
 .main-add-group-content-background {
-  position: absolute;
-  background: #ffffff;
-  opacity: 0.9;
-  border-radius: 20px;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
+	position: absolute;
+	background: #ffffff;
+	opacity: 0.9;
+	border-radius: 20px;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
 }
 
 .main-add-group-content-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 3vh;
-  line-height: 39px;
-  display: flex;
-  width: 100%;
-  height: 5vh;
-  padding: 1em;
-  color: #000000;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 3vh;
+	line-height: 39px;
+	display: flex;
+	width: 100%;
+	height: 5vh;
+	padding: 1em;
+	color: #000000;
 }
 
 .input-adding-group-name {
-  width: 30vw;
-  height: 4vh;
-  outline: none;
-  border: none;
-  direction: rtl;
-  background: #ffffff;
-  opacity: 0.9;
-  border-radius: 1.8vh;
-  font-family: Assistant;
-  color: black;
-  font-weight: 400;
-  font-size: 1.4em;
-  position: relative;
-  padding-right: 2%;
-  background-color: inherit;
-  border: 1px solid #a5a5a5;
-  box-sizing: border-box;
+	width: 30vw;
+	height: 4vh;
+	outline: none;
+	border: none;
+	direction: rtl;
+	background: #ffffff;
+	opacity: 0.9;
+	border-radius: 1.8vh;
+	font-family: Assistant;
+	color: black;
+	font-weight: 400;
+	font-size: 1.4em;
+	position: relative;
+	padding-right: 2%;
+	background-color: inherit;
+	border: 1px solid #a5a5a5;
+	box-sizing: border-box;
 }
 
 .span-explnation-for-input {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.7vh;
-  line-height: 33px;
-  padding-right: 2vw;
-  color: #000000;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 2.7vh;
+	line-height: 33px;
+	padding-right: 2vw;
+	color: #000000;
 }
 
 .upload-contact-from-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.5vh;
-  line-height: 33px;
-  margin-top: 4vh;
-  display: flex;
-  justify-content: flex-start;
-  padding-right: 2vw;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 2.5vh;
+	line-height: 33px;
+	margin-top: 4vh;
+	display: flex;
+	justify-content: flex-start;
+	padding-right: 2vw;
 
-  color: #000000;
+	color: #000000;
 }
 
 .upload-container {
-  display: flex;
-  padding-right: 2vw;
-  padding-top: 4vh;
-  gap: 2em;
+	display: flex;
+	padding-right: 2vw;
+	padding-top: 4vh;
+	gap: 2em;
 }
 
 .xlsx-icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10vw;
-  height: 10vw;
-  border-radius: 2.5vh;
-  border: 1px solid #dbd6d6;
-  box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 10vw;
+	height: 10vw;
+	border-radius: 2.5vh;
+	border: 1px solid #dbd6d6;
+	box-sizing: border-box;
 }
 
 .phone-icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10vw;
-  height: 10vw;
-  border-radius: 2.5vh;
-  border: 1px solid #dbd6d6;
-  box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 10vw;
+	height: 10vw;
+	border-radius: 2.5vh;
+	border: 1px solid #dbd6d6;
+	box-sizing: border-box;
 }
 
 #xlsx-upload-format {
-  height: 30vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	height: 30vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .xlsx-upload-format-header {
-  width: 100%;
-  display: flex;
-  margin-top: 4vh;
-  margin-right: 3vw;
-  justify-content: flex-start;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 33px;
+	width: 100%;
+	display: flex;
+	margin-top: 4vh;
+	margin-right: 3vw;
+	justify-content: flex-start;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 33px;
 
-  color: #000000;
+	color: #000000;
 }
 
 .process-explantion {
-  font-family: Assistant;
-  width: 100%;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 24px;
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 2.5vh;
-  margin-right: 3vw;
-  text-align: right;
+	font-family: Assistant;
+	width: 100%;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 24px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 2.5vh;
+	margin-right: 3vw;
+	text-align: right;
+	align-items: center;
 
-  color: #000000;
+	color: #000000;
 }
 
 .selects-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 78vw;
-  justify-content: flex-start;
-  margin-top: 5vh;
-  gap: 2em;
+	display: flex;
+	flex-wrap: wrap;
+	width: 78vw;
+	justify-content: flex-start;
+	margin-top: 5vh;
+	gap: 2em;
 }
 
 .xlsx-upload-format-input-warpper {
-  width: fit-content;
-  height: fit-content;
+	width: fit-content;
+	height: fit-content;
 }
 
 .xlsx-upload-format-input-box {
-  width: 10vw;
-  border-radius: 1vh;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 10vw;
+	border-radius: 1vh;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .xlsx-upload-format-input-box input {
-  width: 2vw;
-  border: none;
-  border-bottom: 1px solid black;
-  background-color: inherit;
-  margin-bottom: 1vh;
-  text-align: center;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.4vw;
-  color: #000000;
+	width: 2vw;
+	border: none;
+	border-bottom: 1px solid black;
+	background-color: inherit;
+	margin-bottom: 1vh;
+	text-align: center;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.4vw;
+	color: #000000;
 }
 
 .xlsx-upload-format-input-box input:focus {
-  outline: none;
+	outline: none;
 }
 
 .xlsx-upload-format-input-header {
-  text-align: center;
+	text-align: center;
 }
 
 .xlsx-upload-format-button-columns {
-  width: 7vw;
-  height: 5vh;
-  border-radius: 1.2vh;
-  border: 0.01vw solid black;
-  background-color: inherit;
-  font-size: 0.9vw;
-  font-weight: 400;
-  font-family: Assistant;
-  transform: scale(1);
-  transition: transform 0.5s;
+	width: 7vw;
+	height: 5vh;
+	border-radius: 1.2vh;
+	border: 0.01vw solid black;
+	background-color: inherit;
+	font-size: 0.9vw;
+	font-weight: 400;
+	font-family: Assistant;
+	transform: scale(1);
+	transition: transform 0.5s;
 }
 
 .xlsx-upload-format-button-columns:hover {
-  transform: scale(1.1);
-  transition: transform 0.5s;
+	transform: scale(1.1);
+	transition: transform 0.5s;
 }
 .upload-xlsx-input-file {
-  width: 8vw;
-  height: 5vh;
-  background-color: inherit;
-  border: 1px solid black;
-  border-radius: 1vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 4.2vw;
-  bottom: 2vh;
-  position: absolute;
+	width: 8vw;
+	height: 5vh;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 1vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 4.2vw;
+	bottom: 2vh;
+	position: absolute;
 }
 
 .selector {
-  position: absolute;
-  top: 10vh;
-  width: 10vw;
-  left: 30%;
+	width: 10vw;
+	padding-right: 4vw;
 }
 
 .selector label {
-  z-index: 1;
-  margin-top: 1vh;
+	z-index: 1;
+	margin-top: 1vh;
 }
 
 .icon-image-csv {
-  width: 5.5vh;
+	width: 5.5vh;
 }
