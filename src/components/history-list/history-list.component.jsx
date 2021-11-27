@@ -13,12 +13,11 @@ function HistoryList() {
 	const userId = useSelector((state) => state.userReducer.userId);
 
 	useEffect(async () => {
-		const response = await fetch(
-			`${process.env.React_App_HEROKU_SERVER_URL}/history/${userId}`
-		);
+		const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/history/${userId}`);
 		const history = await response.json();
 		setHistoryList(history);
 	}, []);
+	console.log(historyList);
 
 	function handleInputs({ target }) {
 		const { name, value } = target;
@@ -38,9 +37,7 @@ function HistoryList() {
 		<section id="hisotry-page">
 			<header className="history-page-main-header">
 				<div className="history-page-main-header-right-side">
-					<p className="history-page-main-header-text-content">
-						היסטורית הודעות
-					</p>
+					<p className="history-page-main-header-text-content">היסטורית הודעות</p>
 				</div>
 				<div className="history-page-main-header-left-side">
 					<input
@@ -65,7 +62,7 @@ function HistoryList() {
 						<p className="history-page-content-header">תאריך שליחה</p>
 					</div>
 					<div className="history-page-list-four-item history-page-list-content-item-warpper-header">
-						<p className="history-page-content-header">קבצים מצורפים</p>
+						<p className="history-page-content-header">התחלה-סוף</p>
 					</div>
 				</div>
 			</div>
@@ -75,25 +72,15 @@ function HistoryList() {
 					historyList.map((history, index) => {
 						let searchHistoryLower = state.searchHistory.toLocaleLowerCase();
 						const isMedia = checkMedia(history.contentMessage);
-						let isMessageName = history.messageName
-							.toLocaleLowerCase()
-							.includes(searchHistoryLower);
-						let isGroupName = history.groupName
-							.toLocaleLowerCase()
-							.includes(searchHistoryLower);
-						let isDate = history.sendDate
-							.toLocaleLowerCase()
-							.includes(searchHistoryLower);
+						let isMessageName = history.messageName.toLocaleLowerCase().includes(searchHistoryLower);
+						let isGroupName = history.groupName.toLocaleLowerCase().includes(searchHistoryLower);
+						let isDate = history.sendDate.toLocaleLowerCase().includes(searchHistoryLower);
 						if (isMessageName || isGroupName || isDate) {
 							return (
 								<ListItem4
 									key={index}
-									item={[
-										history.messageName,
-										history.groupName,
-										history.sendDate,
-										isMedia.toString(),
-									]}
+									item={[history.messageName, history.groupName, history.sendDate, isMedia.toString()]}
+									history={history}
 								/>
 							);
 						} else {
@@ -106,12 +93,8 @@ function HistoryList() {
 						return (
 							<ListItem4
 								key={index}
-								item={[
-									history.messageName,
-									history.groupName,
-									history.sendDate,
-									isMedia.toString(),
-								]}
+								item={[history.messageName, history.groupName, history.sendDate, isMedia.toString()]}
+								history={history}
 							/>
 						);
 					})}

@@ -1,158 +1,203 @@
 #send-message-part3 {
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-content: center;
-  grid-template-rows: 1fr;
-  padding-right: 5vw;
-  gap: 8vw;
+	width: 100%;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-content: center;
+	grid-template-rows: 1fr;
+	padding-right: 5vw;
+	gap: 8vw;
 }
 
 .send-message-part3-main-header {
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.4vw;
-  text-align: right;
-  color: #ffffff;
-  padding-right: 0.4vw;
-  padding-top: 3vw;
-  padding-bottom: 4vh;
-  display: flex;
-  gap: 1vw;
-  width: fit-content;
-  height: fit-content;
-  margin-right: -5vw;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.4vw;
+	text-align: right;
+	color: #ffffff;
+	padding-right: 0.4vw;
+	padding-top: 3vw;
+	padding-bottom: 4vh;
+	display: flex;
+	gap: 1vw;
+	width: fit-content;
+	height: fit-content;
+	margin-right: -5vw;
 }
 .send-message-part3-warpper {
-  width: 100%;
-  height: 100%;
-  margin-right: 3em;
+	width: 100%;
+	height: 100%;
+	margin-right: 3em;
 }
 
 .phoen-svg {
-  width: 20vw;
-  height: 90vh;
-  position: absolute;
-  top: 50%;
-  margin-top: -40vh;
+	width: 20vw;
+	height: 90vh;
+	position: absolute;
+	top: 50%;
+	margin-top: -40vh;
 }
 .last-warpper-1 {
-  position: relative;
+	position: relative;
 }
 
 .content-phone-box {
-  position: absolute;
-  top: 50%;
-  margin-top: -16vw;
-  width: 20vw;
-  left: 1.5vw;
-  height: 40.6vw;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 1em;
-  align-items: center;
+	position: absolute;
+	top: 50%;
+	margin-top: -16vw;
+	width: 20vw;
+	left: 1.5vw;
+	height: 40.6vw;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	gap: 1em;
+	align-items: center;
 }
 
 .send-message-part3-group-name-container {
-  background: rgba(255, 255, 255, 0.9);
-  border: 0.01vw solid #000000;
-  box-sizing: border-box;
-  border-radius: 2vh;
-  width: 13vw;
-  height: 6vh;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-right: 1vw;
-  font-size: 0.8vw;
+	background: rgba(255, 255, 255, 0.9);
+	border: 0.01vw solid #000000;
+	box-sizing: border-box;
+	border-radius: 2vh;
+	width: 13vw;
+	height: 6vh;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-right: 1vw;
+	font-size: 0.8vw;
 }
 
 .send-message-part3-sub-header {
-  font-family: "Assistant", sans-serif;
+	font-family: "Assistant", sans-serif;
 
-  font-size: 1.3vw;
-  text-align: right;
-  color: #ffffff;
-  font-weight: 100;
-  margin-bottom: 2vh;
+	font-size: 1.3vw;
+	text-align: right;
+	color: #ffffff;
+	font-weight: 100;
+	margin-bottom: 2vh;
 }
 
 .send-message-part3-conditions-container {
-  background: rgba(255, 255, 255, 0.9);
-  border: 0.01vw solid #000000;
-  box-sizing: border-box;
-  border-radius: 2vh;
-  padding: 2vw;
-  max-width: 20.2vw;
-  font-size: 0.7vw;
-  height: 40vh;
+	background: rgba(255, 255, 255, 0.9);
+	border: 0.01vw solid #000000;
+	box-sizing: border-box;
+	border-radius: 2vh;
+	padding: 2vw;
+	max-width: 20.2vw;
+	font-size: 0.7vw;
+	height: 40vh;
 }
 
 .i-agree-line {
-  margin-top: 5vh;
+	margin-top: 5vh;
 }
 
 .send-message-part3-warpper-2 {
-  margin-top: 10vh;
-  margin-bottom: 10vh;
-  width: fit-content;
-  height: fit-content;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+	width: fit-content;
+	height: fit-content;
 }
 
 .send-message-part-3-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 10px;
-  height: 5vh;
-  width: 10vw;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.1vw;
-  text-align: right;
-  color: #000000;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 5vh;
-  margin-left: 1vw;
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: 10px;
+	height: 5vh;
+	width: 10vw;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.1vw;
+	text-align: right;
+	color: #000000;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5vh;
+	margin-left: 1vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.send-message-part-3-button-background[disabled] {
+	background: rgba(255, 255, 255, 0.2);
 }
 
 .send-message-part-3-button-background {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: rgba(255, 255, 255, 0.2);
-  z-index: -1;
-  border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: white;
+	z-index: -1;
+	border-radius: 10px;
 }
 
 .send-message-part-3-button-warpper {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
 }
 
 .send-message-part-3-display-on-phone-warpper img {
-  max-width: 10vw;
-  width: 10vw;
+	max-width: 10vw;
+	width: 10vw;
 }
 
 .starter-index-container input {
-  width: 4vw;
-  height: 2h;
-  font-size: large;
-  border-radius: 1vh;
-  border: none;
-  border-bottom: 0.01vw solid black;
+	width: 4vw;
+	height: 2h;
+	font-size: large;
+	border-radius: 1vh;
+	border: none;
+	border-bottom: 0.01vw solid black;
 }
 .starter-index-container input:focus {
-  outline: none;
+	outline: none;
+}
+
+.display-phone {
+	width: 430px;
+	height: 820px;
+	padding-top: 2em;
+
+	display: flex;
+	align-items: flex-start;
+	overflow-y: hidden;
+	background-image: url("../../images/Frame.png");
+	background-position: center center;
+	background-size: cover;
+	justify-content: center;
+	background-size: 98%;
+	background-repeat: no-repeat;
+	padding-top: 1em;
+}
+
+.display-phone-content {
+	padding-top: 0px;
+	height: 90%;
+	width: 87%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 30px;
+	overflow-y: scroll;
+}
+
+.display-phone::-webkit-scrollbar {
+	width: 0px;
+}
+
+.display-phone-content::-webkit-scrollbar {
+	width: 0px;
 }

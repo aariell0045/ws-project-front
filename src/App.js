@@ -15,6 +15,7 @@ import LoginPage from "./components/login-page/login-page.component";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import UserProfile from "./components/user-profile/user-profile.component";
+
 function App() {
 	const userId = useSelector((state) => state.userReducer.userId);
 	console.log(userId);

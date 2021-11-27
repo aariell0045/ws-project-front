@@ -32,28 +32,21 @@ function LoginPage() {
 				<div className="login-page-logo-container">
 					<header className="login-page-logo">
 						<img className="login-page-wesend-logo" src={logo} alt="" />
-						<img
-							className="login-page-orangeline-logo"
-							src={OrangeLineLogo}
-							alt=""
-						/>
+						<img className="login-page-orangeline-logo" src={OrangeLineLogo} alt="" />
 					</header>
 				</div>
 				<form
 					className="login-page-login-form"
 					onSubmit={async (e) => {
 						e.preventDefault();
-						const response = await fetch(
-							`${process.env.React_App_HEROKU_SERVER_URL}/login`,
-							{
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({
-									userName: state.userName,
-									password: state.password,
-								}),
-							}
-						);
+						const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/login`, {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify({
+								userName: state.userName,
+								password: state.password,
+							}),
+						});
 						const data = await response.json();
 						if (data.result === true && data.userId) {
 							dispatch(addUserId(data.userId));

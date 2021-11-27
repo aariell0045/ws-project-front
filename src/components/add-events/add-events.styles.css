@@ -1,132 +1,132 @@
 .add-events-container {
-  width: 65vw;
-  height: 70vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -37vw;
-  margin-top: -35vh;
-  background: rgba(255, 255, 255, 0.95);
-  z-index: 1;
-  border-radius: 1.5vh;
+	width: 65vw;
+	height: 70vh;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -37vw;
+	margin-top: -35vh;
+	background: rgba(255, 255, 255, 0.95);
+	z-index: 1;
+	border-radius: 1.5vh;
 }
 
 .add-events-header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: fit-content;
-  gap: 1vw;
-  padding-right: 2vw;
-  padding-top: 2vh;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1vw;
-  line-height: 20px;
-  text-align: right;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: fit-content;
+	gap: 1vw;
+	padding-right: 2vw;
+	padding-top: 2vh;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1vw;
+	line-height: 20px;
+	text-align: right;
 
-  color: #000000;
+	color: #000000;
 }
 
 .add-events-header span {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .add-events-main {
-  display: flex;
-  width: 100%;
-  height: fit-content;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-top: 5vh;
-  padding-right: 5vw;
-  gap: 3vw;
+	display: flex;
+	width: 100%;
+	height: fit-content;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	margin-top: 5vh;
+	padding-right: 5vw;
+	gap: 3vw;
 }
 
 .add-events-title input {
-  border: none;
-  border-bottom: 0.01vw solid black;
-  width: 15vw;
-  background-color: inherit;
-  outline: none;
-  font-size: 2vw;
+	border: none;
+	border-bottom: 0.01vw solid black;
+	width: 15vw;
+	background-color: inherit;
+	outline: none;
+	font-size: 2vw;
 }
 
 .add-events-description textarea {
-  padding-right: 1vw;
-  width: 50vw;
-  height: 12vh;
-  border-radius: 2vh;
+	padding-right: 1vw;
+	width: 50vw;
+	height: 12vh;
+	border-radius: 2vh;
 }
 
 .add-events-title {
-  display: flex;
-  width: 100%;
-  align-items: flex-end;
+	display: flex;
+	width: 100%;
+	align-items: flex-end;
 }
 .add-events-title p {
-  padding-left: 1vw;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 1.3vw;
-  /* identical to box height */
+	padding-left: 1vw;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 1.3vw;
+	/* identical to box height */
 
-  text-align: right;
+	text-align: right;
 
-  color: #000000;
+	color: #000000;
 }
 
 .add-events-description {
-  display: flex;
-  width: 100%;
+	display: flex;
+	width: 100%;
 }
 
 .add-events-description p {
-  padding-top: 1vh;
-  padding-left: 1vw;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 1.3vw;
-  /* identical to box height */
+	padding-top: 1vh;
+	padding-left: 1vw;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: 300;
+	font-size: 1.3vw;
+	/* identical to box height */
 
-  color: #000000;
+	color: #000000;
 }
 
 .add-events-footer {
-  position: absolute;
-  width: 100%;
-  height: fit-content;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  bottom: 0px;
+	position: absolute;
+	width: 100%;
+	height: fit-content;
+	padding-top: 3vh;
+	padding-bottom: 3vh;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	bottom: 0px;
 }
 
 .add-events-footer-button {
-  background: rgba(255, 255, 255, 0.2);
-  border: 0.01vw solid #000000;
-  box-sizing: border-box;
-  border-radius: 1vh;
-  height: 5vh;
-  border-radius: 1vh;
-  width: 10vw;
-  margin-left: 2vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Assistant;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1vw;
-  text-align: right;
+	background: rgba(255, 255, 255, 0.2);
+	border: 0.01vw solid #000000;
+	box-sizing: border-box;
+	border-radius: 1vh;
+	height: 5vh;
+	border-radius: 1vh;
+	width: 10vw;
+	margin-left: 2vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Assistant;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1vw;
+	text-align: right;
 
-  color: #000000;
-  cursor: pointer;
+	color: #000000;
+	cursor: pointer;
 }
