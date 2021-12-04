@@ -12,12 +12,14 @@ function HistoryList() {
 
 	const userId = useSelector((state) => state.userReducer.userId);
 
-	useEffect(async () => {
-		const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/history/${userId}`);
-		const history = await response.json();
-		setHistoryList(history);
-	}, []);
-	console.log(historyList);
+	useEffect(() => {
+		async function getHistory() {
+			const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/history/${userId}`);
+			const history = await response.json();
+			setHistoryList(history?.reverse());
+		}
+		getHistory();
+	}, [userId]);
 
 	function handleInputs({ target }) {
 		const { name, value } = target;
