@@ -51,8 +51,10 @@ function Tasks() {
 	const buttonText = "משימה חדשה";
 	const addNewTaskHeaderText = "משימה חדשה";
 	function mapTasks(event, index) {
+		console.log(event._id);
 		return (
 			<div
+				key={event._id}
 				onClick={() =>
 					setTaskToDisplay({ taskName: event.taskName, taskContent: event.taskContent, taskColor: event.taskColor })
 				}
