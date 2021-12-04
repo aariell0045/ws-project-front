@@ -3,17 +3,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GoBack from "../../icons/icons-components/go-back-icon/go-back-icon.component";
 import { useSelector } from "react-redux";
-import DisplayPhone from "../../icons/icons-components/display-phone/display-phone.component";
 import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import WhatsappIcon from "../../icons/icons-components/whatsapp-icon";
+import smalltalk from "smalltalk";
 const { ipcRenderer } = window.require("electron");
 
 function SendMessagePart3() {
 	const [starterIndex, setStarterIndex] = useState(0);
 	const [endIndex, setEndIndex] = useState(0);
 	const [currentMessageFromState, setCurrentMessageFromState] = useState(null);
+	const [termsAndServices, setTermsAndServices] = useState(false);
 	const currentGroup = useSelector((state) => state.messageToSendReducer.currentGroup);
 	const currentMessage = useSelector((state) => state.messageToSendReducer.currentMessage);
 	const userId = useSelector((state) => state.userReducer.userId);
@@ -155,7 +156,7 @@ function SendMessagePart3() {
 						</p>
 					</article>
 					<div className="i-agree-line">
-						<input type="checkbox" />
+						<input onChange={({ target: { checked } }) => setTermsAndServices(checked)} type="checkbox" />
 						אני מאשר/ת שקראתי ואני מסכימ/ה לכל תנאי השימוש.
 					</div>
 				</div>
@@ -189,16 +190,24 @@ function SendMessagePart3() {
 			<div className="send-message-part3-warpper">
 				<div className="send-message-part-3-button-warpper">
 					<div
-						onClick={() => {
-							ipcRenderer.send("start", {
-								elementsSelectores,
-								currentMessage: currentMessageFromState,
-								currentGroup,
-							});
+						onClick={(event) => {
+							if (termsAndServices) {
+								ipcRenderer.send("start", {
+									elementsSelectores,
+									currentMessage: currentMessageFromState,
+									currentGroup,
+								});
+							} else {
+								smalltalk.alert(
+									"תנאי השימוש",
+									`על מנת להפעיל את שליחת ההודעות הינכם נדרשים \n 
+									 לאשר תנאי השימוש`
+								);
+							}
 						}}
 						className="send-message-part-3-button"
 					>
-						<div disabled={false} className="send-message-part-3-button-background"></div>
+						<div disabled={!termsAndServices} className="send-message-part-3-button-background"></div>
 						לשליחה דרך
 						<WhatsappIcon />
 					</div>
