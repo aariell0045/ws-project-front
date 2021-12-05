@@ -72,19 +72,22 @@ function GroupsList() {
 			return groups[1];
 		}
 	}
-
 	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.userReducer.userId);
 	useEffect(() => {
 		async function getGroups() {
 			const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/groups/${userId}`);
-			const groups = await response.json();
-			const newGroups = groups.map((group) => {
-				return { ...group, checked: false };
-			});
-			setGroupsList(newGroups.reverse());
+			if (response.status === 200) {
+				const groups = await response.json();
+
+				const newGroups = groups?.map((group) => {
+					return { ...group, checked: false };
+				});
+				setGroupsList(newGroups?.reverse());
+			}
 		}
-		getGroups();
+
+		return getGroups();
 	}, [userId]);
 
 	async function combineGroups(groupName) {
@@ -115,8 +118,8 @@ function GroupsList() {
 		setState(currentState);
 	}
 
-	async function deleteItem(id, container, setContainer) {
-		await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
+	async function deleteItem(id) {
+		const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/group`, {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -125,7 +128,7 @@ function GroupsList() {
 			}),
 		});
 
-		setContainer(container.filter((item) => item._id != id));
+		return response;
 	}
 
 	function fetchCurrentContactList(groupOfContacts) {
@@ -268,4 +271,4 @@ function GroupsList() {
 	);
 }
 
-export default GroupsList;
+export default React.memo(GroupsList);

@@ -67,7 +67,7 @@ function ListItems(props) {
 				<div
 					style={{ width: "3vw", zIndex: 1 }}
 					id={props.id}
-					onClick={(event) => {
+					onClick={async (event) => {
 						event.stopPropagation();
 						setState({
 							...state,
@@ -75,10 +75,13 @@ function ListItems(props) {
 						});
 						const [[...groupsList], setGroupsList] = props.onClickEventParams;
 						const index = groupsList.findIndex((group) => group._id === props.id);
-						groupsList.splice(index, 1);
-						setGroupsList(groupsList);
-
-						return props.onClickEvent && props.onClickEvent(props.id, ...props.onClickEventParams);
+						if (props.onClickEvent) {
+							const response = await props.onClickEvent(props.id);
+							if (response.status === 200) {
+								groupsList.splice(index, 1);
+								setGroupsList(groupsList);
+							}
+						}
 					}}
 					onMouseLeave={() => setState({ ...state, disabled: false })}
 					onMouseEnter={() => setState({ ...state, disabled: true })}
