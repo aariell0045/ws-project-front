@@ -55,6 +55,8 @@ function LoginPage() {
 								userId: data.userId,
 								result: data.result,
 							});
+						} else if (data.result === "user expierd" && data.userId === null) {
+							smalltalk.alert("משתמש זה יצא משימוש", "אם תרצה להחזיר את השימוש במשתמש לחץ כאן:");
 						} else {
 							smalltalk.alert("Error", "worng password");
 						}
