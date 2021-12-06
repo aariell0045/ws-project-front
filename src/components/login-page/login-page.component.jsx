@@ -39,26 +39,28 @@ function LoginPage() {
 					className="login-page-login-form"
 					onSubmit={async (e) => {
 						e.preventDefault();
-						const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/login`, {
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								userName: state.userName,
-								password: state.password,
-							}),
-						});
-						const data = await response.json();
-						if (data.result === true && data.userId) {
-							dispatch(addUserId(data.userId));
-							setState({
-								...state,
-								userId: data.userId,
-								result: data.result,
+						try {
+							const response = await fetch(`${process.env.React_App_HEROKU_SERVER_URL}/login`, {
+								method: "POST",
+								headers: { "Content-Type": "application/json" },
+								body: JSON.stringify({
+									userName: state.userName,
+									password: state.password,
+								}),
 							});
+	const data = await response.json();
+							if (data.result === true && data.userId) {
+								dispatch(addUserId(data.userId));
+								setState({
+									...state,
+									userId: data.userId,
+									result: data.result,
+								});
 						} else if (data.result === "user expierd" && data.userId === null) {
 							smalltalk.alert("משתמש זה יצא משימוש", "אם תרצה להחזיר את השימוש במשתמש לחץ כאן:");
 						} else {
 							smalltalk.alert("Error", "worng password");
+
 						}
 					}}
 				>
