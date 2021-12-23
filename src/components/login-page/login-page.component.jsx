@@ -48,7 +48,7 @@ function LoginPage() {
 									password: state.password,
 								}),
 							});
-							const data = await response.json();
+	const data = await response.json();
 							if (data.result === true && data.userId) {
 								dispatch(addUserId(data.userId));
 								setState({
@@ -56,11 +56,11 @@ function LoginPage() {
 									userId: data.userId,
 									result: data.result,
 								});
-							} else {
-								smalltalk.alert("Error", "worng password");
-							}
-						} catch (err) {
-							console.log(err);
+						} else if (data.result === "user expierd" && data.userId === null) {
+							smalltalk.alert("משתמש זה יצא משימוש", "אם תרצה להחזיר את השימוש במשתמש לחץ כאן:");
+						} else {
+							smalltalk.alert("Error", "worng password");
+
 						}
 					}}
 				>
